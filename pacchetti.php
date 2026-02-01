@@ -1,9 +1,9 @@
 <?php
-// Inclusione della connessione al database e avvio sessione
+// Inclusione corretta del file di configurazione
 require_once 'includes/db_config.php';
 session_start();
 
-// Controllo stato autenticazione per gestire i permessi
+// Controllo stato autenticazione
 $is_logged = isset($_SESSION['user']);
 ?>
 <!DOCTYPE html>
@@ -50,13 +50,12 @@ $is_logged = isset($_SESSION['user']);
 
    <main class="pannelli">
      <?php
-     // 1. Modificata la query per puntare alla tabella 'pacchetti'
+     // Query per la tabella pacchetti
      $query = "SELECT * FROM pacchetti ORDER BY id ASC";
      $result = pg_query($conn, $query);
 
      if ($result):
          $count = 1;
-         // Conta il numero totale di righe per rendere le frecce dinamiche
          $total_rows = pg_num_rows($result);
          
          while ($row = pg_fetch_assoc($result)):
@@ -80,7 +79,7 @@ $is_logged = isset($_SESSION['user']);
             </div>
 
             <figure>
-                <img src="<?php echo htmlspecialchars($row['immagine']); ?>" class="img-pack" alt="Pacchetto">
+                <img src="assets/<?php echo htmlspecialchars($row['immagine']); ?>" class="img-pack" alt="Pacchetto">
             </figure>
 
             <h4>*I PACCHETTI POSSONO ESSERE PERSONALIZZATI SU RICHIESTA <br>
