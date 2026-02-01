@@ -1,5 +1,6 @@
 <?php
 session_start();
+// Percorso corretto dopo lo spostamento in sottocartelle
 require_once 'includes/db_config.php';
 ?>
 <!DOCTYPE html>
@@ -7,33 +8,17 @@ require_once 'includes/db_config.php';
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Salerno Mare e Luci</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="favicon.ico">
-    <script src="validation.js"></script>
+    <script src="js/validation.js"></script>
   </head>
 
   <body>
-
     <header class="header">
       <div class="header-content"> 
-
         <a class="icon-big" href="index.php">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 260" width="140" height="32" role="img" aria-label="Salerno Mare & Luci" style="display:block">
-            <g fill="none" fill-rule="evenodd">
-              <rect x="30" y="40" width="170" height="170" stroke="#2E2E2E" stroke-width="4"/>
-              <path d="M30 175 C70 155,110 195,150 175 C170 165,190 185,200 175 L200 210 L30 210 Z" fill="#2F86C1"/>
-              <path d="M110 65 L130 65 L138 80 L138 170 L102 170 L102 80 Z" fill="#F5F5F5" stroke="#2E2E2E" stroke-width="3"/>
-              <rect x="112" y="90" width="16" height="16" fill="#FFD94A"/>
-              <rect x="112" y="120" width="16" height="16" fill="#FFD94A"/>
-              <circle cx="75" cy="75" r="9" fill="#FFD94A" opacity="0.85"/>
-              <circle cx="95" cy="95" r="7" fill="#FFD94A" opacity="0.7"/>
-              <circle cx="65" cy="105" r="6" fill="#FFD94A" opacity="0.6"/>
-              <text x="240" y="145" fill="#8B1E1E" font-size="120" font-family="Georgia, serif" font-style="italic">Salerno</text>
-              <text x="250" y="200" fill="#1E5F9C" font-size="52" font-family="Arial, sans-serif" letter-spacing="6">MARE &amp; LUCI</text>
-            </g>
-          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 260" width="140" height="32">...</svg>
         </a>
 
         <ul class="header-menu">
@@ -51,13 +36,7 @@ require_once 'includes/db_config.php';
         </ul>
 
         <div class="hamb-menu">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <line x1="3" y1="6" x2="21" y2="6" stroke="red" stroke-width="2" stroke-linecap="round"/>
-            <line x1="3" y1="12" x2="21" y2="12" stroke="white" stroke-width="2" stroke-linecap="round"/>
-            <line x1="3" y1="18" x2="21" y2="18" stroke="blue" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </div>
-
+           </div>
       </div>
     </header>
 
@@ -77,7 +56,6 @@ require_once 'includes/db_config.php';
           $panelClass = "panel";
           if ($count == 2) $panelClass = "panel panel2";
           if ($count == 3) $panelClass = "panel panel3";
-          if ($count > 3) $panelClass = "panel panel" . $count;
           
           $anchorId = "";
           if ($count == 1) $anchorId = "id='suite'";
@@ -88,7 +66,7 @@ require_once 'includes/db_config.php';
       <h1 class="text fade-in watch"><?php echo htmlspecialchars($row['titolo']); ?></h1>
 
       <img class="img-cent <?php echo ($count == 2) ? 'img-panel2' : (($count == 3) ? 'img-panel3' : ''); ?>" 
-           src="<?php echo htmlspecialchars($row['immagine']); ?>" alt="">
+           src="assets/<?php echo htmlspecialchars($row['immagine']); ?>" alt="Suite">
 
       <h1 class="tit testo1 watch">Comfort</h1>
       <h2 class="tit testo2 watch">
@@ -96,7 +74,7 @@ require_once 'includes/db_config.php';
         if (isset($_SESSION['user'])) {
             echo htmlspecialchars($row['descrizione']);
         } else {
-            echo "Parte del contenuto è riservata. <a href='login_reg.php' style='color:#FFD94A;'>Accedi</a> per i dettagli.";
+            echo "Contenuto riservato. <a href='login_reg.php' style='color:#FFD94A;'>Accedi</a> per i dettagli.";
         }
         ?>
       </h2>
