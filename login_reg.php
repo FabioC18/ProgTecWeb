@@ -9,12 +9,11 @@ $email = $_POST['email'] ?? "";
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['registrati'])) {
     $password = $_POST['pass'];
     
-    // 1. VALIDAZIONE EMAIL (Nuova modifica)
-    // Controlla se l'email è ben formata (es. nome@dominio.com)
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errori = "Errore: Inserisci un'email valida (es. nome@gmail.com).";
+    // 1. VALIDAZIONE EMAIL RIGIDA (.com o .it)
+    if (!preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|it)$/", $email)) {
+        $errori = "Errore: L'email deve terminare obbligatoriamente con .com o .it";
     }
-    // 2. VALIDAZIONE PASSWORD (Regole precedenti)
+    // 2. VALIDAZIONE PASSWORD
     elseif (strlen($password) < 8 || 
         !preg_match("/[A-Z]/", $password) || 
         !preg_match("/[0-9]/", $password) || 
@@ -61,6 +60,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['registrati'])) {
             cursor: not-allowed !important;
             opacity: 0.6;
         }
+        
+        /* Stile per l'icona occhio */
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 35%; /* Centrato verticalmente rispetto all'input */
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #333; /* Colore dell'occhio (scuro perché l'input è bianco) */
+            user-select: none;
+        }
+        
+        /* Contenitore relativo per posizionare l'occhio */
+        .password-container {
+            position: relative;
+            width: 100%;
+        }
     </style>
 </head>
 <body style="background: #1d1d1f; color: white; padding-top: 100px;">
@@ -73,10 +89,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['registrati'])) {
             <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($username); ?>" style="width:100%" required ><br><br>
             
             <label>E-mail:</label><br>
-            <input type="text" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>" style="width:100%" required placeholder="nome@esempio.com"><br><br>
+            <input type="text" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>" style="width:100%" required placeholder="esempio@dominio.it"><br><br>
             
             <label>Password:</label><br>
-            <input type="password" id="pass" name="pass" style="width:100%" required placeholder="Min 8 car, 1 Maiusc, 1 Num, 1 Spec"><br><br>
+            <div class="password-container">
+                <input type="password" id="pass" name="pass" style="width:100%; padding-right: 40px;" required placeholder="Min 8 car, 1 Maiusc, 1 Num, 1 Spec">
+                <span class="toggle-password" onclick="togglePassword()">
+                    <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                </span>
+            </div>
+            <br><br>
             
             <input type="submit" id="btn-submit" name="registrati" value="Crea Account" style="padding: 10px 20px; cursor:pointer;" disabled>
         </form>
@@ -90,22 +112,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['registrati'])) {
         const passIn = document.getElementById('pass');
         const btn = document.getElementById('btn-submit');
 
+        // Funzione per mostrare/nascondere la password
+        function togglePassword() {
+            if (passIn.type === "password") {
+                passIn.type = "text";
+                // Opzionale: cambia colore o icona per indicare che è visibile
+                document.getElementById('eye-icon').style.stroke = "#007bff"; 
+            } else {
+                passIn.type = "password";
+                document.getElementById('eye-icon').style.stroke = "currentColor";
+            }
+        }
+
         function checkInputs() {
             const passValue = passIn.value;
             const emailValue = emailIn.value;
 
-            // --- Validazione Password (Vecchie regole) ---
+            // --- Validazione Password ---
             const hasUpperCase = /[A-Z]/.test(passValue); 
             const hasNumber = /[0-9]/.test(passValue);    
             const hasSpecial = /[^a-zA-Z0-9]/.test(passValue); 
             const hasLength = passValue.length >= 8;      
 
-            // --- Validazione Email (Nuova modifica) ---
-            // Deve avere caratteri, poi @, poi caratteri, poi un punto, poi caratteri
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            // --- Validazione Email (.com o .it) ---
+            const emailRegex = /^[^\s@]+@[^\s@]+\.(com|it)$/;
             const isEmailValid = emailRegex.test(emailValue);
 
-            // Attiva il tasto solo se TUTTO è valido
+            // Attiva il tasto solo se tutto è corretto
             if (userIn.value.trim() !== "" && 
                 isEmailValid && 
                 hasUpperCase && 
