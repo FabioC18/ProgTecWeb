@@ -101,7 +101,7 @@ $is_logged = isset($_SESSION['user']);
                 <a href="#" onclick="scorriA('<?php echo ($count > 1) ? "panel".($count-1) : "panel".$total_rows; ?>'); return false;">
                     <img class="frslider" src="assets/frsx-no-bg.png" alt="Precedente">
                 </a> 
-                <a href="#" onclick="scorriA('<?php echo ($count < $total_rows) ? "panel".($count+1) : "panel"; ?>'); return false;">
+                <a href="#" onclick="scorriA('<?php echo ($count < $total_rows) ? "panel".($count+1) : "panel1"; ?>'); return false;">
                     <img class="frslider" src="assets/frdx-no-bg.png" alt="Successivo">
                 </a>
             </h4>
