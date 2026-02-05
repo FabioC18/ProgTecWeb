@@ -240,7 +240,7 @@ body{
         
     }
 
-    .panel1, .panel2, .panel3, .panel4 {
+    .panel, .panel2, .panel3, .panel4 {
         position: relative; 
         height: auto; 
         width: 50vw; 
@@ -262,7 +262,7 @@ body{
         flex-direction: row; 
     }
 
-    .panel1, .panel2, .panel3, .panel4 {
+    .panel, .panel2, .panel3, .panel4 {
         position: relative; 
         height: auto; 
         width: 90vw; 
@@ -275,7 +275,7 @@ body{
 }
 
 
-.panel1 {
+.panel {
     background-color: rgb(255, 167, 214);
 } 
 
