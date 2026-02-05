@@ -115,8 +115,4 @@ $is_logged = isset($_SESSION['user']);
 
     <script src="js/pacchetti.js"></script>
 </body>
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> 5a614add8a24779828dd672ddd572a1c5fb93c61
