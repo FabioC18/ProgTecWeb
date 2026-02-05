@@ -84,7 +84,6 @@ require_once 'includes/db_config.php';
       endwhile; 
     endif;
     ?>
-     
     <div id="chi-siamo" class="cont-container">
       <div class="cont1">
         <h1>DOVE LA TRADIZIONE INCONTRA L'ELEGANZA</h1>
