@@ -46,6 +46,21 @@ $is_logged = isset($_SESSION['user']);
     <div class="container">
         <h2 class="object" data-value="3">Pacchetti <br> <span>Love</span> <br> </h2>
         <img src="assets/unnamed-no-bg.png" class="object freccia" data-value="3">
+        <img src="assets/bacchette-no-bg.png" class="object top-right" data-value="12 ">
+        <img src="assets/pall-no-bg.png" class ="object cent-top" data-value="-7">
+        <img src="assets/bicchiere-no-bg.png" class="object top-left" data-value="-20">
+        <img src="assets/bottiglia-no-bg.png" class="object top-left" data-value="11">
+        <img src="assets/cuore1-no-bg.png" class="object cent-right" data-value="17">
+        <img src="assets/cuore2-no-bg.png" class="object cent-right" data-value="-19">
+        <img src="assets/cuore3-no-bg.png" class="object cent-left" data-value="-13">
+        <img src="assets/cuore4-no-bg.png" class="object cent-left" data-value="15">
+        <img src="assets/cuore5-no-bg.png" class="object cent-left" data-value="19">
+        <img src="assets/noccioline-no-bg.png" class="object bott-left" data-value="11">
+        <img src="assets/patatine-no-bg.png" class="object bott-left" data-value="-10">
+        <img src="assets/sushi-no-bg.png" class="object top-right" data-value="-16">
+        <img src="assets/pane-no-bg.png" class="object bott-right pane" data-value="12">
+        <img src="assets/tagliere-no-bg.png" class="object bott-right tagliere" data-value="-18">
+        <img src="assets/mais-no-bg.png" class="object bott-left" data-value="3">
     </div>
 
    <main class="pannelli">
@@ -100,4 +115,8 @@ $is_logged = isset($_SESSION['user']);
 
     <script src="js/pacchetti.js"></script>
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> 5a614add8a24779828dd672ddd572a1c5fb93c61
