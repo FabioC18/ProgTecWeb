@@ -35,7 +35,7 @@ require_once 'includes/db_config.php';
 
 <nav>
     <ul class="header-menu">
-        <li><a href="#suite">Suite</a></li>
+        <li><a href="case.php">Case vacanza</a></li>
         <li><a href="pacchetti.php">Pacchetti</a></li>
         
         <?php if (isset($_SESSION['user'])): ?>
