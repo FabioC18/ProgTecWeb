@@ -44,7 +44,7 @@ $is_logged = isset($_SESSION['user']);
         <li><a href="pacchetti.php">Pacchetti</a></li>
         
         <?php if (isset($_SESSION['user'])): ?>
-            <li class="menu-item-session"><span class="user-name" style="color: #FFD94A;">Ciao, <?php echo htmlspecialchars($_SESSION['nome']); ?></span></li>
+            <li class="menu-item-session"><span class="user-name" style="color: #FFD94A;">Ciao, <?php echo htmlspecialchars($_SESSION['user']); ?></span></li>
             <li class="menu-item-session"><a href="logout.php">Logout</a></li>
         <?php else: ?>
             <li><a href="login_reg.php">Login / Registrati</a></li>
