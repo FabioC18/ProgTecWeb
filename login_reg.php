@@ -9,9 +9,13 @@ $email = $_POST['email'] ?? "";
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['registrati'])) {
     $password = $_POST['pass'];
     
-    // VALIDAZIONE PASSWORD (Lato Server)
-    // Controlla: lunghezza < 8, nessuna maiuscola, nessun numero, nessun carattere speciale (non alfanumerico)
-    if (strlen($password) < 8 || 
+    // 1. VALIDAZIONE EMAIL (Nuova modifica)
+    // Controlla se l'email è ben formata (es. nome@dominio.com)
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errori = "Errore: Inserisci un'email valida (es. nome@gmail.com).";
+    }
+    // 2. VALIDAZIONE PASSWORD (Regole precedenti)
+    elseif (strlen($password) < 8 || 
         !preg_match("/[A-Z]/", $password) || 
         !preg_match("/[0-9]/", $password) || 
         !preg_match("/[^a-zA-Z0-9]/", $password)) {
@@ -19,12 +23,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['registrati'])) {
         $errori = "Errore: La password deve essere di almeno 8 caratteri, contenere una maiuscola, un numero e un carattere speciale.";
     }
     else {
-        // Se la password è valida, procedo con i controlli al Database
-        
-        // 1. Controllo se l'utente esiste già 
+        // 3. CONTROLLI DATABASE
         $check_user = pg_query_params($conn, "SELECT * FROM utenti WHERE username = $1", array($username));
-        
-        // 2. Controllo separato per l'email
         $check_email = pg_query_params($conn, "SELECT * FROM utenti WHERE email = $1", array($email));
 
         if (pg_num_rows($check_user) > 0) {
@@ -34,15 +34,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['registrati'])) {
             $errori = "Errore: l'email è già presente nel database.";
         } 
         else {
-            // Inserimento nuovo utente
+            // 4. INSERIMENTO
             $query = "INSERT INTO utenti (username, email, password) VALUES ($1, $2, $3)";
             $res = pg_query_params($conn, $query, array($username, $email, $password));
             
             if ($res) {
-                // 3. LOGIN AUTOMATICO: Imposto la sessione SUBITO
                 $_SESSION['user'] = $username; 
-                
-                // Reindirizzo alla Home Page con utente loggato
                 header("Location: index.php");
                 exit;
             }
@@ -58,19 +55,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['registrati'])) {
     <link rel="stylesheet" href="style.css">
     <script src="validation.js"></script> 
     <style>
-        /* Stile aggiuntivo solo per l'effetto del tasto disabilitato */
         input[type="submit"]:disabled {
-            background-color: #555 !important; /* Grigio scuro */
+            background-color: #555 !important;
             color: #888 !important;
             cursor: not-allowed !important;
             opacity: 0.6;
-        }
-        /* Classe per evidenziare requisiti password (opzionale, per chiarezza) */
-        .password-req {
-            font-size: 0.8em;
-            color: #ccc;
-            margin-top: -15px;
-            margin-bottom: 15px;
         }
     </style>
 </head>
@@ -84,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['registrati'])) {
             <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($username); ?>" style="width:100%" required ><br><br>
             
             <label>E-mail:</label><br>
-            <input type="text" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>" style="width:100%" required ><br><br>
+            <input type="text" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>" style="width:100%" required placeholder="nome@esempio.com"><br><br>
             
             <label>Password:</label><br>
             <input type="password" id="pass" name="pass" style="width:100%" required placeholder="Min 8 car, 1 Maiusc, 1 Num, 1 Spec"><br><br>
@@ -103,29 +92,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['registrati'])) {
 
         function checkInputs() {
             const passValue = passIn.value;
+            const emailValue = emailIn.value;
 
-            // Regex per la validazione Javascript (deve combaciare con quella PHP)
-            const hasUpperCase = /[A-Z]/.test(passValue); // Almeno una Maiuscola
-            const hasNumber = /[0-9]/.test(passValue);    // Almeno un Numero
-            const hasSpecial = /[^a-zA-Z0-9]/.test(passValue); // Almeno un carattere speciale
-            const hasLength = passValue.length >= 8;      // Almeno 8 caratteri
+            // --- Validazione Password (Vecchie regole) ---
+            const hasUpperCase = /[A-Z]/.test(passValue); 
+            const hasNumber = /[0-9]/.test(passValue);    
+            const hasSpecial = /[^a-zA-Z0-9]/.test(passValue); 
+            const hasLength = passValue.length >= 8;      
 
-            // Il tasto si attiva solo se user e email sono pieni E la password rispetta tutte le regole
+            // --- Validazione Email (Nuova modifica) ---
+            // Deve avere caratteri, poi @, poi caratteri, poi un punto, poi caratteri
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const isEmailValid = emailRegex.test(emailValue);
+
+            // Attiva il tasto solo se TUTTO è valido
             if (userIn.value.trim() !== "" && 
-                emailIn.value.trim() !== "" && 
+                isEmailValid && 
                 hasUpperCase && 
                 hasNumber && 
                 hasSpecial && 
                 hasLength) {
                 
-                btn.disabled = false; // Accendi il tasto
+                btn.disabled = false; 
                 btn.style.backgroundColor = ""; 
             } else {
-                btn.disabled = true;  // Spegni il tasto
+                btn.disabled = true;  
             }
         }
 
-        // Ascolta ogni tasto premuto
         userIn.addEventListener('input', checkInputs);
         emailIn.addEventListener('input', checkInputs);
         passIn.addEventListener('input', checkInputs);
