@@ -5,7 +5,7 @@ session_start();
 $errori = "";
 $username = $_POST['username'] ?? ""; 
 $email = $_POST['email'] ?? "";
-$action = $_POST['action'] ?? "register"; // Capisce se stai facendo login o registrazione
+$action = $_POST['action'] ?? "register"; 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (!preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|it)$/", $email)) {
             $errori = "Errore: L'email deve terminare obbligatoriamente con .com o .it";
         }
-        // 2. Validazione Password Compleessa
+        // 2. Validazione Password Complessa
         elseif (strlen($password) < 8 || 
             !preg_match("/[A-Z]/", $password) || 
             !preg_match("/[0-9]/", $password) || 
@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
     }
-    // --- LOGICA LOGIN (Codice che mi hai mandato integrato qui) ---
+    // --- LOGICA LOGIN ---
     elseif ($action === 'login' && isset($_POST['btn_submit'])) {
         $password = $_POST['pass'];
         
@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (pg_num_rows($result) == 1) {
             $row = pg_fetch_assoc($result);
             $_SESSION['user'] = $row['username'];
-            // $_SESSION['nome'] = $row['nome']; // Decommenta se hai la colonna nome
+            // $_SESSION['nome'] = $row['nome']; 
             header("Location: index.php");
             exit;
         } else {
@@ -80,17 +80,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         .toggle-password {
             position: absolute;
             right: 10px;
-            top: 35%; 
+            top: 50%; /* Centrato meglio */
             transform: translateY(-50%);
             cursor: pointer;
             color: #333; 
             user-select: none;
+            z-index: 10;
         }
         .password-container {
             position: relative;
             width: 100%;
         }
-        /* Stili per il Tab Switch */
+        /* STILE PER IL TOOLTIP (ETICHETTA) */
+        .tooltip-requirements {
+            display: none; /* Nascosto di default */
+            position: absolute;
+            bottom: 100%; /* Appare sopra l'input */
+            top:100%;
+            height: 80px;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 0.85em;
+            margin-bottom: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            border: 1px solid #FFD94A;
+            z-index: 100;
+        }
+        .tooltip-requirements ul {
+            margin: 0;
+            padding-left: 20px;
+            list-style-type: circle;
+        }
+        .tooltip-requirements li {
+            margin-bottom: 3px;
+        }
+        
+        /* Stili Tab */
         .tab-switch {
             text-align: center;
             font-size: 1.5em;
@@ -138,6 +167,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
             <label>Password:</label><br>
             <div class="password-container">
+                <div id="password-tooltip" class="tooltip-requirements">
+                    <strong>Requisiti Password:</strong>
+                    <ul>
+                        <li>Minimo 8 caratteri</li>
+                        <li>Almeno una Maiuscola</li>
+                        <li>Almeno un Numero</li>
+                        <li>Almeno un Carattere Speciale</li>
+                    </ul>
+                </div>
+                
                 <input type="password" id="pass" name="pass" style="width:100%; padding-right: 40px;" required placeholder="Password">
                 <span class="toggle-password" onclick="togglePassword()">
                     <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
@@ -154,35 +193,54 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         const emailIn = document.getElementById('email');
         const passIn = document.getElementById('pass');
         const btn = document.getElementById('btn-submit');
+        const tooltip = document.getElementById('password-tooltip'); // Riferimento al tooltip
         
         const tabReg = document.getElementById('tab-reg');
         const tabLog = document.getElementById('tab-log');
         const emailCont = document.getElementById('email-container');
         const actionInput = document.getElementById('action-input');
 
-        let currentMode = 'register'; // Stato iniziale
+        let currentMode = 'register'; 
 
-        // Funzione per cambiare tra Login e Registrazione
+        // GESTIONE TOOLTIP PASSWORD
+        // Mostra quando il mouse entra o il campo ha il focus
+        function showTooltip() {
+            if (currentMode === 'register') {
+                tooltip.style.display = 'block';
+            }
+        }
+        // Nascondi quando il mouse esce o perde focus
+        function hideTooltip() {
+            tooltip.style.display = 'none';
+        }
+
+        passIn.addEventListener('mouseenter', showTooltip);
+        passIn.addEventListener('mouseleave', hideTooltip);
+        passIn.addEventListener('focus', showTooltip); // Utile per chi usa tab
+        passIn.addEventListener('blur', hideTooltip);
+
+
         function switchMode(mode) {
             currentMode = mode;
-            actionInput.value = mode; // Dice al PHP cosa fare
+            actionInput.value = mode; 
 
             if (mode === 'login') {
                 // UI Login
                 tabLog.className = 'tab-active';
                 tabReg.className = 'tab-inactive';
-                emailCont.style.display = 'none'; // Nascondi Email
+                emailCont.style.display = 'none'; 
                 btn.value = 'Accedi';
                 passIn.placeholder = 'Inserisci la password';
+                // Nasconde tooltip se era aperto
+                tooltip.style.display = 'none';
             } else {
                 // UI Registrazione
                 tabReg.className = 'tab-active';
                 tabLog.className = 'tab-inactive';
-                emailCont.style.display = 'block'; // Mostra Email
+                emailCont.style.display = 'block'; 
                 btn.value = 'Crea Account';
                 passIn.placeholder = 'Min 8 car, 1 Maiusc, 1 Num, 1 Spec';
             }
-            // Resetta validazione
             checkInputs();
         }
 
@@ -200,9 +258,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             const passValue = passIn.value;
             const emailValue = emailIn.value;
 
-            // Logica diversa a seconda della modalità
             if (currentMode === 'register') {
-                // --- REGOLE SEVERE PER REGISTRAZIONE ---
                 const hasUpperCase = /[A-Z]/.test(passValue); 
                 const hasNumber = /[0-9]/.test(passValue);    
                 const hasSpecial = /[^a-zA-Z0-9]/.test(passValue); 
@@ -218,8 +274,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
 
             } else {
-                // --- REGOLE SEMPLICI PER LOGIN ---
-                // Basta che username e password non siano vuoti
                 if (userIn.value.trim() !== "" && passValue.trim() !== "") {
                     btn.disabled = false;
                     btn.style.backgroundColor = "";
@@ -233,7 +287,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         emailIn.addEventListener('input', checkInputs);
         passIn.addEventListener('input', checkInputs);
         
-        // Avvia il controllo iniziale
         checkInputs();
     </script>
 </body>

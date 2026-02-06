@@ -35,11 +35,11 @@ require_once 'includes/db_config.php';
 
 <nav>
     <ul class="header-menu">
-        <li><a href="case.php">Case vacanza</a></li>
+        <li><a href="camere.php">Case vacanza</a></li>
         <li><a href="pacchetti.php">Pacchetti</a></li>
         
         <?php if (isset($_SESSION['user'])): ?>
-            <li class="menu-item-session"><span class="user-name" style="color: #FFD94A;">Ciao, <?php echo htmlspecialchars($_SESSION['user']); ?></span></li>
+            <li class="menu-item-session"><a class="user-name" href="profilo.php" style="color: #FFD94A;">Ciao, <?php echo htmlspecialchars($_SESSION['user']); ?></a></li>
             <li class="menu-item-session"><a href="logout.php">Logout</a></li>
         <?php else: ?>
             <li><a href="login_reg.php">Login / Registrati</a></li>

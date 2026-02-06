@@ -40,19 +40,19 @@ $is_logged = isset($_SESSION['user']);
         
         <nav>
             <ul class="header-menu">
-        <li><a href="#suite">Suite</a></li>
-        <li><a href="pacchetti.php">Pacchetti</a></li>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="camere.php">Camere</a></li>
+                <li><a href="pacchetti.php" style="color:#FFD94A">Pacchetti</a></li>
         
-        <?php if (isset($_SESSION['user'])): ?>
-            <li class="menu-item-session"><span class="user-name" style="color: #FFD94A;">Ciao, <?php echo htmlspecialchars($_SESSION['user']); ?></span></li>
-            <li class="menu-item-session"><a href="logout.php">Logout</a></li>
-        <?php else: ?>
-            <li><a href="login_reg.php">Login / Registrati</a></li>
-        <?php endif; ?>
-
-        <li><a href="#chi-siamo">Chi Siamo</a></li>
-    </ul>
-</nav>
+                <?php if ($is_logged): ?>
+                    <li class="menu-item-session"><span class="user-name" style="color: #FFD94A;">Ciao, <?php echo htmlspecialchars($_SESSION['user']); ?></span></li>
+                    <li class="menu-item-session"><a href="logout.php">Logout</a></li>
+                    <li><a href="profilo.php">Profilo</a></li>
+                <?php else: ?>
+                    <li><a href="login_reg.php">Login / Registrati</a></li>
+                <?php endif; ?>
+            </ul>
+        </nav>
 
         <div class="hamb-menu">
            <svg width="25" height="25" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6" stroke="red" stroke-width="2"/><line x1="3" y1="12" x2="21" y2="12" stroke="white" stroke-width="2"/><line x1="3" y1="18" x2="21" y2="18" stroke="blue" stroke-width="2"/></svg>
@@ -94,7 +94,7 @@ $is_logged = isset($_SESSION['user']);
              $id_panel =  "panel" . $count;
              $class_panel = ($count == 1) ? "panel" : "panel" . $count;
      ?>
-        <article id="<?php echo $id_panel; ?>" class="<?php echo $class_panel; ?>">       
+        <article id="<?php echo $id_panel; ?>" class="<?php echo $class_panel; ?>">        
             <div class="pack-base">
                 <h3><?php echo htmlspecialchars($row['nome']); ?> <br> <span>include:</span></h3>
                 
@@ -103,6 +103,14 @@ $is_logged = isset($_SESSION['user']);
                     <p style="font-weight: bold; font-size: 1.5em; color: #FFD94A;">
                         € <?php echo htmlspecialchars($row['prezzo']); ?>
                     </p>
+                    
+                    <?php 
+                        $link_prenotazione = "salva_prenotazione.php?nome=" . urlencode($row['nome']) . "&prezzo=" . $row['prezzo'];
+                    ?>
+                    <a href="<?php echo $link_prenotazione; ?>" style="display:inline-block; background:#25D366; color:white; padding:10px 20px; text-decoration:none; border-radius:5px; margin-top:10px; font-weight:bold;">
+                        Prenota Ora
+                    </a>
+
                 <?php else: ?>
                     <p style="font-style: italic; color: #f7f7f7;">
                         Registrati per visualizzare i dettagli completi e i prezzi riservati.
