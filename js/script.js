@@ -63,7 +63,23 @@ class Cont {
       value: 0,
     });
 
-    cont.update(value);
+    let hasRun = false;
+
+  const callback = function(items) {
+    items.forEach((item) => {
+      if (item.isIntersecting) {
+        if (!hasRun) {
+          cont.update(value);
+          hasRun = true;
+          
+          observer.unobserve(el); 
+        }
+      }
+    });
+  };
+
+  var observer = new IntersectionObserver(callback, { threshold: 0.5 });
+  observer.observe(el); 
   };
 
   const contClient = document.querySelector(".cont-client");
