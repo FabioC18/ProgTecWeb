@@ -212,7 +212,7 @@ $res_pren = pg_query_params($conn, $query_pren, array($user_id));
                     </table>
                 <?php else: ?>
                     <p style="margin-top:20px; color:#ccc;">Non hai ancora effettuato prenotazioni.</p>
-                    <a href="case.php"  class="btn-save" >Vai alle case</a>
+                    <a href="camere.php"  class="btn-save" >Vai alle case</a>
                     <a href="pacchetti.php"  class="btn-save" >Vai ai pacchetti</a>
                 <?php endif; ?>
             </div>
