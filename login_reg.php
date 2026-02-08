@@ -68,82 +68,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Accedi - Salerno Mare e Luci</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="validation.js"></script> 
-    <style>
-        input[type="submit"]:disabled {
-            background-color: #555 !important;
-            color: #888 !important;
-            cursor: not-allowed !important;
-            opacity: 0.6;
-        }
-        .toggle-password {
-            position: absolute;
-            right: 10px;
-            top: 50%; /* Centrato meglio */
-            transform: translateY(-50%);
-            cursor: pointer;
-            color: #333; 
-            user-select: none;
-            z-index: 10;
-        }
-        .password-container {
-            position: relative;
-            width: 100%;
-        }
-        /* STILE PER IL TOOLTIP (ETICHETTA) */
-        .tooltip-requirements {
-            display: none; /* Nascosto di default */
-            position: absolute;
-            bottom: 100%; /* Appare sopra l'input */
-            top:100%;
-            height: 80px;
-            left: 0;
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            color: #fff;
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 0.85em;
-            margin-bottom: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            border: 1px solid #FFD94A;
-            z-index: 100;
-        }
-        .tooltip-requirements ul {
-            margin: 0;
-            padding-left: 20px;
-            list-style-type: circle;
-        }
-        .tooltip-requirements li {
-            margin-bottom: 3px;
-        }
-        
-        /* Stili Tab */
-        .tab-switch {
-            text-align: center;
-            font-size: 1.5em;
-            margin-bottom: 20px;
-            cursor: pointer;
-            user-select: none;
-        }
-        .tab-active {
-            color: #FFD94A;
-            font-weight: bold;
-            text-decoration: underline;
-        }
-        .tab-inactive {
-            color: #888;
-        }
-        .tab-inactive:hover {
-            color: white;
-        }
-        .hidden {
-            display: none;
-        }
-    </style>
+    <link rel="stylesheet" href="css/login_reg.css">
+    <link rel="icon" href="assets/favicon.ico">
+    
 </head>
 <body style="background: #1d1d1f; color: white; padding-top: 100px;">
+
+<header class="header">
+      <div class="header-content"> 
+        <a class="icon-big" href="index.php" style="color:#FFD94A; text-decoration:none; font-weight:bold; font-size:1.2em;">
+           &larr; Torna alla Home
+        </a>
+      </div>
+    </header>
     <div style="max-width: 400px; margin: 0 auto; background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
         
         <div class="tab-switch">
@@ -188,106 +125,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
     </div>
 
-    <script>
-        const userIn = document.getElementById('username');
-        const emailIn = document.getElementById('email');
-        const passIn = document.getElementById('pass');
-        const btn = document.getElementById('btn-submit');
-        const tooltip = document.getElementById('password-tooltip'); // Riferimento al tooltip
-        
-        const tabReg = document.getElementById('tab-reg');
-        const tabLog = document.getElementById('tab-log');
-        const emailCont = document.getElementById('email-container');
-        const actionInput = document.getElementById('action-input');
+    
 
-        let currentMode = 'register'; 
-
-        // GESTIONE TOOLTIP PASSWORD
-        // Mostra quando il mouse entra o il campo ha il focus
-        function showTooltip() {
-            if (currentMode === 'register') {
-                tooltip.style.display = 'block';
-            }
-        }
-        // Nascondi quando il mouse esce o perde focus
-        function hideTooltip() {
-            tooltip.style.display = 'none';
-        }
-
-        passIn.addEventListener('mouseenter', showTooltip);
-        passIn.addEventListener('mouseleave', hideTooltip);
-        passIn.addEventListener('focus', showTooltip); // Utile per chi usa tab
-        passIn.addEventListener('blur', hideTooltip);
-
-
-        function switchMode(mode) {
-            currentMode = mode;
-            actionInput.value = mode; 
-
-            if (mode === 'login') {
-                // UI Login
-                tabLog.className = 'tab-active';
-                tabReg.className = 'tab-inactive';
-                emailCont.style.display = 'none'; 
-                btn.value = 'Accedi';
-                passIn.placeholder = 'Inserisci la password';
-                // Nasconde tooltip se era aperto
-                tooltip.style.display = 'none';
-            } else {
-                // UI Registrazione
-                tabReg.className = 'tab-active';
-                tabLog.className = 'tab-inactive';
-                emailCont.style.display = 'block'; 
-                btn.value = 'Crea Account';
-                passIn.placeholder = 'Min 8 car, 1 Maiusc, 1 Num, 1 Spec';
-            }
-            checkInputs();
-        }
-
-        function togglePassword() {
-            if (passIn.type === "password") {
-                passIn.type = "text";
-                document.getElementById('eye-icon').style.stroke = "#007bff"; 
-            } else {
-                passIn.type = "password";
-                document.getElementById('eye-icon').style.stroke = "currentColor";
-            }
-        }
-
-        function checkInputs() {
-            const passValue = passIn.value;
-            const emailValue = emailIn.value;
-
-            if (currentMode === 'register') {
-                const hasUpperCase = /[A-Z]/.test(passValue); 
-                const hasNumber = /[0-9]/.test(passValue);    
-                const hasSpecial = /[^a-zA-Z0-9]/.test(passValue); 
-                const hasLength = passValue.length >= 8;      
-                const emailRegex = /^[^\s@]+@[^\s@]+\.(com|it)$/;
-                const isEmailValid = emailRegex.test(emailValue);
-
-                if (userIn.value.trim() !== "" && isEmailValid && hasUpperCase && hasNumber && hasSpecial && hasLength) {
-                    btn.disabled = false; 
-                    btn.style.backgroundColor = ""; 
-                } else {
-                    btn.disabled = true;  
-                }
-
-            } else {
-                if (userIn.value.trim() !== "" && passValue.trim() !== "") {
-                    btn.disabled = false;
-                    btn.style.backgroundColor = "";
-                } else {
-                    btn.disabled = true;
-                }
-            }
-        }
-
-        userIn.addEventListener('input', checkInputs);
-        emailIn.addEventListener('input', checkInputs);
-        passIn.addEventListener('input', checkInputs);
-        
-        checkInputs();
-    </script>
+    <script src="js/login_reg.js"></script>
 </body>
 </html>

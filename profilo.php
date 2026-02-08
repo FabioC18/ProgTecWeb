@@ -72,6 +72,7 @@ $res_pren = pg_query_params($conn, $query_pren, array($user_id));
     <meta charset="UTF-8">
     <title>Profilo Personale - Salerno Mare e Luci</title>
     <link rel="stylesheet" href="css/profilo.css">
+    <link rel="icon" href="assets/favicon.ico">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
      crossorigin=""/>

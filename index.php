@@ -8,7 +8,7 @@ require_once 'includes/db_config.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Salerno Mare e Luci</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/index.css">
     <link rel="icon" href="assets/favicon.ico">
   </head>
   <body>
@@ -48,7 +48,7 @@ require_once 'includes/db_config.php';
 ></dotlottie-wc></a></li>
             <li class="menu-item-session"><a href="logout.php">Logout</a></li>
         <?php else: ?>
-            <li><a href="login_reg.php">Login / Registrati</a></li>
+            <li><a href="login_reg.php">Login</a></li>
         <?php endif; ?>
     </ul>
 </nav>
@@ -164,6 +164,6 @@ require_once 'includes/db_config.php';
 
     
 
-    <script src="js/script.js"></script>
+    <script src="js/index.js"></script>
   </body>
 </html>
