@@ -283,12 +283,11 @@
      color: #FFD94A;
  }
  
- .user-name img{
+ .user dotlottie-wc{
     width: 50px;
     height: 50px;
-    margin-bottom:-12px;
-    border-radius: 50%;
-    border: 2px solid #FFD94A;
+    margin-bottom: -100px;
+    
 }
 
  .hamb-menu {

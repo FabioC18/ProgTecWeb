@@ -72,7 +72,18 @@ $res_pren = pg_query_params($conn, $query_pren, array($user_id));
     <meta charset="UTF-8">
     <title>Profilo Personale - Salerno Mare e Luci</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
     <style>
+        #map { 
+            height: 400px; 
+            width: 100%; 
+            margin-top: 20px; 
+            border-radius: 10px; 
+            border: 1px solid #444;
+            display: none; 
+        }
         body { background-color: #1d1d1f; color: white; font-family: sans-serif; padding-top: 100px; }
         .container { max-width: 900px; margin: 0 auto; padding: 20px; }
         
@@ -278,5 +289,48 @@ $res_pren = pg_query_params($conn, $query_pren, array($user_id));
         
         checkInputs();
     </script>
+
+
+    <div class="container">
+        <button onclick="getLocation()" class="btn-save" style="margin-bottom: 20px;">
+            📍 Mostra la mia posizione sulla mappa
+        </button>
+        
+        <div id="map"></div>
+        <p id="geo-error" class="error" style="display:none;"></p>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+
+    <script>
+    let map = null; 
+
+    function getLocation() {
+      
+      const mapContainer = document.getElementById("map");
+
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+
+          mapContainer.style.display = 'block';
+
+          map = L.map('map').setView([lat, lon], 11); 
+          L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+              maxZoom: 19
+          }).addTo(map);
+
+          const suite = L.marker([40.6780, 14.7625]).addTo(map).bindPopup("<b>Suite!</b>").openPopup();
+          const deluxe = L.marker([40.67891, 14.75808]).addTo(map).bindPopup("<b>Deluxe!</b>").openPopup();
+          const marker = L.marker([lat, lon]).addTo(map).bindPopup("<b>Sei qui!</b>").openPopup();          
+        }
+      );
+    }
+    </script>
+</body>
+</html>
 </body>
 </html>
