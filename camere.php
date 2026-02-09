@@ -14,7 +14,7 @@ $result = pg_query($conn, $query);
     <link rel="stylesheet" href="css/camere.css">
     <link rel="icon" href="assets/favicon.ico">
 </head>
-<body style="background-color: black;">
+<body style= "background-color: #3a0707ff ">
 
     <header class="header">
       <div class="header-content"> 
@@ -39,7 +39,15 @@ $result = pg_query($conn, $query);
         <li><a href="camere.php">Case vacanza</a></li>
         <li><a href="pacchetti.php">Pacchetti</a></li>
          <?php if (isset($_SESSION['user'])): ?>
-            <li class="menu-item-session"><a class="user-name" href="profilo.php" ><img src="assets/user-no-bg.png"></a></li>
+            <li class="menu-item-session"><a class="user" href="profilo.php" ><script
+  src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.11/dist/dotlottie-wc.js"
+  type="module"></script>
+
+<dotlottie-wc
+  src="https://lottie.host/73049aba-3e4d-41d1-a8bc-0cb9982ffb58/EV4SRIloZW.lottie"
+  autoplay
+  loop
+></dotlottie-wc></a></li>
             <li class="menu-item-session"><a href="logout.php">Logout</a></li>
         <?php else: ?>
             <li><a href="login_reg.php">Login / Registrati</a></li>

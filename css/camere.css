@@ -11,7 +11,7 @@
  }
  
  .header-content {
-     max-width: 1200px;
+     max-width: 62.5vw;
      width: 100%;
      margin: 0 auto;
      display: flex;
@@ -21,7 +21,7 @@
  
  .header-menu li {
      display: inline-block;
-     margin-right: 135px;
+     margin-right: 7vw;
      transition: transform 0.3s ease;
  }
  
@@ -42,7 +42,7 @@
      color: #f7f7f7;
      display: inline;
      text-decoration: none;
-     font-size: 14px;
+     font-size: 0.73vw;
     text-transform: uppercase;
     letter-spacing: 2px; 
     font-weight: 500;
@@ -55,12 +55,11 @@
      color: #FFD94A;
  }
  
- .user-name img{
-    width: 50px;
-    height: 50px;
-    margin-bottom:-12px;
-    border-radius: 50%;
-    border: 2px solid #FFD94A;
+ .user dotlottie-wc{
+    width: 3.2vw;
+    height: 3.2vh;
+    margin-bottom: -5.2vh;
+    
 }
 
  .hamb-menu {
@@ -71,10 +70,10 @@
      display: flex;
      align-items: center;
      justify-content: center;
-     min-width: 48px;
-     min-height: 48px;
+     min-width: 2.5vw;
+     min-height: 2.5vh;
      margin-left: 0px;
-     padding-top: 10px;
+     padding-top: 0.52vh;
      cursor: pointer;
      transition: transform 0.3s ease;
  }
@@ -100,7 +99,7 @@
          border-bottom: 2px solid #FFD94A;
      }
      .menu-open .header-menu {
-         height: 12vh;
+         height: 12.65vh;
          transform: translateY(0px);
          opacity: 1;
      }
@@ -113,8 +112,8 @@
          display: flex;
          align-items: center;
          justify-content: center;
-         min-width: 48px;
-         min-height: 48px;
+         min-width: 40px;
+         min-height: 40px;
          margin-right: 20px;
          padding-top: 10px;
          cursor: pointer;
@@ -123,30 +122,36 @@
      .hamb-menu:hover {
          transform: scale(1.2);
      }
+
+     .user dotlottie-wc{
+        width: 30px;
+        height: 30px;
+        margin: 0 auto;
+    }
  }
 
 .category-section {
-            padding: 60px 20px;
-            border-bottom: 1px solid #333;
+            padding: 0vh 1vw;
+            margin-top: -50px;
         }
         
         .category-header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 2.1vh;
             color: #f7f7f7;
         }
 
         .category-title {
-            font-size: 3.5em;
+            font-size: 3.5rem;
             color: #FFD94A;
             font-family: 'Intro', sans-serif;
             text-transform: uppercase;
-            margin-bottom: 10px;
+            margin-bottom: 0.52vh;
         }
 
         .category-desc {
-            font-size: 1.2em;
-            max-width: 800px;
+            font-size: 1.2rem;
+            max-width: 41.7vw;
             margin: 0 auto;
             color: #ccc;
         }
@@ -154,7 +159,7 @@
         .grid-container {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: (4, 400px);
+            grid-template-rows: (4, 200px);
             gap: 15px;
         }
 
@@ -217,32 +222,33 @@
         }
 
         .images:hover {
-            transform: scale(1.2);
+            transform: scale(1.05);
             z-index: 10;
             box-shadow: 0 5px 15px rgba(255, 217, 74, 0.2);
         }
 
         .images {
             width: 100%;
-            height: 300px;
+            height: 270px;
             object-fit: cover;
             display: block;
             transition: transform 0.3s ease;
+            border-radius: 2%;
         }
 
         .btn-whatsapp-big {
             display: inline-block;
-            background-color: #25D366;
-            color: white;
-            padding: 15px 30px;
+            background-color: #FFD94A;
+            color: #3a0707ff;
+            padding: 0.78vh 1.56vw;
             text-decoration: none;
             border-radius: 50px;
             font-weight: bold;
-            font-size: 1.2em;
-            margin-top: 30px;
-            transition: background 0.3s;
+            font-size: 1.2rem;
+            margin-top: 1.56vh;
+            transition: background 0.3s ease;
         }
         .btn-whatsapp-big:hover {
-            background-color: #128C7E;
+            background-color: #e5d867;
             transform: scale(1.05);
         }
