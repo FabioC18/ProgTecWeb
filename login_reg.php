@@ -91,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <p style="color: red; text-align: center; min-height: 20px;"><?php echo $errori; ?></p>
         
-        <form name="authForm" action="login_reg.php" method="POST">
+        <form name="authForm" action="login_reg.php" method="POST" style="position: sticky;">
             <input type="hidden" id="action-input" name="action" value="register">
 
             <label>Username:</label><br>
