@@ -153,31 +153,81 @@
 
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            max-width: 1400px;
-            margin: 0 auto;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: (4, 400px);
+            gap: 15px;
         }
 
-        .photo-card {
-            background: #1d1d1f;
-            border-radius: 10px;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-            position: relative;
+        .photo-card1{
+            grid-column: span 2;
+            grid-row: span 1;
+        }
+        .photo-card2{
+            grid-column: span 1;
+        }
+        .photo-card3{
+            grid-column: span 1;
+        }
+        .photo-card4{
+            grid-column: span 2;
+        }
+        .photo-card5{
+            grid-column: span 2;
+        }
+        .photo-card6{
+            grid-row: span 2;
+        }
+        .photo-card7{
+            grid-column: span 1;
+        }
+        .photo-card8{
+            grid-column: span 2;
+            grid-row: span 1;
+        }
+        .photo-card9{
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+        .photo-card10{
+            grid-column: span 1;
+        }
+        .photo-card11{
+            grid-column: span 1;
+        }
+        .photo-card12{
+            grid-column: span 2;
+        }
+        .photo-card13{
+            grid-row: span 2;
+        }
+        .photo-card14{
+            grid-column: span 2;
+        }
+        .photo-card15{
+            grid-column: span 1;
+        }
+        .photo-card16{
+            grid-column: span 1;
+        }
+        .photo-card17{
+            grid-column: span 1;
+        }
+        .photo-card18{
+            grid-column: span 1;
         }
 
-        .photo-card:hover {
-            transform: scale(1.02);
+        .images:hover {
+            transform: scale(1.2);
             z-index: 10;
             box-shadow: 0 5px 15px rgba(255, 217, 74, 0.2);
         }
 
-        .photo-card img {
+        .images {
             width: 100%;
             height: 300px;
             object-fit: cover;
             display: block;
+            transition: transform 0.3s ease;
         }
 
         .btn-whatsapp-big {

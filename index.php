@@ -64,15 +64,15 @@ require_once 'includes/db_config.php';
     <main>
       
     <div class="section watch">
-      <h1 class="title">Comfort e relax a pochi passi dal mare</h1> 
+      <h1 class="title">SALERNO MARE & LUCI</h1> 
+    </div>
+
+    <div class="section watch">
+      <h2 class="title">Comfort e relax a pochi passi dal mare</h2> 
     </div>
 
     <div class="section watch">
       <h2 class="title">Case vacanza accoglienti nel cuore di Salerno</h2> 
-    </div>
-
-    <div class="section watch">
-      <h2 class="title">Un punto di partenza per vivere la città e il mare</h2> 
     </div>
 
       <?php

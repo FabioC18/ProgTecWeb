@@ -77,11 +77,17 @@ $result = pg_query($conn, $query);
         </div>
 
         <div class="grid-container">
-            <?php foreach ($immagini_array as $img_name): ?>
-            <div class="photo-card">
-                <img src="assets/<?php echo rawurlencode(trim($img_name)); ?>" alt="Foto Camera">
+            <?php $count =1;
+            foreach ($immagini_array as $img_name): 
+                
+                
+                ?>
+ 
+            <div class="<?php echo "photo-card".$count;?>">
+                <img class="images" src="assets/<?php echo rawurlencode(trim($img_name)); ?>" >
             </div>
-            <?php endforeach; ?>
+
+            <?php $count ++; endforeach; ?>
         </div>
     </section>
 
