@@ -46,7 +46,7 @@
     font-style: italic;
     font-size: 3.5rem;
     text-shadow: 0 4px 10px rgba(0,0,0,0.5);
-    letter-spacing: 2px;
+    letter-spacing: 0.1vw;
  }
  
  .section.in-page .title {
@@ -86,14 +86,14 @@
      position: relative;
  }
  
- @media (max-width: 1024px) {
+ @media (max-width: 53.3vw) {
      .panel {
          height: 57vh;
          width: 100%;
          background: #f7f7f7;
          position: sticky;
-         top: 80px;
-         margin-bottom: 0px;
+         top: 4.16vh;
+         margin-bottom: 0vh;
          z-index: 2;
          color: #2e2e2e;
          justify-content: center;
@@ -116,11 +116,11 @@
  }
  
  .intro {
-     font-size: 16px;
+     font-size: 1vw;
      padding-left: 10%;
      padding-top: 2%;
      text-transform: uppercase;
-    letter-spacing: 4px;
+    letter-spacing: 0.21vw;
     font-weight: 600;
     opacity: 0.8;
     font-family: 'Helvetica Neue', sans-serif;
@@ -173,7 +173,7 @@
  }
  
  .testo2 {
-     font-size: 30px;
+     font-size: 1.56vw;
      position: relative;
      text-align: centre;
      justify-content: center;
@@ -243,7 +243,7 @@
  }
  
  .header-content {
-     max-width: 1200px;
+     max-width: 62.5vw;
      width: 100%;
      margin: 0 auto;
      display: flex;
@@ -253,16 +253,16 @@
  
  .header-menu li {
      display: inline-block;
-     margin-right: 100px;
+     margin-right: 5.21vw;
      transition: transform 0.3s ease;
  }
  
  
  
- @media (max-width: 1100px) {
+ @media (max-width: 57.3vw) {
      .header-menu li {
          display: inline-block;
-         margin-right: 50px;
+         margin-right: 2.6vw;
          transition: transform 0.3s ease;
      }
      .header-menu li:hover {
@@ -274,9 +274,9 @@
      color: #f7f7f7;
      display: inline;
      text-decoration: none;
-     font-size: 14px;
+     font-size: 0.73vw;
     text-transform: uppercase;
-    letter-spacing: 2px; 
+    letter-spacing: 0.1vw; 
     font-weight: 500;
     font-family: 'Helvetica Neue', sans-serif;
     transition: transform 0.3s ease;
@@ -288,9 +288,9 @@
  }
  
  .user dotlottie-wc{
-    width: 50px;
-    height: 50px;
-    margin-bottom: -100px;
+    width: 3.2vw;
+    height: 3.2vh;
+    margin-bottom: -5.2vh;
     
 }
 
@@ -302,10 +302,10 @@
      display: flex;
      align-items: center;
      justify-content: center;
-     min-width: 48px;
-     min-height: 48px;
-     margin-left: 0px;
-     padding-top: 10px;
+     min-width: 2.5vw;
+     min-height: 2.5vh;
+     margin-left: 0vw;
+     padding-top: 0.52vh;
      cursor: pointer;
      transition: transform 0.3s ease;
  }
@@ -314,13 +314,13 @@
      transform: scale(1.2);
  }
  
- @media (max-width: 768px) {
+ @media (max-width: 40vw) {
      .header {
-         height: 60px;
+         height: 3.12vh;
      }
      .header-menu {
          position: absolute;
-         top: 40px;
+         top: 2.1vh;
          left: 0;
          background-color: #1d1d1f;
          width: 100%;
@@ -344,10 +344,10 @@
          display: flex;
          align-items: center;
          justify-content: center;
-         min-width: 48px;
-         min-height: 48px;
-         margin-right: 20px;
-         padding-top: 10px;
+         min-width: 2.5vw;
+         min-height: 2.5vh;
+         margin-right: 1vw;
+         padding-top: 0.52vh;
          cursor: pointer;
          transition: transform 0.3s ease;
      }
@@ -364,7 +364,7 @@
      animation: gradientMove 18s ease infinite;
      color: #f7f7f7;
      z-index: 50;
-     margin-top: -90px;
+     margin-top: -4.7vh;
      display: flex;
      justify-content: center;
      align-items: center;
@@ -384,7 +384,7 @@
      }
  }
  
- @media (max-width: 1100px) {
+ @media (max-width: 57.3vw) {
      .cont-container {
          position: relative;
          width: 100%;
@@ -405,7 +405,7 @@
     font-weight: 400;
     text-transform: none; 
     letter-spacing: 1px;
-    margin-bottom: 40px;
+    margin-bottom: 2.1vh;
     text-shadow: 0 5px 15px rgba(0,0,0,0.3);
  }
  
@@ -422,15 +422,15 @@
     background: transparent;
     border: 2px solid #FFD94A; 
     color: #FFD94A;
-    font-size: 3.5rem;
+    font-size: 2.7rem;
     font-family: 'Georgia', serif;
     font-style: italic;
     font-weight: bold;
-    margin: 30px auto;
+    margin: 1.56vh auto;
     border-radius: 50%;
-    width: 180px;
-    height: 180px;
-    line-height: 180px; 
+    width: 8.8vw;
+    height: 8.8vh;
+    line-height: 9.4vh; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -447,7 +447,7 @@
     position: relative;
     font-family: 'Helvetica Neue', sans-serif;    z-index: 9999;
     background-color: #121212;;
-    padding: 60px 20px;
+    padding: 3.1vh 1vw;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 15%;
@@ -461,10 +461,10 @@
     font-family: 'Georgia', serif;
     color: #F5F5F5;
     font-size: 1.5rem;
-    margin-bottom: 20px;
+    margin-bottom: 1vh;
     border-bottom: 1px solid #2F86C1;
     display: inline-block;
-    padding-bottom: 10px;
+    padding-bottom: 0.52vh;
 }
 
 footer h2, .info h2, .contatti h2 {
@@ -479,8 +479,8 @@ footer h2, .info h2, .contatti h2 {
 .social .fb, 
 .social .tk {
     display:inline-block; 
-    width: 40px;           
-    margin: 0 15px;        
+    width: 2.1vw;           
+    margin: 0 0.78vw;        
     cursor: pointer;
     transition: all 0.3s ease;
     color: #F5F5F5;    
@@ -492,7 +492,7 @@ footer h2, .info h2, .contatti h2 {
     transform: translateY(-5px); 
     color: #FFD94A; 
 }
-
+    
 @media (max-width: 900px) {
     footer {
         grid-template-columns: 1fr;
