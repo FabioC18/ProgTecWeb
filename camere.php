@@ -14,7 +14,7 @@ $result = pg_query($conn, $query);
     <link rel="stylesheet" href="css/camere.css">
     <link rel="icon" href="assets/favicon.ico">
 </head>
-<body style= "background-color: #3a0707ff ">
+<body>
 
     <header class="header">
       <div class="header-content"> 

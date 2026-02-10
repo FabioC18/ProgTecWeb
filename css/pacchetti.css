@@ -4,12 +4,12 @@
     box-sizing: border-box;
 }
 
-body{
-    font-family: 'Segoe UI', sans-serif;
-    background-size: cover;
-    background-color: rgb(253, 115, 223) !important;
-    overflow-x: hidden;
-
+body {
+    height: 100vh; /* Forza l'altezza schermo intero */
+    width: 100vw;
+    overflow: hidden; /* Blocca scroll indesiderati */
+    margin: 0;
+    background-color: #3a0707ff;
 }
 
 .container{
@@ -227,266 +227,165 @@ body{
         margin: 0 auto;
     }
 
-    .pannelli {
-        width: 1000%; 
-        position: relative;
-        left: 0;
-        z-index: 10; 
-        margin-top: 150vh; 
-        display: flex;
-        flex-direction: row; 
+    .panel, .panel2, .panel3, .panel4 {
+      
+        width: 90vw; 
         
+        
+        margin: 0 5vw; 
+        
+        padding: 20px; 
+        
+        
+        max-height: 80vh; 
     }
 
-    .panel{
-        position: relative; 
-        height: auto; 
-        width: 50vw; 
-        border-radius: 2%;
-        padding: 10px 16px 10px 16px;          
-        margin: 100px 20vw 80px 20vw;
-        left: 5.2vw;
-        align-items: center;
-        justify-content: center;
+    
+    .img-pack, .img-lbase, .img-lplus, .img-lsushi {
+        margin-bottom: 15px; 
+        border-radius: 8px; 
     }
 
-    .panel2{
-        position: relative; 
-        height: auto; 
-        width: 50vw; 
-        border-radius: 2%;
-        padding: 10px 16px 10px 16px;          
-        margin: 100px 20vw 80px 20vw;
-        align-items: center;
-        justify-content: center;
+    .pack-base h3, .love-base h3, .love-plus h3, .love-sushi h3 {
+        font-size: 16px; 
+        margin-bottom: 5px;
     }
 
-    .panel3{
-        position: relative; 
-        height: auto; 
-        width: 50vw; 
-        border-radius: 2%;
-        padding: 10px 16px 10px 16px;          
-        margin: 100px 20vw 80px 20vw;
-        left: 100px;
-        align-items: center;
-        justify-content: center;
+    .pack-base ul, .love-base ul, .love-plus ul, .love-sushi ul {
+        font-size: 14px; 
+        padding-left: 0; 
+        line-height: 1.4;
     }
 
-    .panel4{
-        position: relative; 
-        height: auto; 
-        width: 50vw; 
-        border-radius: 2%;
-        padding: 10px 16px 10px 16px;          
-        margin: 100px 40vw 80px 20vw;
-        right: 50vw;
-        align-items: center;
-        justify-content: center;
-    }
-
-     .panel2, .panel3 {
-        position: relative; 
-        height: auto; 
-        width: 50vw; 
-        border-radius: 2%;
-        padding: 10px 16px 10px 16px;          
-        margin: 100px 20vw 80px 20vw;
-        align-items: center;
-        justify-content: center;
+    
+    .container h2 {
+        font-size: 40px; 
+        letter-spacing: 5px;
+        line-height: 45px;
     }
  }
 
-   .pannelli {
-        width: 400%; 
-        position: relative;
-        left: 0;
-        z-index: 10; 
-        margin-top: 150vh;
-        display: flex;
-        flex-direction: row; 
-        
-    }
-
-    .panel{
-        position: relative; 
-        height: auto; 
-        width: 50vw; 
-        border-radius: 2%;
-        padding: 10px 16px 10px 16px;          
-        margin: 100px 20vw 80px 20vw;
-        left: 5.2vw;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .panel2{
-        position: relative; 
-        height: auto; 
-        width: 50vw; 
-        border-radius: 2%;
-        padding: 10px 16px 10px 16px;          
-        margin: 100px 20vw 80px 20vw;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .panel3{
-        position: relative; 
-        height: auto; 
-        width: 50vw; 
-        border-radius: 2%;
-        padding: 10px 16px 10px 16px;          
-        margin: 100px 20vw 80px 20vw;
-        left: 100px;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .panel4{
-        position: relative; 
-        height: auto; 
-        width: 50vw; 
-        border-radius: 2%;
-        padding: 10px 16px 10px 16px;          
-        margin: 100px 20vw 80px 20vw;
-        right: 100px;
-        align-items: center;
-        justify-content: center;
-    }
-
-     .panel2, .panel3, .panel4 {
-        position: relative; 
-        height: auto; 
-        width: 50vw; 
-        border-radius: 2%;
-        padding: 10px 16px 10px 16px;          
-        margin: 100px 20vw 80px 20vw;
-        align-items: center;
-        justify-content: center;
-    }
 
 @media (max-width: 1100px) {
    .pannelli {
-        width: 450%; 
-        position: relative;
-        left: 0;
-        z-index: 10; 
-        margin-top: 150vh; 
-        display: flex;
-        flex-direction: row; 
+        width: 400vw;
+        height: 100vh;
     }
 
-    .panel{
-        position: relative; 
-        height: auto; 
-        width: 50vw; 
-        border-radius: 2%;
-        padding: 10px 16px 10px 16px;          
-        margin: 100px 20vw 80px 20vw;
-        left: 0.1vw;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .panel2{
-        position: relative; 
-        height: auto; 
-        width: 50vw; 
-        border-radius: 2%;
-        padding: 10px 16px 10px 16px;          
-        margin: 100px 20vw 80px 20vw;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .panel3{
-        position: relative; 
-        height: auto; 
-        width: 50vw; 
-        border-radius: 2%;
-        padding: 10px 16px 10px 16px;          
-        margin: 100px 20vw 80px 20vw;
-        left: 100px;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .panel4{
-        position: relative; 
-        height: auto; 
-        width: 50vw; 
-        border-radius: 2%;
-        padding: 10px 16px 10px 16px;          
-        margin: 100px 20vw 80px 20vw;
-        left: 50px;
-        right: 50px;
-        align-items: center;
-        justify-content: center;
-    }
-
+    
     .panel, .panel2, .panel3, .panel4 {
-        position: relative; 
-        height: auto; 
-        width: 90vw; 
-        border-radius: 2%;
-        padding: 10px 16px 10px 16px;        
-        margin: 100px 10vw 80px 10vw;
-        align-items: center;
-        justify-content: center;
+    
+        width: 80vw;
+        
+        margin: 0 10vw;
+        padding: 25px; 
     }
+    
+    
+    .pack-base h3, .love-base h3, .love-plus h3, .love-sushi h3 {
+         font-size: 1.8vh;
+    }
+     .pack-base ul, .love-base ul, .love-plus ul, .love-sushi ul {
+         font-size: 1.8vh;
+    }
+}
+
+.pannelli {
+    
+    width: 400vw; 
+    height: 100vh; 
+    
+    display: flex; 
+    flex-direction: row;
+    align-items: center; 
+    
+    position: absolute; 
+    top: 0;
+    left: 0;
+    z-index: 10;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+
+.panel, .panel2, .panel3, .panel4 {
+    
+    width: 50vw;
+    margin: 0 25vw; 
+    margin-top: 6vh; 
+    height: auto;
+    max-height: 95vh; 
+    border-radius: 20px; 
+    padding: 20px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
+    
 }
 
 
 .panel {
-    background-color: rgb(255, 167, 214);
+    background-color: #C08081;
 } 
 
 .panel2 {
-    background-color: rgb(255, 187, 231);
+    background-color: #D8A8A8;
 }
 
 .panel3 {
-    background-color: rgb(255, 44, 181);
+    background-color: #E8A8A8;
 }
 
 .panel4 {
-    background-color: rgb(212, 0, 138);
+    background-color: #fda3a3;
 
 }
 
 
 .pack-base, .love-base, .love-plus, .love-sushi {
     margin-bottom: 20px; 
+    width: 100%;
     text-align: center;
     height: auto;        
 }
 
 .pack-base h3, .love-base h3, .love-plus h3, .love-sushi h3{
-    font-family:Verdana, Geneva, Tahoma, sans-serif;   
+    font-family:Verdana, Geneva, Tahoma, sans-serif; 
+    font-size: 1.5vh;  
 }
 
 .pack-base ul , .love-base ul , .love-plus ul , .love-sushi ul {
     font-family:Verdana, Geneva, Tahoma, sans-serif; 
     list-style: none;
+    font-size: 1.5vh; 
 }
 
 h4{
     position: relative;
     margin-top: 30px;
     text-align: center; 
+    font-size: 1.5vh; 
 }
 
-.img-pack, .img-lbase, .img-lplus, .img-lsushi{
-    width: 100%;
+h4 a{
+    text-decoration: none;
+}
+
+.img-pack, .img-lbase, .img-lplus, .img-lsushi {
+    width: 100%; 
     height: auto;    
-    border-radius: 2%;                   
+    border-radius: 12px;
+    object-fit: contain; 
+    display: block;
 }
 
 
 .frslider{
     width: 10%;
     transition: transform 0.3s ease;
+    color: #1d1d1f;
 }
 
 .frslider:hover{

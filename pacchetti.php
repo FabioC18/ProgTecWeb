@@ -64,7 +64,6 @@ $is_logged = isset($_SESSION['user']);
     </header>
     
     <div class="container">
-        <h2 class="object" data-value="3">Pacchetti <br> <span>Love</span> <br> </h2>
         <img src="assets/unnamed-no-bg.png" class="object freccia" data-value="3">
         <img src="assets/bacchette-no-bg.png" class="object top-right" data-value="12 ">
         <img src="assets/pall-no-bg.png" class ="object cent-top" data-value="-7">
@@ -127,10 +126,10 @@ $is_logged = isset($_SESSION['user']);
 
             <h4>*I PACCHETTI POSSONO ESSERE PERSONALIZZATI SU RICHIESTA <br>
                 <a href="#" onclick="scorriA('<?php echo ($count > 1) ? "panel".($count-1) : "panel".$total_rows; ?>'); return false;">
-                    <img class="frslider" src="assets/frsx-no-bg.png" alt="Precedente">
+                    <img class="frslider" src="assets/arrow-circle-left.png" alt="Precedente">
                 </a> 
                 <a href="#" onclick="scorriA('<?php echo ($count < $total_rows) ? "panel".($count+1) : "panel1"; ?>'); return false;">
-                    <img class="frslider" src="assets/frdx-no-bg.png" alt="Successivo">
+                    <img class="frslider" src="assets/arrow-circle-right.png" alt="Successivo">
                 </a>
             </h4>
         </article>
