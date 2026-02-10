@@ -59,7 +59,7 @@
      width: 100%;
      background: #f7f7f7;
      position: sticky;
-     top: -10vh;
+     top: -7vh;
      margin-bottom: 30vh;
      z-index: 2;
      color: #2e2e2e;
@@ -253,9 +253,10 @@
  
  .header-menu li {
      display: inline-block;
-     margin-right: 5vw;
+     margin-right: 3vw;
      transition: transform 0.3s ease;
  }
+
  
  
  
@@ -291,7 +292,6 @@
     width: 3.2vw;
     height: 3.2vh;
     margin-bottom: -5.2vh;
-    
 }
 
  .hamb-menu {

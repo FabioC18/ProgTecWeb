@@ -353,20 +353,20 @@ body {
 
 .pack-base h3, .love-base h3, .love-plus h3, .love-sushi h3{
     font-family:Verdana, Geneva, Tahoma, sans-serif; 
-    font-size: 1.5vh;  
+    font-size: 1.8vh;  
 }
 
 .pack-base ul , .love-base ul , .love-plus ul , .love-sushi ul {
     font-family:Verdana, Geneva, Tahoma, sans-serif; 
     list-style: none;
-    font-size: 1.5vh; 
+    font-size: 1.8vh; 
 }
 
 h4{
     position: relative;
-    margin-top: 30px;
+    margin-top: 20px;
     text-align: center; 
-    font-size: 1.5vh; 
+    font-size: 1.8vh; 
 }
 
 h4 a{
