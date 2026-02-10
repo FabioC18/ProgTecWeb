@@ -42,7 +42,7 @@
      transform: scale(1);
      transition: all 1s cubic-bezier(.215, .61, .355, 1);
      opacity: 0;
-     
+     font-family: Georgia, serif;
     font-style: italic;
     font-size: 3.5rem;
     text-shadow: 0 4px 10px rgba(0,0,0,0.5);
