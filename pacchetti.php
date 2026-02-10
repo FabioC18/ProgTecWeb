@@ -20,9 +20,8 @@ $is_logged = isset($_SESSION['user']);
 
     <header class="header">
       <div class="header-content"> 
-        <div class="icon-big">
-            <a class="icon-big" href="index.php">
-          <svg viewBox="0 0 900 260" width="140" height="32" role="img" aria-label="Salerno Mare & Luci">
+        <a class="icon-big" href="index.php">
+          <svg viewBox="0 0 900 260" width="155" height="40" role="img" aria-label="Salerno Mare & Luci">
             <g fill="none" fill-rule="evenodd">
               <rect x="30" y="40" width="170" height="170" stroke="#2E2E2E" stroke-width="4"/>
               <path d="M30 175 C70 155,110 195,150 175 C170 165,190 185,200 175 L200 210 L30 210 Z" fill="#2F86C1"/>
@@ -36,23 +35,27 @@ $is_logged = isset($_SESSION['user']);
             </g>
           </svg>
         </a>
-        </div>
-        
-        <nav>
-            <ul class="header-menu">
-                <li><a href="index.php">Home</a></li>
-                <li><a href="camere.php">Camere</a></li>
-                <li><a href="pacchetti.php" style="color:#FFD94A">Pacchetti</a></li>
-        
-                <?php if ($is_logged): ?>
-                    <li class="menu-item-session"><span class="user-name" style="color: #FFD94A;">Ciao, <?php echo htmlspecialchars($_SESSION['user']); ?></span></li>
-                    <li class="menu-item-session"><a href="logout.php">Logout</a></li>
-                    <li><a href="profilo.php">Profilo</a></li>
-                <?php else: ?>
-                    <li><a href="login_reg.php">Login / Registrati</a></li>
-                <?php endif; ?>
-            </ul>
-        </nav>
+
+<nav>
+    <ul class="header-menu">
+        <li><a href="camere.php">Case vacanza</a></li>
+        <li><a href="pacchetti.php">Pacchetti</a></li>
+         <?php if (isset($_SESSION['user'])): ?>
+            <li class="menu-item-session"><a class="user" href="profilo.php" ><script
+  src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.11/dist/dotlottie-wc.js"
+  type="module"></script>
+
+<dotlottie-wc
+  src="https://lottie.host/73049aba-3e4d-41d1-a8bc-0cb9982ffb58/EV4SRIloZW.lottie"
+  autoplay
+  loop
+></dotlottie-wc></a></li>
+            <li class="menu-item-session"><a href="logout.php">Logout</a></li>
+        <?php else: ?>
+            <li><a href="login_reg.php">Login / Registrati</a></li>
+        <?php endif; ?>
+    </ul>
+</nav>
 
         <div class="hamb-menu">
            <svg width="25" height="25" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6" stroke="red" stroke-width="2"/><line x1="3" y1="12" x2="21" y2="12" stroke="white" stroke-width="2"/><line x1="3" y1="18" x2="21" y2="18" stroke="blue" stroke-width="2"/></svg>

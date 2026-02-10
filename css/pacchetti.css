@@ -96,142 +96,139 @@ body{
     letter-spacing: 10px;
 }
 
-.header{
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 9999; 
+.header {
+     position: fixed;
+     top: 0;
+     left: 0;
+     z-index: 9999;
      width: 100%;
-     background-color: #1d1d1f;
-    
-} 
-
-.header-content{
-    max-width: 1200px; 
-    width: 100%;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 16px;
-}
-
-.header-menu li{
-    display: inline-block;
-    margin-right: 100px;
-    transition: transform 0.3s ease;
-}
-
- .header-menu li:hover{
-        transform: scale(1.1);
-    }
-
-    @media (max-width: 1100px){
-        .header-menu li{
-    display: inline-block;
-    margin-right: 60px;
-    transition: transform 0.3s ease;
-}
-
- .header-menu li:hover{
-        transform: scale(1.1);
-    }
-
-    }
-
-.header-menu li a{
-    color:#f7f7f7 ;    
-    display: block;
-    padding: 15px;
-    text-decoration: none;
-    font-size: large;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-}
-
-.hamb-menu{
-    display: none;
-}
-
- .icon-big{
-        display: flex;
-        align-items: center;
-        justify-content:left;
-        min-width: 48px;                     
-        min-height: 48px; 
-        margin-left: 90px;
-        padding-top: 10px;
-        cursor: pointer;
-        transition: transform 0.3s ease;
-    }
+     background-color: rgba(29, 29, 31, 0.95); 
+    backdrop-filter: blur(10px); 
+    border-bottom: 1px solid rgba(255, 217, 74, 0.2); 
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+ }
  
-    .icon-big:hover{
-        transform: scale(1.2);
-    }
-
-@media (max-width: 768px){
-    
-    .container h2{
-        font-size: 60px;
-        letter-spacing: 19px;
-        line-height: 35px;
-    }
-
-    .container h2 span{
-        font-size: 26px;
-        
-    }
-
-    .header{
-        height: 60px;
-    }
-
-     .header-menu{
-        position:absolute;
-        top: 60px;
-        left: 0;
-        background-color: #1d1d1f;
-        width: 100%;
-        overflow: hidden;
-        transform:translateY(-20px);
-        transition: transform 0.5s ease, opacity 0.4s ease;
-        opacity: 0;
-    }
-
-     .menu-open .header-menu{
-        height: 26vh ;
-        transform: translateY(0px);
-        opacity: 1;
-    }
-
-    .header-menu li{
-        width: 100%;
-        border-bottom: 1px solid #444;
-        text-align: center;     
-        margin-right: 50px;
-    }
-
-
-    .hamb-menu{
-        display: flex;
-        align-items: center;             
-        justify-content: center;         
-        min-width: 48px;                 
-        min-height: 48px;  
-        margin-left: 20px;
-        margin-right: 10%;
-        padding-top: 10px;
-        cursor: pointer;
-        transition: transform 0.3s ease;
-    }
+ .header-content {
+     max-width: 62.5vw;
+     width: 100%;
+     margin: 0 auto;
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+ }
  
-    .hamb-menu:hover{
-        transform: scale(1.2);
-    }
+ .header-menu li {
+     display: inline-block;
+     margin-right: 7vw;
+     transition: transform 0.3s ease;
+ }
+ 
+ 
+ 
+ @media (max-width: 1100px) {
+     .header-menu li {
+         display: inline-block;
+         margin-right: 50px;
+         transition: transform 0.3s ease;
+     }
+     .header-menu li:hover {
+         transform: scale(1.2);
+     }
+ }
+ 
+ .header-menu li a {
+     color: #f7f7f7;
+     display: inline;
+     text-decoration: none;
+     font-size: 0.73vw;
+    text-transform: uppercase;
+    letter-spacing: 2px; 
+    font-weight: 500;
+    font-family: 'Helvetica Neue', sans-serif;
+    transition: transform 0.3s ease;
+ }
+
+ .header-menu li a:hover {
+     transform: scale(1.2);
+     color: #FFD94A;
+ }
+ 
+ .user dotlottie-wc{
+    width: 3.2vw;
+    height: 3.2vh;
+    margin-bottom: -5.2vh;
     
 }
 
-   .pannelli {
-        width: 368%; 
+ .hamb-menu {
+     display: none;
+ }
+ 
+ .icon-big {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     min-width: 2.5vw;
+     min-height: 2.5vh;
+     margin-left: 0px;
+     padding-top: 0.52vh;
+     cursor: pointer;
+     transition: transform 0.3s ease;
+ }
+ 
+ .icon-big:hover {
+     transform: scale(1.2);
+ }
+ 
+ @media (max-width: 768px) {
+     .header {
+         height: 60px;
+     }
+     .header-menu {
+         position: absolute;
+         top: 40px;
+         left: 0;
+         background-color: #1d1d1f;
+         width: 100%;
+         overflow: hidden;
+         transform: translateY(-20px);
+         transition: transform 0.5s ease, opacity 0.4s ease;
+         opacity: 0;
+         border-bottom: 2px solid #FFD94A;
+     }
+     .menu-open .header-menu {
+         height: 12.65vh;
+         transform: translateY(0px);
+         opacity: 1;
+     }
+     .header-menu li {
+         width: 100%;
+         border-bottom: 1px solid rgba(255,255,255,0.1);
+         text-align: center;
+     }
+     .hamb-menu {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         min-width: 40px;
+         min-height: 40px;
+         margin-right: 20px;
+         padding-top: 10px;
+         cursor: pointer;
+         transition: transform 0.3s ease;
+     }
+     .hamb-menu:hover {
+         transform: scale(1.2);
+     }
+
+     .user dotlottie-wc{
+        width: 30px;
+        height: 30px;
+        margin: 0 auto;
+    }
+
+    .pannelli {
+        width: 1000%; 
         position: relative;
         left: 0;
         z-index: 10; 
@@ -241,7 +238,124 @@ body{
         
     }
 
-    .panel, .panel2, .panel3, .panel4 {
+    .panel{
+        position: relative; 
+        height: auto; 
+        width: 50vw; 
+        border-radius: 2%;
+        padding: 10px 16px 10px 16px;          
+        margin: 100px 20vw 80px 20vw;
+        left: 5.2vw;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .panel2{
+        position: relative; 
+        height: auto; 
+        width: 50vw; 
+        border-radius: 2%;
+        padding: 10px 16px 10px 16px;          
+        margin: 100px 20vw 80px 20vw;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .panel3{
+        position: relative; 
+        height: auto; 
+        width: 50vw; 
+        border-radius: 2%;
+        padding: 10px 16px 10px 16px;          
+        margin: 100px 20vw 80px 20vw;
+        left: 100px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .panel4{
+        position: relative; 
+        height: auto; 
+        width: 50vw; 
+        border-radius: 2%;
+        padding: 10px 16px 10px 16px;          
+        margin: 100px 40vw 80px 20vw;
+        right: 50vw;
+        align-items: center;
+        justify-content: center;
+    }
+
+     .panel2, .panel3 {
+        position: relative; 
+        height: auto; 
+        width: 50vw; 
+        border-radius: 2%;
+        padding: 10px 16px 10px 16px;          
+        margin: 100px 20vw 80px 20vw;
+        align-items: center;
+        justify-content: center;
+    }
+ }
+
+   .pannelli {
+        width: 400%; 
+        position: relative;
+        left: 0;
+        z-index: 10; 
+        margin-top: 150vh;
+        display: flex;
+        flex-direction: row; 
+        
+    }
+
+    .panel{
+        position: relative; 
+        height: auto; 
+        width: 50vw; 
+        border-radius: 2%;
+        padding: 10px 16px 10px 16px;          
+        margin: 100px 20vw 80px 20vw;
+        left: 5.2vw;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .panel2{
+        position: relative; 
+        height: auto; 
+        width: 50vw; 
+        border-radius: 2%;
+        padding: 10px 16px 10px 16px;          
+        margin: 100px 20vw 80px 20vw;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .panel3{
+        position: relative; 
+        height: auto; 
+        width: 50vw; 
+        border-radius: 2%;
+        padding: 10px 16px 10px 16px;          
+        margin: 100px 20vw 80px 20vw;
+        left: 100px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .panel4{
+        position: relative; 
+        height: auto; 
+        width: 50vw; 
+        border-radius: 2%;
+        padding: 10px 16px 10px 16px;          
+        margin: 100px 20vw 80px 20vw;
+        right: 100px;
+        align-items: center;
+        justify-content: center;
+    }
+
+     .panel2, .panel3, .panel4 {
         position: relative; 
         height: auto; 
         width: 50vw; 
@@ -254,13 +368,61 @@ body{
 
 @media (max-width: 1100px) {
    .pannelli {
-        width: 400%; 
+        width: 450%; 
         position: relative;
         left: 0;
         z-index: 10; 
         margin-top: 150vh; 
         display: flex;
         flex-direction: row; 
+    }
+
+    .panel{
+        position: relative; 
+        height: auto; 
+        width: 50vw; 
+        border-radius: 2%;
+        padding: 10px 16px 10px 16px;          
+        margin: 100px 20vw 80px 20vw;
+        left: 0.1vw;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .panel2{
+        position: relative; 
+        height: auto; 
+        width: 50vw; 
+        border-radius: 2%;
+        padding: 10px 16px 10px 16px;          
+        margin: 100px 20vw 80px 20vw;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .panel3{
+        position: relative; 
+        height: auto; 
+        width: 50vw; 
+        border-radius: 2%;
+        padding: 10px 16px 10px 16px;          
+        margin: 100px 20vw 80px 20vw;
+        left: 100px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .panel4{
+        position: relative; 
+        height: auto; 
+        width: 50vw; 
+        border-radius: 2%;
+        padding: 10px 16px 10px 16px;          
+        margin: 100px 20vw 80px 20vw;
+        left: 50px;
+        right: 50px;
+        align-items: center;
+        justify-content: center;
     }
 
     .panel, .panel2, .panel3, .panel4 {

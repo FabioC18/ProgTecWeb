@@ -16,7 +16,7 @@ require_once 'includes/db_config.php';
     <header class="header">
       <div class="header-content"> 
         <a class="icon-big" href="index.php">
-          <svg viewBox="0 0 900 260" width="140" height="32" role="img" aria-label="Salerno Mare & Luci">
+          <svg viewBox="0 0 900 260" width="155" height="40" role="img" aria-label="Salerno Mare & Luci">
             <g fill="none" fill-rule="evenodd">
               <rect x="30" y="40" width="170" height="170" stroke="#2E2E2E" stroke-width="4"/>
               <path d="M30 175 C70 155,110 195,150 175 C170 165,190 185,200 175 L200 210 L30 210 Z" fill="#2F86C1"/>
