@@ -46,7 +46,7 @@ require_once 'includes/db_config.php';
   autoplay
   loop
 ></dotlottie-wc></a></li>
-          <li><a href="profilo.php">Ciao, <?php echo htmlspecialchars($_SESSION['user']); ?></a></li>
+
             <li class="menu-item-session"><a href="logout.php">Logout</a></li>
         <?php else: ?>
             <li><a href="login_reg.php">Login</a></li>

@@ -2,8 +2,8 @@
 session_start();
 require_once 'includes/db_config.php';
 
-// Query per prendere le categorie dalla tabella 'camere'
-$query = "SELECT * FROM camere ORDER BY id ASC"; 
+// Aggiunto LIMIT 2 per sicurezza, per evitare duplicati se nel DB hai più righe
+$query = "SELECT * FROM camere ORDER BY id ASC LIMIT 2"; 
 $result = pg_query($conn, $query);
 ?>
 <!DOCTYPE html>
@@ -85,17 +85,17 @@ $result = pg_query($conn, $query);
         </div>
 
         <div class="grid-container">
-            <?php $count =1;
+            <?php 
+            // RIMOSSO IL CONTATORE $COUNT
+            // Ora tutte le card hanno la stessa classe "photo-card" per lo slider
             foreach ($immagini_array as $img_name): 
-                
-                
-                ?>
+            ?>
  
-            <div class="<?php echo "photo-card".$count;?>">
-                <img class="images" src="assets/<?php echo rawurlencode(trim($img_name)); ?>" >
+            <div class="photo-card">
+                <img class="images" src="assets/<?php echo rawurlencode(trim($img_name)); ?>" alt="Foto Camera">
             </div>
 
-            <?php $count ++; endforeach; ?>
+            <?php endforeach; ?>
         </div>
     </section>
 

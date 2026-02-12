@@ -1,105 +1,205 @@
-html{
+html {
     overflow-x: hidden;
 }
-header{
-     position: fixed;
-     height: 50px;
-     top: 0;
-     left: 0;
-     z-index: 9999;
-     width: 100%;
-     background-color: rgba(29, 29, 31, 0.95); 
-    backdrop-filter: blur(10px); 
-    border-bottom: 1px solid rgba(255, 217, 74, 0.2); 
-    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+
+header {
+    position: fixed;
+    height: 50px;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    width: 100%;
+    background-color: rgba(29, 29, 31, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 217, 74, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
 .header-content {
-     max-width: 1200px;
-     width: 100%;
-     margin: 0 auto;
-     display: flex;
-     align-items: center;
-     justify-content: space-between;
-     padding-top: 13px;
- }
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 13px;
+}
 
+#map {
+    height: 400px;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 10px;
+    border: 1px solid #444;
+    display: none;
+}
 
-#map { 
-            height: 400px; 
-            width: 100%; 
-            margin-top: 20px; 
-            border-radius: 10px; 
-            border: 1px solid #444;
-            display: none; 
-        }
-        body { background-color: #1d1d1f; color: white; font-family: sans-serif; padding-top: 40px; margin: 0; }
-        .container { max-width: 900px; margin: 0 auto; padding: 20px;}
-        
-        .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-        @media (max-width: 768px) { .profile-grid { grid-template-columns: 1fr; } }
+body {
+    background-color: #1d1d1f;
+    color: white;
+    font-family: sans-serif;
+    padding-top: 40px;
+    margin: 0;
+}
 
-        .box { background: rgba(255,255,255,0.05); padding: 25px; border-radius: 10px; border: 1px solid #333; }
-        h2 { color: #FFD94A; border-bottom: 1px solid #444; padding-bottom: 10px; margin-top: 0; }
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
 
-        label { display: block; margin-top: 15px; color: #ccc; }
-        input[type="text"], input[type="password"] {
-            width: 100%; padding: 10px; margin-top: 5px;
-            background: #222; border: 1px solid #444; color: white; border-radius: 5px;
-        }
-        
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #444; }
-        th { color: #FFD94A; }
-        tr:hover { background: rgba(255,255,255,0.05); }
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
 
-        .success { color: #4BB543; background: rgba(75, 181, 67, 0.2); padding: 10px; border-radius: 5px; margin-bottom: 15px; }
-        .error { color: #ff4d4d; background: rgba(255, 77, 77, 0.2); padding: 10px; border-radius: 5px; margin-bottom: 15px; }
+@media (max-width: 768px) {
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
+}
 
-        .btn-save {
-            background-color: #FFD94A; color: black; border: none; padding: 12px 20px;
-            font-weight: bold; cursor: pointer; margin-top: 20px; width: 100%; border-radius: 5px;
-            transition: opacity 0.3s;
-            text-decoration: none; 
-        }
-        .btn-save:disabled { background-color: #555; color: #888; cursor: not-allowed; }
-        
-        .password-container { position: relative; }
-        
-        .toggle-password {
-            position: absolute; right: 10px; top: 38px; cursor: pointer; color: #ccc; z-index: 10;
-        }
+.box {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid #333;
+}
 
-        /* --- STILE TOOLTIP (SOTTO) --- */
-        .tooltip-requirements {
-            display: none; /* Nascosto di default */
-            position: absolute;
-            top: 100%; /* Posizionato SOTTO l'input */
-            left: 0;
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.95);
-            color: #fff;
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 0.85em;
-            margin-top: 5px; /* Spazio tra input e tooltip */
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            border: 1px solid #FFD94A;
-            z-index: 100;
-        }
-        .tooltip-requirements ul {
-            margin: 0;
-            padding-left: 20px;
-            list-style-type: circle;
-        }
-        .tooltip-requirements li {
-            margin-bottom: 3px;
-        }
+h2 {
+    color: #FFD94A;
+    border-bottom: 1px solid #444;
+    padding-bottom: 10px;
+    margin-top: 0;
+}
 
-        footer{
+label {
+    display: block;
+    margin-top: 15px;
+    color: #ccc;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    background: #222;
+    border: 1px solid #444;
+    color: white;
+    border-radius: 5px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #444;
+}
+
+th {
+    color: #FFD94A;
+}
+
+tr:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.success {
+    color: #4BB543;
+    background: rgba(75, 181, 67, 0.2);
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.error {
+    color: #ff4d4d;
+    background: rgba(255, 77, 77, 0.2);
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.btn-save {
+    background-color: #FFD94A;
+    color: black;
+    border: none;
+    padding: 12px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 100%;
+    border-radius: 5px;
+    transition: opacity 0.3s;
+    text-decoration: none;
+}
+
+.btn-save:disabled {
+    background-color: #555;
+    color: #888;
+    cursor: not-allowed;
+}
+
+.password-container {
     position: relative;
-    font-family: 'Helvetica Neue', sans-serif;    z-index: 9999;
-    background-color: #121212;;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 38px;
+    cursor: pointer;
+    color: #ccc;
+    z-index: 10;
+}
+
+
+/* --- STILE TOOLTIP (SOTTO) --- */
+
+.tooltip-requirements {
+    display: none;
+    /* Nascosto di default */
+    position: absolute;
+    top: 100%;
+    /* Posizionato SOTTO l'input */
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 0.85em;
+    margin-top: 5px;
+    /* Spazio tra input e tooltip */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    border: 1px solid #FFD94A;
+    z-index: 100;
+}
+
+.tooltip-requirements ul {
+    margin: 0;
+    padding-left: 20px;
+    list-style-type: circle;
+}
+
+.tooltip-requirements li {
+    margin-bottom: 3px;
+}
+
+footer {
+    position: relative;
+    font-family: 'Helvetica Neue', sans-serif;
+    z-index: 9999;
+    background-color: #121212;
+    ;
     padding: 60px 20px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -109,9 +209,9 @@ header{
     border-top: 4px solid #8B1E1E;
     color: #cccccc;
     width: 100%;
- }
+}
 
- footer h1 {
+footer h1 {
     font-family: 'Georgia', serif;
     color: #F5F5F5;
     font-size: 1.5rem;
@@ -121,30 +221,31 @@ header{
     padding-bottom: 10px;
 }
 
-footer h2, .info h2, .contatti h2 {
+footer h2,
+.info h2,
+.contatti h2 {
     font-size: 0.9rem;
     font-weight: 400;
     line-height: 2;
     color: #aaaaaa;
 }
 
-
- .social .ig, 
-.social .fb, 
+.social .ig,
+.social .fb,
 .social .tk {
-    display:inline-block; 
-    width: 40px;           
-    margin: 0 15px;        
+    display: inline-block;
+    width: 40px;
+    margin: 0 15px;
     cursor: pointer;
     transition: all 0.3s ease;
-    color: #F5F5F5;    
-}    
+    color: #F5F5F5;
+}
 
 .social .ig:hover,
 .social .fb:hover,
 .social .tk:hover {
-    transform: translateY(-5px); 
-    color: #FFD94A; 
+    transform: translateY(-5px);
+    color: #FFD94A;
 }
 
 @media (max-width: 900px) {
@@ -153,6 +254,9 @@ footer h2, .info h2, .contatti h2 {
         gap: 40px;
         text-align: center;
     }
-    .info, .contatti, .social { text-align: center; }
+    .info,
+    .contatti,
+    .social {
+        text-align: center;
+    }
 }
-
