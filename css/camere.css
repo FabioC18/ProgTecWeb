@@ -276,3 +276,62 @@ body {
     background-color: #e5d867;
     transform: scale(1.05);
 }
+
+footer{
+    position: relative;
+    font-family: 'Helvetica Neue', sans-serif;    z-index: 9999;
+    background-color: #121212;;
+    padding: 3.1vh 1vw;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15%;
+    justify-items: center;
+    align-items: start;
+    border-top: 4px solid #8B1E1E;
+    color: #cccccc;
+ }
+
+ footer h1 {
+    font-family: 'Georgia', serif;
+    color: #F5F5F5;
+    font-size: 1.5rem;
+    margin-bottom: 1vh;
+    border-bottom: 1px solid #2F86C1;
+    display: inline-block;
+    padding-bottom: 0.52vh;
+}
+
+footer h2, .info h2, .contatti h2 {
+    font-size: 0.9rem;
+    font-weight: 400;
+    line-height: 2;
+    color: #aaaaaa;
+}
+
+
+ .social .ig, 
+.social .fb, 
+.social .tk {
+    display:inline-block; 
+    width: 2.1vw;           
+    margin: 0 0.78vw;        
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #F5F5F5;    
+}    
+
+.social .ig:hover,
+.social .fb:hover,
+.social .tk:hover {
+    transform: translateY(-5px); 
+    color: #FFD94A; 
+}
+    
+@media (max-width: 900px) {
+    footer {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+    }
+    .info, .contatti, .social { text-align: center; }
+}
