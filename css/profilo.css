@@ -62,7 +62,7 @@ body {
 
 .box {
     background: rgba(255, 255, 255, 0.05);
-    padding: 25px;
+    padding: 25px 40px 25px 25px;
     border-radius: 10px;
     border: 1px solid #333;
 }
@@ -99,7 +99,7 @@ table {
 
 th,
 td {
-    padding: 12px;
+    padding: 12px 3px 12px 12px;
     text-align: left;
     border-bottom: 1px solid #444;
 }

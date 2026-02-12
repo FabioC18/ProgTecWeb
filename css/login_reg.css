@@ -1,104 +1,254 @@
-html{
-    overflow-x: hidden;
+/* --- Reset e Variabili --- */
+:root {
+    --primary-yellow: #FFD94A;   /* Il tuo giallo */
+    --hover-yellow: #e6c242;     /* Giallo un po' più scuro per l'hover */
+    --bg-dark: #121212;          /* Sfondo pagina molto scuro */
+    --bg-card: #1E1E24;          /* Sfondo del box login */
+    --input-bg: #2b2b2b;         /* Sfondo degli input */
+    --text-main: #ffffff;
+    --text-muted: #aaaaaa;
+    --border-radius: 8px;
+    --transition-speed: 0.3s;
 }
 
-body{
+* {
+    box-sizing: border-box;
     margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    overflow: hidden;
 }
 
-header{
-     position: fixed;
-     height: 50px;
-     top: 0;
-     left: 0;
-     z-index: 9999;
-     width: 100%;
-     background-color: rgba(29, 29, 31, 0.95); 
-    backdrop-filter: blur(10px); 
-    border-bottom: 1px solid rgba(255, 217, 74, 0.2); 
-    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+body {
+    background-color: var(--bg-dark) !important; /* Sovrascrive lo stile inline */
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* --- Header e Link Home --- */
+.header {
+    width: 100%;
+    padding: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .header-content {
-     max-width: 1200px;
-     width: 100%;
-     margin: 0 auto;
-     display: flex;
-     align-items: center;
-     justify-content: space-between;
-     padding-top: 13px;
- }
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
+.icon-big {
+    transition: color var(--transition-speed);
+}
 
-input[type="submit"]:disabled {
-            background-color: #555 !important;
-            color: #888 !important;
-            cursor: not-allowed !important;
-            opacity: 0.6;
-        }
-        .toggle-password {
-            position: absolute;
-            right: 10px;
-            top: 50%; /* Centrato meglio */
-            transform: translateY(-50%);
-            cursor: pointer;
-            color: #333; 
-            user-select: none;
-            z-index: 10;
-        }
-        .password-container {
-            position: relative;
-            width: 100%;
-        }
-        /* STILE PER IL TOOLTIP (ETICHETTA) */
-        .tooltip-requirements {
-            display: none; /* Nascosto di default */
-            position: absolute;
-            bottom: 100%; /* Appare sopra l'input */
-            top:100%;
-            height: 80px;
-            left: 0;
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            color: #fff;
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 0.85em;
-            margin-bottom: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            border: 1px solid #FFD94A;
-            z-index: 100;
-        }
-        .tooltip-requirements ul {
-            margin: 0;
-            padding-left: 20px;
-            list-style-type: circle;
-        }
-        .tooltip-requirements li {
-            margin-bottom: 3px;
-        }
-        
-        /* Stili Tab */
-        .tab-switch {
-            text-align: center;
-            font-size: 1.5em;
-            margin-bottom: 20px;
-            cursor: pointer;
-            user-select: none;
-        }
-        .tab-active {
-            color: #FFD94A;
-            font-weight: bold;
-            text-decoration: underline;
-        }
-        .tab-inactive {
-            color: #888;
-        }
-        .tab-inactive:hover {
-            color: white;
-        }
-        .hidden {
-            display: none;
-        }
+.icon-big:hover {
+    color: #fff !important; /* Diventa bianco al passaggio del mouse */
+    text-shadow: 0 0 10px rgba(255, 217, 74, 0.5);
+}
 
- 
+/* --- Container Principale --- */
+/* Targettiamo il div con stile inline tramite attributo o struttura */
+body > div {
+    background: var(--bg-card) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px); /* Effetto vetro se c'è sfondo dietro */
+    border-radius: 12px !important;
+    padding: 40px !important;
+    margin-top: 80px !important;
+    width: 100%;
+    max-width: 420px !important;
+}
+
+/* --- Tab Switch (Stile Google Material) --- */
+.tab-switch {
+    display: flex; /* Dispone gli elementi in riga */
+    width: 100%;   /* Occupa tutto lo spazio orizzontale */
+    border-bottom: 2px solid #333; /* Linea grigia di base per tutti */
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.tab-switch span {
+    flex: 1;             /* Ogni tab prende il 50% dello spazio */
+    text-align: center;  /* Testo centrato */
+    padding: 15px 0;     /* Spaziatura verticale comoda */
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #888;         /* Colore testo inattivo */
+    position: relative;
+    transition: all 0.3s ease;
+    text-transform: uppercase; /* Google usa spesso il maiuscolo nei tab */
+    letter-spacing: 1px;
+    background: transparent;
+}
+
+/* Effetto Hover (passaggio del mouse) */
+.tab-switch span:hover {
+    background-color: rgba(255, 255, 255, 0.03); /* Leggero chiarore */
+    color: #fff;
+}
+
+/* --- Tab Attivo --- */
+.tab-active {
+    color: var(--primary-yellow) !important; /* Testo giallo */
+    font-weight: bold !important;
+}
+
+.panel{
+    max-width: 400px; 
+    background: rgba(255,255,255,0.1); 
+    padding: 20px; border-radius: 10px;
+    
+}
+
+/* La barra gialla sotto il tab attivo */
+.tab-active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; /* Si sovrappone alla linea grigia del container */
+    left: 0;
+    width: 100%;
+    height: 3px; /* Spessore della barra attiva */
+    background-color: var(--primary-yellow);
+    box-shadow: 0 -2px 10px rgba(255, 217, 74, 0.4); /* Alone luminoso */
+    animation: slideIn 0.3s ease; /* Piccola animazione di entrata */
+}
+
+/* Animazione opzionale per rendere l'apparizione della barra più fluida */
+@keyframes slideIn {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+}
+
+/* --- Form Elements --- */
+form label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 5px;
+    display: block;
+    font-weight: 500;
+}
+
+input {
+    background-color: var(--input-bg);
+    border: 1px solid transparent;
+    border-radius: var(--border-radius);
+    padding: 12px 15px;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    transition: all var(--transition-speed);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+}
+
+input:focus {
+    border-color: var(--primary-yellow);
+    background-color: #333;
+    box-shadow: 0 0 8px rgba(255, 217, 74, 0.2);
+}
+
+/* --- Password Container e Occhio --- */
+.password-container {
+    position: relative;
+    width: 100%;
+}
+
+.password-container input {
+    width: 100% !important; /* Forza larghezza piena */
+}
+
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: color var(--transition-speed);
+    display: flex;
+    align-items: center;
+}
+
+.toggle-password:hover {
+    color: var(--primary-yellow);
+}
+
+/* --- Tooltip Password --- */
+.tooltip-requirements {
+    display: none; /* Gestito da JS */
+    position: absolute;
+    bottom: 110%; /* Appare sopra l'input */
+    left: 0;
+    background: #2a2a2a;
+    border: 1px solid var(--primary-yellow);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    width: 100%;
+    font-size: 0.85rem;
+    color: #ddd;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    z-index: 10;
+}
+
+.tooltip-requirements::after{
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 20px;
+    border-width: 6px;
+    border-style: solid;
+    border-color: var(--primary-yellow) transparent transparent transparent;
+}
+
+.tooltip-requirements ul {
+    padding-left: 20px;
+    margin-top: 5px;
+}
+
+.tooltip-requirements li {
+    margin-bottom: 3px;
+}
+
+/* --- Bottone Submit --- */
+#btn-submit {
+    background-color: var(--primary-yellow);
+    color: #111;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    border-radius: var(--border-radius);
+    width: 100%;
+    margin-top: 10px;
+    transition: all var(--transition-speed);
+}
+
+#btn-submit:hover:not(:disabled) {
+    background-color: var(--hover-yellow);
+    box-shadow: 0 0 15px rgba(255, 217, 74, 0.4);
+    transform: translateY(-2px);
+}
+
+#btn-submit:disabled {
+    background-color: #444;
+    color: #777;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* --- Messaggi di Errore --- */
+p[style*="color: red"] {
+    color: #ff5f5f !important;
+    border-radius: 4px;
+    padding: 5px;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+

@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="icon" href="assets/favicon.ico">
     
 </head>
-<body style="background: #1d1d1f; color: white; padding-top: 100px;">
+<body style="background: #1d1d1f; color: white; ">
 
 <header class="header">
       <div class="header-content"> 
@@ -81,11 +81,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </a>
       </div>
     </header>
-    <div style="max-width: 400px; margin: 0 auto; background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
+    <div class= "panel">
         
         <div class="tab-switch">
             <span id="tab-reg" class="tab-active" onclick="switchMode('register')">Registrati</span>
-            <span> / </span>
             <span id="tab-log" class="tab-inactive" onclick="switchMode('login')">Login</span>
         </div>
 
@@ -116,7 +115,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 
                 <input type="password" id="pass" name="pass" style="width:100%; padding-right: 40px;" required placeholder="Password">
                 <span class="toggle-password" onclick="togglePassword()">
-                    <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                    <img src="assets/eye-slash.png" id="icon-slash">
+                    <img src="assets/eye.png" id="icon-eye" hidden>
                 </span>
             </div>
             <br><br>

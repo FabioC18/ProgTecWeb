@@ -3,7 +3,8 @@ const userIn = document.getElementById('username');
         const passIn = document.getElementById('pass');
         const btn = document.getElementById('btn-submit');
         const tooltip = document.getElementById('password-tooltip'); // Riferimento al tooltip
-        
+        const iconSlash = document.getElementById('icon-slash');
+        const iconEye = document.getElementById('icon-eye');
         const tabReg = document.getElementById('tab-reg');
         const tabLog = document.getElementById('tab-log');
         const emailCont = document.getElementById('email-container');
@@ -56,10 +57,12 @@ const userIn = document.getElementById('username');
         function togglePassword() {
             if (passIn.type === "password") {
                 passIn.type = "text";
-                document.getElementById('eye-icon').style.stroke = "#007bff"; 
+                iconSlash.hidden=true;
+                iconEye.hidden=false; 
             } else {
                 passIn.type = "password";
-                document.getElementById('eye-icon').style.stroke = "currentColor";
+                iconSlash.hidden=false;
+                iconEye.hidden=true;
             }
         }
 
