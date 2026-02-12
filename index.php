@@ -163,8 +163,6 @@ require_once 'includes/db_config.php';
           
     </footer>
 
-    
-
     <script src="js/index.js"></script>
   </body>
 </html>
