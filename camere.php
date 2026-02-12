@@ -39,7 +39,7 @@ $result = pg_query($conn, $query);
         <li><a href="camere.php">Case vacanza</a></li>
         <li><a href="pacchetti.php">Pacchetti</a></li>
          <?php if (isset($_SESSION['user'])): ?>
-            <li class="menu-item-session"><a class="user" href="profilo.php" ><script
+            <li class="menu-item-session" style="margin-right: 0px;"><a class="user" href="profilo.php" ><script
   src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.11/dist/dotlottie-wc.js"
   type="module"></script>
 
@@ -48,6 +48,7 @@ $result = pg_query($conn, $query);
   autoplay
   loop
 ></dotlottie-wc></a></li>
+            <li><a href="profilo.php">Ciao, <?php echo htmlspecialchars($_SESSION['user']); ?></a></li>
             <li class="menu-item-session"><a href="logout.php">Logout</a></li>
         <?php else: ?>
             <li><a href="login_reg.php">Login / Registrati</a></li>

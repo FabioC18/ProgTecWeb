@@ -150,15 +150,21 @@ tr:hover {
 
 .password-container {
     position: relative;
+    justify-content: center;
 }
 
 .toggle-password {
     position: absolute;
     right: 10px;
-    top: 38px;
+    top: 1.9vh;
     cursor: pointer;
     color: #ccc;
     z-index: 10;
+}
+
+.toggle-password img{
+    width: 1.3vw;
+    height: 2.7vh;
 }
 
 

@@ -292,6 +292,11 @@
     width: 3.2vw;
     height: 3.2vh;
     margin-bottom: -5.2vh;
+     margin-right: 10px;
+}
+
+.header-menu li .user-icon{
+    margin-right: 10px;
 }
 
  .hamb-menu {

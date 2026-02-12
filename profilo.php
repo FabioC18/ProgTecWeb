@@ -112,7 +112,8 @@ $res_pren = pg_query_params($conn, $query_pren, array($user_id));
                     <div class="password-container">
                         <input type="password" id="pass" name="pass" value="<?php echo htmlspecialchars($user_data['password']); ?>" required>
                         <span class="toggle-password" onclick="togglePassword()">
-                             👁️
+                             <img src="assets/eye-slash.png" id="icon-slash">
+                              <img src="assets/eye.png" id="icon-eye" hidden>
                         </span>
 
                         <div id="password-tooltip" class="tooltip-requirements">

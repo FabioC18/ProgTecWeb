@@ -3,6 +3,8 @@ const userIn = document.getElementById('username');
         const passIn = document.getElementById('pass');
         const btn = document.getElementById('btn-submit');
         const tooltip = document.getElementById('password-tooltip');
+        const iconSlash = document.getElementById('icon-slash');
+        const iconEye = document.getElementById('icon-eye');
 
         // GESTIONE TOOLTIP PASSWORD (SOTTO)
         function showTooltip() {
@@ -21,8 +23,13 @@ const userIn = document.getElementById('username');
         function togglePassword() {
             if (passIn.type === "password") {
                 passIn.type = "text";
+                iconSlash.hidden=true;
+                iconEye.hidden=false;
+
             } else {
                 passIn.type = "password";
+                iconSlash.hidden=false;
+                iconEye.hidden=true;
             }
         }
 

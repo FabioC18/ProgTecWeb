@@ -37,7 +37,7 @@ require_once 'includes/db_config.php';
         <li><a href="pacchetti.php">Pacchetti</a></li>
         <li><a href="#footer">Chi Siamo</a></li>
          <?php if (isset($_SESSION['user'])): ?>
-            <li class="user-icon"><a class="user" href="profilo.php" ><script
+            <li class="user-icon" style="margin-right: 0px;"><a class="user" href="profilo.php" ><script
   src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.11/dist/dotlottie-wc.js"
   type="module"></script>
 
@@ -46,7 +46,7 @@ require_once 'includes/db_config.php';
   autoplay
   loop
 ></dotlottie-wc></a></li>
-
+            <li><a href="profilo.php">Ciao, <?php echo htmlspecialchars($_SESSION['user']); ?></a></li>
             <li class="menu-item-session"><a href="logout.php">Logout</a></li>
         <?php else: ?>
             <li><a href="login_reg.php">Login</a></li>
