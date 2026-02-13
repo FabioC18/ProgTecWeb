@@ -1,15 +1,18 @@
 <?php
-include 'includes/db_config.php';
-session_start();
+/*INIZIALIZZAZIONE*/
 
-$errori = "";
+session_start(); // Avvia la sessione per gestire l'utente loggato
+require_once 'includes/db_config.php'; //Connessione al database PostgreSQL
+
+
+$errori = ""; //variabile per accumulare i messaggi di errore 
 $username = $_POST['username'] ?? ""; 
 $email = $_POST['email'] ?? "";
-$action = $_POST['action'] ?? "register"; 
+$action = $_POST['action'] ?? "register"; //determina se l'utente scegli di registrarsi o fare il login 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
-    // --- LOGICA REGISTRAZIONE ---
+    /* LOGICA DI REGISTRAZIONE */
     if ($action === 'register' && isset($_POST['btn_submit'])) {
         $password = $_POST['pass'];
 
@@ -17,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (!preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|it)$/", $email)) {
             $errori = "Errore: L'email deve terminare obbligatoriamente con .com o .it";
         }
-        // 2. Validazione Password Complessa
+        // 2. Validazione Password 
         elseif (strlen($password) < 8 || 
             !preg_match("/[A-Z]/", $password) || 
             !preg_match("/[0-9]/", $password) || 
@@ -26,18 +29,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $errori = "Errore: Password debole (Min 8 car, 1 Maiusc, 1 Num, 1 Spec).";
         }
         else {
-            // Controlli Database
+            // Controlli Database: evita duplicati di username o email 
             $check_user = pg_query_params($conn, "SELECT * FROM utenti WHERE username = $1", array($username));
             $check_email = pg_query_params($conn, "SELECT * FROM utenti WHERE email = $1", array($email));
 
             if (pg_num_rows($check_user) > 0) $errori = "Errore: Username già in uso.";
             elseif (pg_num_rows($check_email) > 0) $errori = "Errore: Email già registrata.";
             else {
-                // Inserimento
+                // Inserimento nuovo utente
                 $query = "INSERT INTO utenti (username, email, password) VALUES ($1, $2, $3)";
                 $res = pg_query_params($conn, $query, array($username, $email, $password));
                 if ($res) {
-                    $_SESSION['user'] = $username; 
+                    $_SESSION['user'] = $username; //permette il login automatico dopo la registrazione
                     header("Location: index.php");
                     exit;
                 }
@@ -48,14 +51,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     elseif ($action === 'login' && isset($_POST['btn_submit'])) {
         $password = $_POST['pass'];
         
+        //Verifica le credenziali cercando nel DataBase le coppie username e password
         $query = "SELECT * FROM utenti WHERE username = $1 AND password = $2";
         $result = pg_query_params($conn, $query, array($username, $password));
 
         if (pg_num_rows($result) == 1) {
             $row = pg_fetch_assoc($result);
-            $_SESSION['user'] = $row['username'];
-            // $_SESSION['nome'] = $row['nome']; 
-            header("Location: index.php");
+            $_SESSION['user'] = $row['username'];  //Salva l'utente che sta navigando 
+            header("Location: index.php"); //dopo l'accesso, invia l'utente direttamente nella home
             exit;
         } else {
             $errori = "Errore: Username o Password non corretti.";
@@ -124,8 +127,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="submit" id="btn-submit" name="btn_submit" value="Crea Account" style="padding: 10px 20px; cursor:pointer;" disabled>
         </form>
     </div>
-
-    
 
     <script src="js/login_reg.js"></script>
 </body>

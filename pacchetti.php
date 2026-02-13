@@ -1,10 +1,12 @@
 <?php
-// Inclusione corretta del file di configurazione
-require_once 'includes/db_config.php';
-session_start();
+/*INIZIALIZZAZIONE*/
+
+session_start(); // Avvia la sessione per gestire l'utente loggato
+require_once 'includes/db_config.php'; //Connessione al database PostgreSQL
+
 
 // Controllo stato autenticazione
-$is_logged = isset($_SESSION['user']);
+$is_logged = isset($_SESSION['user']); //variabile booleana per verificare se l'utente ha effettuato il login
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -17,6 +19,7 @@ $is_logged = isset($_SESSION['user']);
 </head>
 <body>
 
+    <!-- HEADER-->
     <header class="header">
       <div class="header-content"> 
         <a class="icon-big" href="index.php">
@@ -139,6 +142,7 @@ $is_logged = isset($_SESSION['user']);
      ?>
    </main>
 
+    <!-- FOOTER -->
    <footer id="footer">
           <div class="info">
             <h1>Salerno Mare e Luci</h1>

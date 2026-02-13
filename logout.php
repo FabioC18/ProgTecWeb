@@ -1,7 +1,13 @@
 <?php
-session_start();
-session_unset();
+
+/* LOGICA DI LOGOUT */
+
+session_start(); 
+session_unset(); 
 session_destroy();
-header("Location: index.php");
-exit;
+
+/* REINDIRIZZAMENTO */
+
+header("Location: index.php"); // Invia l'istruzione al browser di tornare alla homepage
+exit;                          // Blocca l'esecuzione dello script per garantire il reindirizzamento
 ?>

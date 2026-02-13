@@ -1,6 +1,9 @@
 <?php
-session_start();
-require_once 'includes/db_config.php';
+
+/*INIZIALIZZAZIONE*/
+
+session_start(); // Avvia la sessione per gestire l'utente loggato
+require_once 'includes/db_config.php'; //Connessione al database PostgreSQL
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -13,6 +16,7 @@ require_once 'includes/db_config.php';
   </head>
   <body>
 
+  <!-- HEADER -->
     <header class="header">
       <div class="header-content"> 
         <a class="icon-big" href="index.php">
@@ -77,12 +81,11 @@ require_once 'includes/db_config.php';
     </div>
 
       <?php
-      $sql = "SELECT * FROM contenuti ORDER BY id ASC";
+      $sql = "SELECT * FROM contenuti ORDER BY id ASC";  //preleva i contenuti dal database 
       $res = pg_query($conn, $sql);
       $count = 1;
       if($res) {
         while ($row = pg_fetch_assoc($res)):
-          // Alternanza classi per i pannelli
           $panelClass = ($count == 1) ? "panel" : "panel panel" . $count;
           $anchorId = ($count == 1) ? "id='suite'" : (($count == 2) ? "id='deluxe'" : "");
       ?>
@@ -117,6 +120,7 @@ require_once 'includes/db_config.php';
       </div>
         </div>
 
+    <!-- FOOTER -->
     <footer id="footer">
           <div class="info">
             <h1>Salerno Mare e Luci</h1>

@@ -1,15 +1,16 @@
 <?php
-session_start();
-require_once 'includes/db_config.php';
+/*INIZIALIZZAZIONE*/
 
-// 1. Controllo se l'utente è loggato
+session_start(); // Avvia la sessione per gestire l'utente loggato
+require_once 'includes/db_config.php'; //Connessione al database PostgreSQL
+
+// 1. Controllo se l'utente è loggato, se non è loggato, lo mando al login
 if (!isset($_SESSION['user'])) {
-    // Se non è loggato, lo mando al login
     header("Location: login_reg.php?msg=Devi accedere per prenotare");
     exit;
 }
 
-// 2. Recupero i dati dal link (GET)
+// Recupero i dati dal link (GET)
 $nome_oggetto = $_GET['nome'] ?? '';
 $prezzo = $_GET['prezzo'] ?? 0;
 $username = $_SESSION['user'];
@@ -24,16 +25,16 @@ if ($nome_oggetto) {
         $user_row = pg_fetch_assoc($res_user);
         $user_id = $user_row['id'];
 
-        // 4. INSERISCO LA PRENOTAZIONE NEL DATABASE
+        // INSERISCO LA PRENOTAZIONE NEL DATABASE
         $query_insert = "INSERT INTO prenotazioni (id_utente, nome_pacchetto, prezzo) VALUES ($1, $2, $3)";
         $result = pg_query_params($conn, $query_insert, array($user_id, $nome_oggetto, $prezzo));
 
         if ($result) {
-            // 5. Se salvato con successo, reindirizzo a WhatsApp
+            // 5. Se salvato con successo, reindirizzo a WhatsApp preparando il tasto con il messaggio personalizzato
             $messaggio_wa = "Salve, ho effettuato la prenotazione sul sito per: " . $nome_oggetto . ". Attendo conferma.";
             $link_wa = "https://wa.me/" . $telefono_proprietario . "?text=" . urlencode($messaggio_wa);
             
-            header("Location: " . $link_wa);
+            header("Location: " . $link_wa); //Sposta l'utente fuori dal sito e lo manda su WhatsApp
             exit;
         } else {
             echo "Errore nel salvataggio della prenotazione.";

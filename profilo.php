@@ -1,33 +1,37 @@
 <?php
-session_start();
-require_once 'includes/db_config.php';
+/*INIZIALIZZAZIONE*/
 
-// 1. PROTEZIONE PAGINA
+session_start(); // Avvia la sessione per gestire l'utente loggato
+require_once 'includes/db_config.php'; //Connessione al database PostgreSQL
+
+// // Impedisce l'accesso ai non loggati: se la sessione è vuota, rimanda al login
 if (!isset($_SESSION['user'])) {
     header("Location: login_reg.php");
     exit;
 }
 
-$currentUser = $_SESSION['user'];
-$msg = "";
-$errori = "";
+$currentUser = $_SESSION['user']; // Recupera il nome utente dalla sessione
+$msg = ""; // Messaggio di conferma aggiornamento
+$errori = ""; // Messaggio di errore validazione
 
-// 2. RECUPERO DATI UTENTE
+// RECUPERO DATI UTENTE
+// Recupera tutte le informazioni dell'utente loggato 
 $query_info = "SELECT * FROM utenti WHERE username = $1";
 $res_info = pg_query_params($conn, $query_info, array($currentUser));
 $user_data = pg_fetch_assoc($res_info);
 $user_id = $user_data['id']; 
 
-// 3. GESTIONE MODIFICA CREDENZIALI
+// GESTIONE MODIFICA CREDENZIALI
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_profile'])) {
     $new_user = $_POST['username'];
     $new_email = $_POST['email'];
     $new_pass = $_POST['pass'];
 
-    // VALIDAZIONE RIGIDA
+    // Validazione email (.com o .it)
     if (!preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|it)$/", $new_email)) {
         $errori = "Errore: L'email deve terminare obbligatoriamente con .com o .it";
     }
+    // Validazione Password
     elseif (strlen($new_pass) < 8 || 
         !preg_match("/[A-Z]/", $new_pass) || 
         !preg_match("/[0-9]/", $new_pass) || 
@@ -35,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_profile'])) {
         $errori = "Errore: Password debole (Min 8 car, 1 Maiusc, 1 Num, 1 Spec).";
     } 
     else {
-        // Controllo duplicati
+        // Controllo univocità: verifica che il nuovo username/email non appartengano già ad altri utenti (id diverso)
         $check_u = pg_query_params($conn, "SELECT id FROM utenti WHERE username = $1 AND id != $2", array($new_user, $user_id));
         $check_e = pg_query_params($conn, "SELECT id FROM utenti WHERE email = $1 AND id != $2", array($new_email, $user_id));
 
@@ -44,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_profile'])) {
         } elseif (pg_num_rows($check_e) > 0) {
             $errori = "Email già utilizzata da un altro utente.";
         } else {
-            // Aggiornamento
+            // Aggiornamento credenziali 
             $update_sql = "UPDATE utenti SET username = $1, email = $2, password = $3 WHERE id = $4";
             $res_up = pg_query_params($conn, $update_sql, array($new_user, $new_email, $new_pass, $user_id));
 
@@ -61,7 +65,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_profile'])) {
     }
 }
 
-// 4. RECUPERO PRENOTAZIONI
+// RECUPERO PRENOTAZIONI
+// Estrae lo storico delle prenotazioni dell'utente ordinate dalla più recente
 $query_pren = "SELECT * FROM prenotazioni WHERE id_utente = $1 ORDER BY data_prenotazione DESC";
 $res_pren = pg_query_params($conn, $query_pren, array($user_id));
 ?>

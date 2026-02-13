@@ -1,10 +1,13 @@
 <?php
-session_start();
-require_once 'includes/db_config.php';
+/*INIZIALIZZAZIONE*/
 
-// Aggiunto LIMIT 2 per sicurezza, per evitare duplicati se nel DB hai più righe
+session_start(); // Avvia la sessione per gestire l'utente loggato
+require_once 'includes/db_config.php'; //Connessione al database PostgreSQL
+
+
+// Aggiunto LIMIT 2 per evitare duplicati se nel DB hai più righe
 $query = "SELECT * FROM camere ORDER BY id ASC LIMIT 2"; 
-$result = pg_query($conn, $query);
+$result = pg_query($conn, $query); //esegue la query sulla connessione stabilita
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -16,6 +19,7 @@ $result = pg_query($conn, $query);
 </head>
 <body>
 
+<!-- INIZIO HEADER -->
     <header class="header">
       <div class="header-content"> 
         <a class="icon-big" href="index.php">
@@ -64,14 +68,14 @@ $result = pg_query($conn, $query);
 
     <div style="height: 100px;"></div>
 
+    <!-- Generazione dinamica camere  -->
     <?php 
     if ($result) {
-        while ($row = pg_fetch_assoc($result)): 
-            $immagini_array = explode(',', $row['galleria']);
-            
-            $link_prenotazione = "salva_prenotazione.php?nome=" . urlencode($row['titolo']) . "&prezzo=" . $row['prezzo'];
+        while ($row = pg_fetch_assoc($result)): /* Estrae ogni riga della tabella camere come array associativo */
+            $immagini_array = explode(',', $row['galleria']); // Converte la stringa CSV delle immagini in un array PHP
+            $link_prenotazione = "salva_prenotazione.php?nome=" . urlencode($row['titolo']) . "&prezzo=" . $row['prezzo']; // Genera il link dinamico per la prenotazione passando dati via GET
     ?>
-    
+
     <section class="category-section">
         <div class="category-header">
             <h1 class="category-title"><?php echo htmlspecialchars($row['titolo']); ?></h1>
@@ -105,6 +109,7 @@ $result = pg_query($conn, $query);
     } 
     ?>
 
+    <!-- FOOTER -->
     <footer id="footer">
           <div class="info">
             <h1>Salerno Mare e Luci</h1>
