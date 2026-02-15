@@ -13,10 +13,11 @@ if (!isset($_SESSION['user'])) {
 // Recupero i dati dal link (GET)
 $nome_oggetto = $_GET['nome'] ?? '';
 $prezzo = $_GET['prezzo'] ?? 0;
+$data_prenotazione=$_GET['data'] ?? '';
 $username = $_SESSION['user'];
 $telefono_proprietario = "393497534392"; // Il tuo numero
 
-if ($nome_oggetto) {
+if ($nome_oggetto && $data_prenotazione) {
     // 3. Recupero l'ID dell'utente loggato
     $query_user = "SELECT id FROM utenti WHERE username = $1";
     $res_user = pg_query_params($conn, $query_user, array($username));
@@ -26,13 +27,15 @@ if ($nome_oggetto) {
         $user_id = $user_row['id'];
 
         // INSERISCO LA PRENOTAZIONE NEL DATABASE
-        $query_insert = "INSERT INTO prenotazioni (id_utente, nome_pacchetto, prezzo) VALUES ($1, $2, $3)";
-        $result = pg_query_params($conn, $query_insert, array($user_id, $nome_oggetto, $prezzo));
+        $query_insert = "INSERT INTO prenotazioni (id_utente, nome_pacchetto, data_prenotazione, prezzo) VALUES ($1, $2, $3, $4)";
+        $result = pg_query_params($conn, $query_insert, array($user_id, $nome_oggetto, $data_prenotazione, $prezzo));
 
         if ($result) {
             // 5. Se salvato con successo, reindirizzo a WhatsApp preparando il tasto con il messaggio personalizzato
-            $messaggio_wa = "Salve, ho effettuato la prenotazione sul sito per: " . $nome_oggetto . ". Attendo conferma.";
+            $data_format = date("d/m/Y", strtotime($data_prenotazione));
+            $messaggio_wa = "Salve, ho effettuato la prenotazione sul sito per: " . $nome_oggetto . "per la data" . $data_format. ". Attendo conferma.";
             $link_wa = "https://wa.me/" . $telefono_proprietario . "?text=" . urlencode($messaggio_wa);
+            
             
             header("Location: " . $link_wa); //Sposta l'utente fuori dal sito e lo manda su WhatsApp
             exit;

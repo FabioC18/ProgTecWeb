@@ -105,7 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             
             <label>Password:</label><br>
-            <div class="password-container">
+            <div class="password-container" >
                 <div id="password-tooltip" class="tooltip-requirements">
                     <strong>Requisiti Password:</strong>
                     <ul>
@@ -116,8 +116,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </ul>
                 </div>
                 
-                <input type="password" id="pass" name="pass" style="width:100%; padding-right: 40px;" required placeholder="Password">
-                <span class="toggle-password" onclick="togglePassword()">
+                <input type="password" id="pass" name="pass" style="width:100%; padding-right: 40px;" required placeholder="Password" >
+                <span class="toggle-password" onclick="togglePassword()" >
                     <img src="assets/eye-slash.png" id="icon-slash">
                     <img src="assets/eye.png" id="icon-eye" hidden>
                 </span>

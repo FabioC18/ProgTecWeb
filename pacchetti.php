@@ -84,7 +84,8 @@ $is_logged = isset($_SESSION['user']); //variabile booleana per verificare se l'
         <img src="assets/mais-no-bg.png" class="object bott-left" data-value="3">
     </div>
 
-   <main class="pannelli">
+    <div class="wrapper">
+   <div class="pannelli">
      <?php
      // Query per la tabella pacchetti
      $query = "SELECT * FROM pacchetti ORDER BY id ASC";
@@ -140,7 +141,8 @@ $is_logged = isset($_SESSION['user']); //variabile booleana per verificare se l'
          endwhile;
      endif; 
      ?>
-   </main>
+   </div>
+   </div>
 
     <!-- FOOTER -->
    <footer id="footer">

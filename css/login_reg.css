@@ -158,6 +158,7 @@ input:focus {
 .password-container {
     position: relative;
     width: 100%;
+    overflow: visible !important;
 }
 
 .password-container input {

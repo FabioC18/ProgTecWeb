@@ -179,6 +179,44 @@ body {
     line-height: 1.6;
 }
 
+input[type="date"] {
+    background-color: #FFD94A; /* Sfondo scuro semi-trasparente */
+    color: #3a0707ff; /* Testo chiaro */
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 1rem;
+    font-weight:bold;
+    padding: 15px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Bordo sottile e discreto */
+    border-radius: 12px; /* Bordi arrotondati come i tuoi pannelli */
+    outline: none;
+    width: 100%;
+    max-width: 300px; /* Larghezza massima per estetica */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+    /* Rimuove lo stile di default bruttino dei browser */
+    -webkit-appearance: none;
+    appearance: none;
+    position: relative;
+    margin-top: 1vh;
+}
+
+.btn-disabled {
+    pointer-events: none; /* Impedisce il click */
+    opacity: 0.5;         /* Lo rende semi-trasparente */
+    cursor: not-allowed;
+    background-color: #ccc !important; /* Grigio */
+    border-color: #999 !important;
+}
+
+/* Effetto Hover e Focus (quando ci clicchi) */
+input[type="date"]:hover,
+input[type="date"]:focus {
+    border-color: #ffffff; /* Diventa color ORO */
+    box-shadow: 0 0 15px rgba(255, 217, 74, 0.3); /* Alone luminoso dorato */
+    transform: translateY(-2px); /* Leggero sollevamento */
+}   
+
 
 /* --- SLIDER FOTO FUNZIONANTE --- */
 
@@ -281,13 +319,11 @@ footer {
     font-family: 'Helvetica Neue', sans-serif;
     z-index: 9999;
     background-color: #121212;
-    ;
     padding: 3.1vh 1vw;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 15%;
     justify-items: center;
-    align-items: start;
     border-top: 4px solid #8B1E1E;
     color: #cccccc;
 }

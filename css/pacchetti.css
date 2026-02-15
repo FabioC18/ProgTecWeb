@@ -5,11 +5,13 @@
 }
 
 body {
-    height: 100vh; /* Forza l'altezza schermo intero */
+    min-height: 100vh; /* Forza l'altezza schermo intero */
     width: 100vw;
     overflow-x: hidden; /* Blocca scroll indesiderati */
+    
     margin: 0;
     background-color: #3a0707ff;
+    position: relative;
 }
 
 .container{
@@ -290,6 +292,14 @@ body {
     }
 }
 
+.wrapper{
+    width: 100vw;
+    height: 100vh;      /* Occupa esattamente tutta l'altezza schermo */
+    position: relative; /* Resta nel flusso della pagina */
+    overflow: hidden;   /* Nasconde i pannelli che escono a destra */
+    z-index: 1;
+}
+
 .pannelli {
     
     width: 400vw; 
@@ -298,7 +308,6 @@ body {
     display: flex; 
     flex-direction: row;
     align-items: center; 
-    
     position: absolute; 
     top: 0;
     left: 0;
@@ -393,15 +402,18 @@ h4 a{
 }
 
 footer{
-    position: relative;
-    font-family: 'Helvetica Neue', sans-serif;    z-index: 9999;
+    position:relative;
+    width:100vw;
+    z-index: 9999;
+    
+    
+    font-family: 'Helvetica Neue', sans-serif; 
     background-color: #121212;;
     padding: 3.1vh 1vw;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 15%;
     justify-items: center;
-    align-items: start;
     border-top: 4px solid #8B1E1E;
     color: #cccccc;
  }

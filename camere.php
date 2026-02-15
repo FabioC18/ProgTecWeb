@@ -78,16 +78,23 @@ $result = pg_query($conn, $query); //esegue la query sulla connessione stabilita
 
     <section class="category-section">
         <div class="category-header">
-            <h1 class="category-title"><?php echo htmlspecialchars($row['titolo']); ?></h1>
-            <p class="category-desc"><?php echo htmlspecialchars($row['descrizione']); ?></p>
-            <p style="color:#FFD94A; font-weight:bold; font-size:1.5em; margin-top:10px;">
-                A partire da € <?php echo $row['prezzo']; ?> / notte per coppia
-            </p>
-            
-            <a href="<?php echo $link_prenotazione; ?>" class="btn-whatsapp-big">
-                Prenota <?php echo htmlspecialchars($row['titolo']); ?>
-            </a>
-        </div>
+    <h1 class="category-title"><?php echo htmlspecialchars($row['titolo']); ?></h1>
+    <p class="category-desc"><?php echo htmlspecialchars($row['descrizione']); ?></p>
+    <p style="color:#FFD94A; font-weight:bold; font-size:1.5em; margin-top:10px;">
+        A partire da € <?php echo $row['prezzo']; ?> / notte per coppia
+    </p>
+    
+    <div style="margin: 20px 0;">
+        <label for="date_<?php echo $row['id']; ?>" style="color:white; display:block; margin-bottom:5px;">Scegli una data:</label>
+        <input type="date" id="date_<?php echo $row['id']; ?>" class="date_picker_input">
+    </div>
+    
+    <a href="#" 
+       data-baseurl="<?php echo $link_prenotazione; ?>" 
+       class="btn-whatsapp-big btn-disabled link-prenotazione">
+        Prenota <?php echo htmlspecialchars($row['titolo']); ?>
+    </a>
+</div>
 
         <div class="grid-container">
             <?php 

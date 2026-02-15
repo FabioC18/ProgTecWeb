@@ -12,6 +12,12 @@ const userIn = document.getElementById('username');
 
         let currentMode = 'register'; 
 
+        passIn.addEventListener('mouseover', showTooltip);
+        passIn.addEventListener('mouseenter', showTooltip);
+        passIn.addEventListener('mouseleave', hideTooltip);
+        passIn.addEventListener('focus', showTooltip); // Utile per chi usa tab
+        passIn.addEventListener('blur', hideTooltip);
+
         // GESTIONE TOOLTIP PASSWORD
         // Mostra quando il mouse entra o il campo ha il focus
         function showTooltip() {
@@ -24,11 +30,6 @@ const userIn = document.getElementById('username');
             tooltip.style.display = 'none';
         }
 
-        passIn.addEventListener('mouseenter', showTooltip);
-        passIn.addEventListener('mouseleave', hideTooltip);
-        passIn.addEventListener('focus', showTooltip); // Utile per chi usa tab
-        passIn.addEventListener('blur', hideTooltip);
-
 
         function switchMode(mode) {
             currentMode = mode;
@@ -40,7 +41,7 @@ const userIn = document.getElementById('username');
                 tabReg.className = 'tab-inactive';
                 emailCont.style.display = 'none'; 
                 btn.value = 'Accedi';
-                passIn.placeholder = 'Inserisci la password';
+                passIn.placeholder = 'Password';
                 // Nasconde tooltip se era aperto
                 tooltip.style.display = 'none';
             } else {
@@ -49,7 +50,7 @@ const userIn = document.getElementById('username');
                 tabLog.className = 'tab-inactive';
                 emailCont.style.display = 'block'; 
                 btn.value = 'Crea Account';
-                passIn.placeholder = 'Min 8 car, 1 Maiusc, 1 Num, 1 Spec';
+                passIn.placeholder = 'Password';
             }
             checkInputs();
         }
