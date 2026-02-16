@@ -1,13 +1,11 @@
 <?php
-/*INIZIALIZZAZIONE*/
 
-session_start(); // Avvia la sessione per gestire l'utente loggato
-require_once 'includes/db_config.php'; //Connessione al database PostgreSQL
+session_start(); 
+require_once 'includes/db_config.php'; 
 
-
-// Aggiunto LIMIT 2 per evitare duplicati se nel DB hai più righe
+// Query Camere
 $query = "SELECT * FROM camere ORDER BY id ASC LIMIT 2"; 
-$result = pg_query($conn, $query); //esegue la query sulla connessione stabilita
+$result = pg_query($conn, $query);
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -15,11 +13,10 @@ $result = pg_query($conn, $query); //esegue la query sulla connessione stabilita
     <meta charset="UTF-8">
     <title>Le Nostre Camere - Salerno Mare e Luci</title>
     <link rel="stylesheet" href="css/camere.css">
-    <link rel="icon" href="assets/favicon.ico">
+    <link rel="icon" href="assets/favicon.ico"> 
 </head>
 <body>
 
-<!-- INIZIO HEADER -->
     <header class="header">
       <div class="header-content"> 
         <a class="icon-big" href="index.php">
@@ -38,27 +35,18 @@ $result = pg_query($conn, $query); //esegue la query sulla connessione stabilita
           </svg>
         </a>
 
-<nav>
-    <ul class="header-menu">
-        <li><a href="camere.php">Case vacanza</a></li>
-        <li><a href="pacchetti.php">Pacchetti</a></li>
-         <?php if (isset($_SESSION['user'])): ?>
-            <li class="menu-item-session" style="margin-right: 0px;"><a class="user" href="profilo.php" ><script
-  src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.11/dist/dotlottie-wc.js"
-  type="module"></script>
-
-<dotlottie-wc
-  src="https://lottie.host/73049aba-3e4d-41d1-a8bc-0cb9982ffb58/EV4SRIloZW.lottie"
-  autoplay
-  loop
-></dotlottie-wc></a></li>
-            <li><a href="profilo.php">Ciao, <?php echo htmlspecialchars($_SESSION['user']); ?></a></li>
-            <li class="menu-item-session"><a href="logout.php">Logout</a></li>
-        <?php else: ?>
-            <li><a href="login_reg.php">Login / Registrati</a></li>
-        <?php endif; ?>
-    </ul>
-</nav>
+        <nav>
+            <ul class="header-menu">
+                <li><a href="camere.php">Case vacanza</a></li>
+                <li><a href="pacchetti.php">Pacchetti</a></li>
+                 <?php if (isset($_SESSION['user'])): ?>
+                    <li><a class="name" href="profilo.php">Ciao, <?php echo htmlspecialchars($_SESSION['user']); ?></a></li>
+                    <li class="menu-item-session"><a href="logout.php">Logout</a></li>
+                <?php else: ?>
+                    <li><a href="login_reg.php">Login / Registrati</a></li>
+                <?php endif; ?>
+            </ul>
+        </nav>
 
         <div class="hamb-menu">
            <svg width="25" height="25" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6" stroke="red" stroke-width="2"/><line x1="3" y1="12" x2="21" y2="12" stroke="white" stroke-width="2"/><line x1="3" y1="18" x2="21" y2="18" stroke="blue" stroke-width="2"/></svg>
@@ -68,45 +56,57 @@ $result = pg_query($conn, $query); //esegue la query sulla connessione stabilita
 
     <div style="height: 100px;"></div>
 
-    <!-- Generazione dinamica camere  -->
     <?php 
     if ($result) {
-        while ($row = pg_fetch_assoc($result)): /* Estrae ogni riga della tabella camere come array associativo */
-            $immagini_array = explode(',', $row['galleria']); // Converte la stringa CSV delle immagini in un array PHP
-            $link_prenotazione = "salva_prenotazione.php?nome=" . urlencode($row['titolo']) . "&prezzo=" . $row['prezzo']; // Genera il link dinamico per la prenotazione passando dati via GET
+        while ($row = pg_fetch_assoc($result)): 
+            $immagini_array = explode(',', $row['galleria']); 
+            $link_base = "salva_prenotazione.php?nome=" . urlencode($row['titolo']) . "&prezzo=" . $row['prezzo'] . "&id=" . $row['id']; 
     ?>
 
-    <section class="category-section">
+    <section class="category-section" id="camera_<?php echo $row['id']; ?>">
+        
+        <?php if (isset($_GET['error']) && isset($_GET['id']) && $_GET['id'] == $row['id']): ?>
+        <div class= "error" id="server_error_<?php echo $row['id']; ?>" >
+            <strong>Attenzione:</strong> <?php echo htmlspecialchars($_GET['error']); ?>
+        </div>
+        <?php endif; ?>
+
         <div class="category-header">
-    <h1 class="category-title"><?php echo htmlspecialchars($row['titolo']); ?></h1>
-    <p class="category-desc"><?php echo htmlspecialchars($row['descrizione']); ?></p>
-    <p style="color:#FFD94A; font-weight:bold; font-size:1.5em; margin-top:10px;">
-        A partire da € <?php echo $row['prezzo']; ?> / notte per coppia
-    </p>
-    
-    <div style="margin: 20px 0;">
-        <label for="date_<?php echo $row['id']; ?>" style="color:white; display:block; margin-bottom:5px;">Scegli una data:</label>
-        <input type="date" id="date_<?php echo $row['id']; ?>" class="date_picker_input">
-    </div>
-    
-    <a href="#" 
-       data-baseurl="<?php echo $link_prenotazione; ?>" 
-       class="btn-whatsapp-big btn-disabled link-prenotazione">
-        Prenota <?php echo htmlspecialchars($row['titolo']); ?>
-    </a>
-</div>
+            <h1 class="category-title"><?php echo htmlspecialchars($row['titolo']); ?></h1>
+            <p class="category-desc"><?php echo htmlspecialchars($row['descrizione']); ?></p>
+            <p style="color:#FFD94A; font-weight:bold; font-size:1.5em; margin-top:10px;">
+                A partire da € <?php echo $row['prezzo']; ?> / notte per coppia
+            </p>
+            
+            <div style="margin: 25px 0;">
+                <label for="date_<?php echo $row['id']; ?>" style="color:#ccc; display:block; margin-bottom:8px; font-size: 1.1em;">
+                    Seleziona la data del check-in:
+                </label>
+                <input type="date" 
+                       id="date_<?php echo $row['id']; ?>" 
+                       style="padding: 10px; border-radius: 5px; border: none; font-size: 1em;"
+                       min="<?php echo date('Y-m-d'); ?>" 
+                       onchange="updateBookingLink(<?php echo $row['id']; ?>)">
+            </div>
+            
+            <a href="#" 
+               id="btn_prenota_<?php echo $row['id']; ?>"
+               data-baseurl="<?php echo $link_base; ?>"
+               class="btn-whatsapp-big"
+               onclick="return checkDateSelected(<?php echo $row['id']; ?>)">
+                Prenota <?php echo htmlspecialchars($row['titolo']); ?>
+            </a>
+            
+            <p id="error_msg_<?php echo $row['id']; ?>" style="color: #ff4444; display: none; margin-top: 10px; font-weight: bold;">
+                Per favore, seleziona una data prima di prenotare.
+            </p>
+        </div>
 
         <div class="grid-container">
-            <?php 
-            // RIMOSSO IL CONTATORE $COUNT
-            // Ora tutte le card hanno la stessa classe "photo-card" per lo slider
-            foreach ($immagini_array as $img_name): 
-            ?>
- 
+            <?php foreach ($immagini_array as $img_name): ?>
             <div class="photo-card">
                 <img class="images" src="assets/<?php echo rawurlencode(trim($img_name)); ?>" alt="Foto Camera">
             </div>
-
             <?php endforeach; ?>
         </div>
     </section>
@@ -116,7 +116,6 @@ $result = pg_query($conn, $query); //esegue la query sulla connessione stabilita
     } 
     ?>
 
-    <!-- FOOTER -->
     <footer id="footer">
           <div class="info">
             <h1>Salerno Mare e Luci</h1>
@@ -131,10 +130,9 @@ $result = pg_query($conn, $query); //esegue la query sulla connessione stabilita
                 Email: gruppo13@gmail.com
             </h2>
           </div>
-     
+       
           <div class="social">
             <h1>Social <br></h1>
-
             <h2>
             <a class="ig" href="https://www.instagram.com/salernomareeluci?igsh=a253aHZ6cXE1YW56">
               <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 31.518 31.51" >
@@ -142,7 +140,6 @@ $result = pg_query($conn, $query); //esegue la query sulla connessione stabilita
               </svg>
             </a>
             </h2>
-
           <h2>
             <a class="fb" href="https://www.facebook.com/share/16ow7kgKgY/?mibextid=wwXIfr">
             <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 31.702 31.51">
@@ -150,12 +147,11 @@ $result = pg_query($conn, $query); //esegue la query sulla connessione stabilita
             </svg>
            </a>
           </h2>
-
           <h2>
               <a class="tk" href="https://www.tiktok.com/@salernomareeluci?_r=1&_t=ZN-93hbMdaFklK">
-            
+             
             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"  viewBox="0 0 32 32" version="1.1">
-            <path d="M16.656 1.029c1.637-0.025 3.262-0.012 4.886-0.025 0.054 2.031 0.878 3.859 2.189 5.213l-0.002-0.002c1.411 1.271 3.247 2.095 5.271 2.235l0.028 0.002v5.036c-1.912-0.048-3.71-0.489-5.331-1.247l0.082 0.034c-0.784-0.377-1.447-0.764-2.077-1.196l0.052 0.034c-0.012 3.649 0.012 7.298-0.025 10.934-0.103 1.853-0.719 3.543-1.707 4.954l0.020-0.031c-1.652 2.366-4.328 3.919-7.371 4.011l-0.014 0c-0.123 0.006-0.268 0.009-0.414 0.009-1.73 0-3.347-0.482-4.725-1.319l0.040 0.023c-2.508-1.509-4.238-4.091-4.558-7.094l-0.004-0.041c-0.025-0.625-0.037-1.25-0.012-1.862 0.49-4.779 4.494-8.476 9.361-8.476 0.547 0 1.083 0.047 1.604 0.136l-0.056-0.008c0.025 1.849-0.050 3.699-0.050 5.548-0.423-0.153-0.911-0.242-1.42-0.242-1.868 0-3.457 1.194-4.045 2.861l-0.009 0.030c-0.133 0.427-0.21 0.918-0.21 1.426 0 0.206 0.013 0.41 0.037 0.61l-0.002-0.024c0.332 2.046 2.086 3.59 4.201 3.59 0.061 0 0.121-0.001 0.181-0.004l-0.009 0c1.463-0.044 2.733-0.831 3.451-1.994l0.010-0.018c0.267-0.372 0.45-0.822 0.511-1.311l0.001-0.014c0.125-2.237 0.075-4.461 0.087-6.698 0.012-5.036-0.012-10.060 0.025-15.083z"/>
+            <path d="M16.656 1.029c1.637-0.025 3.262-0.012 4.886-0.025 0.054 2.031 0.878 3.859 2.189 5.213l-0.002-0.002c1.411 1.271 3.247 2.095 5.271 2.235l0.020 0.002v5.036c-1.912-0.048-3.71-0.489-5.331-1.247l0.082 0.034c-0.784-0.377-1.447-0.764-2.077-1.196l0.052 0.034c-0.012 3.649 0.012 7.298-0.025 10.934-0.103 1.853-0.719 3.543-1.707 4.954l0.020-0.031c-1.652 2.366-4.328 3.919-7.371 4.011l-0.014 0c-0.123 0.006-0.268 0.009-0.414 0.009-1.73 0-3.347-0.482-4.725-1.319l0.040 0.023c-2.508-1.509-4.238-4.091-4.558-7.094l-0.004-0.041c-0.025-0.625-0.037-1.25-0.012-1.862 0.49-4.779 4.494-8.476 9.361-8.476 0.547 0 1.083 0.047 1.604 0.136l-0.056-0.008c0.025 1.849-0.050 3.699-0.050 5.548-0.423-0.153-0.911-0.242-1.42-0.242-1.868 0-3.457 1.194-4.045 2.861l-0.009 0.030c-0.133 0.427-0.21 0.918-0.21 1.426 0 0.206 0.013 0.41 0.037 0.61l-0.002-0.024c0.332 2.046 2.086 3.59 4.201 3.59 0.061 0 0.121-0.001 0.181-0.004l-0.009 0c1.463-0.044 2.733-0.831 3.451-1.994l0.010-0.018c0.267-0.372 0.45-0.822 0.511-1.311l0.001-0.014c0.125-2.237 0.075-4.461 0.087-6.698 0.012-5.036-0.012-10.060 0.025-15.083z"/>
             </svg>
             </a>
           </h2>
@@ -164,6 +160,7 @@ $result = pg_query($conn, $query); //esegue la query sulla connessione stabilita
     </footer>
 
     <script src="js/camere.js"></script>
+    
 
 </body>
 </html>

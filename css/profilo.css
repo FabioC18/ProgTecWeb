@@ -60,6 +60,14 @@ body {
     }
 }
 
+.box1{
+    background: rgba(255, 255, 255, 0.05);
+    padding: 25px 40px 25px 25px;
+    border-radius: 10px;
+    border: 1px solid #333;
+    height: fit-content;
+}
+
 .box {
     background: rgba(255, 255, 255, 0.05);
     padding: 25px 40px 25px 25px;

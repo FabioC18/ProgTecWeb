@@ -271,6 +271,13 @@ body {
     margin-right: 3vw;
     transition: transform 0.3s ease;
 }
+.header-menu li .name{
+    color: #FFD94A;
+}
+
+.header-menu li .name:hover{
+    color: #ffffff;
+}
 
 @media (max-width: 1100px) {
     .header-menu li {
@@ -298,13 +305,6 @@ body {
 .header-menu li a:hover {
     transform: scale(1.2);
     color: #FFD94A;
-}
-
-.user dotlottie-wc {
-    width: 3.2vw;
-    height: 3.2vh;
-    margin-bottom: -5.2vh;
-    margin-right: 10px;
 }
 
 .header-menu li .user-icon {
@@ -382,7 +382,7 @@ body {
 .cont-container {
     position: relative;
     width: 100%;
-    min-height: 80vh;
+    min-height: 60vh;
     background: linear-gradient(135deg, #dd6b14 0%, #1E5F9C 50%, #46a9ec 100%);
     background-size: 300% 300%;
     animation: gradientMove 18s ease infinite;

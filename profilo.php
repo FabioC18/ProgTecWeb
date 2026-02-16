@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_profile'])) {
 
 // RECUPERO PRENOTAZIONI
 // Estrae lo storico delle prenotazioni dell'utente ordinate dalla più recente
-$query_pren = "SELECT * FROM prenotazioni WHERE id_utente = $1 ORDER BY data_prenotazione DESC";
+$query_pren = "SELECT * FROM prenotazioni WHERE id_utente = $1 ORDER BY data_prenotazione ASC";
 $res_pren = pg_query_params($conn, $query_pren, array($user_id));
 ?>
 
@@ -104,7 +104,7 @@ $res_pren = pg_query_params($conn, $query_pren, array($user_id));
 
         <div class="profile-grid">
             
-            <div class="box">
+            <div class="box1">
                 <h2>I Miei Dati</h2>
                 <form method="POST" action="">
                     <label>Username</label>
