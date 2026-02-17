@@ -1,89 +1,88 @@
-
 var elements = document.querySelectorAll('.watch');
 
-var callback = function(items){
-  items.forEach((item) => {
-    if(item.isIntersecting){
-      item.target.classList.add("in-page");
-    } else{
-      item.target.classList.remove("in-page");
-    }
-  });
+var callback = function(items) {
+    items.forEach((item) => {
+        if (item.isIntersecting) {
+            item.target.classList.add("in-page");
+        } else {
+            item.target.classList.remove("in-page");
+        }
+    });
 }
 
-var observer = new IntersectionObserver(callback, { threshold: 0.5} );
+var observer = new IntersectionObserver(callback, { threshold: 0.5 });
 elements.forEach((element) => {
-  observer.observe(element); 
+    observer.observe(element);
 });
 
 
 let item = document.querySelector('.hamb-menu');
 item.addEventListener("click", function() {
-  document.body.classList.toggle('menu-open');
+    document.body.classList.toggle('menu-open');
 });
 
 
 
 class Cont {
     constructor(options) {
-      this.el = options.el;
-      this.value = options.value;
+        this.el = options.el;
+        this.value = options.value;
     }
 
     update(targetValue) {
-      const startValue = this.value;
-      const duration = 5000; 
-      const startTime = performance.now();
+        const startValue = this.value;
+        const duration = 5000;
+        const startTime = performance.now();
 
-      const animate = (currentTime) => {
-        const elapsedTime = currentTime - startTime;
-        const progress = Math.min(elapsedTime / duration, 1);
-        
-       
-        const currentVal = Math.floor(startValue + (targetValue - startValue) * progress);
-        
-        this.el.textContent = currentVal;
+        const animate = (currentTime) => {
+            const elapsedTime = currentTime - startTime;
+            const progress = Math.min(elapsedTime / duration, 1);
 
-        if (progress < 1) {
-          requestAnimationFrame(animate);
-        } else {
-          this.value = targetValue; 
-        }
-      };
 
-      requestAnimationFrame(animate);
+            const currentVal = Math.floor(startValue + (targetValue - startValue) * progress);
+
+            this.el.textContent = currentVal;
+
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            } else {
+                this.value = targetValue;
+            }
+        };
+
+        requestAnimationFrame(animate);
     }
-  }
+}
 
-  const createContCl = (el, value) => {
-    if (!el) return; 
-    
+const createContCl = (el, value) => {
+    if (!el) return;
+
     const cont = new Cont({
-      el: el,
-      value: 0,
+        el: el,
+        value: 0,
     });
 
     let hasRun = false;
 
-  const callback = function(items) {
-    items.forEach((item) => {
-      if (item.isIntersecting) {
-        if (!hasRun) {
-          cont.update(value);
-          hasRun = true;
-          
-          observer.unobserve(el); 
-        }
-      }
-    });
-  };
+    const callback = function(items) {
+        items.forEach((item) => {
+            if (item.isIntersecting) {
+                if (!hasRun) {
+                    cont.update(value);
+                    hasRun = true;
 
-  var observer = new IntersectionObserver(callback, { threshold: 0.5 });
-  observer.observe(el); 
-  };
+                    observer.unobserve(el);
+                }
+            }
+        });
+    };
 
-  const contClient = document.querySelector(".cont-client");
-  createContCl(contClient, 6500);
+    var observer = new IntersectionObserver(callback, { threshold: 0.5 });
+    observer.observe(el);
+};
 
-  const contYear = document.querySelector(".cont-year");
-  createContCl(contYear, 2008);
+const contClient = document.querySelector(".cont-client");
+createContCl(contClient, 6500);
+
+const contYear = document.querySelector(".cont-year");
+createContCl(contYear, 2008);

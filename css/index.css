@@ -271,11 +271,12 @@ body {
     margin-right: 3vw;
     transition: transform 0.3s ease;
 }
-.header-menu li .name{
+
+.header-menu li .name {
     color: #FFD94A;
 }
 
-.header-menu li .name:hover{
+.header-menu li .name:hover {
     color: #ffffff;
 }
 
