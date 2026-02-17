@@ -4,9 +4,83 @@
 session_start(); // Avvia la sessione per gestire l'utente loggato
 require_once 'includes/db_config.php'; //Connessione al database PostgreSQL
 
-
 // Controllo stato autenticazione
-$is_logged = isset($_SESSION['user']); //variabile booleana per verificare se l'utente ha effettuato il login
+$is_logged = isset($_SESSION['user']);
+
+// LOGICA PRENOTAZIONE PACCHETTI
+$prenotazioni_disponibili = [];
+$messaggio_stato = ""; // "no_camere", "tutto_pieno", "ok"
+
+if ($is_logged) {
+    $username = $_SESSION['user'];
+    
+    // 1. Recupero ID Utente
+    $query_user = "SELECT id FROM utenti WHERE username = $1";
+    $res_user = pg_query_params($conn, $query_user, array($username));
+    
+    if ($res_user && pg_num_rows($res_user) > 0) {
+        $user_row = pg_fetch_assoc($res_user);
+        $user_id = $user_row['id'];
+
+        // 2. Recupero nomi dei pacchetti (per distinguerli dalle camere nella tabella prenotazioni)
+        $pacchetti_names = [];
+        $q_pack = "SELECT nome FROM pacchetti";
+        $r_pack = pg_query($conn, $q_pack);
+        while ($row_p = pg_fetch_assoc($r_pack)) {
+            $pacchetti_names[] = $row_p['nome'];
+        }
+
+        // 3. Recupero tutte le prenotazioni dell'utente
+        $q_pren = "SELECT * FROM prenotazioni WHERE id_utente = $1";
+        $r_pren = pg_query_params($conn, $q_pren, array($user_id));
+
+        $mie_camere_per_data = []; // Array: [data] => [nome_camera1, nome_camera2]
+        $miei_pacchetti_per_data = []; // Array: [data] => conteggio
+
+        while ($row_pr = pg_fetch_assoc($r_pren)) {
+            $data = $row_pr['data_prenotazione'];
+            $nome_oggetto = $row_pr['nome_pacchetto'];
+
+            // Controllo se è un pacchetto o una camera
+            if (in_array($nome_oggetto, $pacchetti_names)) {
+                // È un pacchetto già prenotato
+                if (!isset($miei_pacchetti_per_data[$data])) {
+                    $miei_pacchetti_per_data[$data] = 0;
+                }
+                $miei_pacchetti_per_data[$data]++;
+            } else {
+                // È una camera
+                if (!isset($mie_camere_per_data[$data])) {
+                    $mie_camere_per_data[$data] = [];
+                }
+                $mie_camere_per_data[$data][] = $nome_oggetto;
+            }
+        }
+
+        // 4. Calcolo quali date sono ancora "libere" per aggiungere un pacchetto
+        // Logica: Posso prenotare un pacchetto SOLO se per quella data ho più camere che pacchetti
+        if (empty($mie_camere_per_data)) {
+            $messaggio_stato = "no_camere";
+        } else {
+            foreach ($mie_camere_per_data as $data => $camere) {
+                // Filtro date passate
+                if (strtotime($data) >= strtotime(date('Y-m-d'))) {
+                    $num_camere = count($camere);
+                    $num_pacchetti = isset($miei_pacchetti_per_data[$data]) ? $miei_pacchetti_per_data[$data] : 0;
+
+                    if ($num_pacchetti < $num_camere) {
+                        // C'è spazio per un altro pacchetto in questa data
+                        $prenotazioni_disponibili[$data] = $camere[0]; // Prende il nome della prima camera disponibile
+                        $messaggio_stato = "ok";
+                    }
+                }
+            }
+            if ($messaggio_stato == "" && !empty($mie_camere_per_data)) {
+                $messaggio_stato = "tutto_pieno"; // Ha camere, ma ha già preso pacchetti per tutte
+            }
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -19,7 +93,6 @@ $is_logged = isset($_SESSION['user']); //variabile booleana per verificare se l'
 </head>
 <body>
 
-    <!-- HEADER-->
     <header class="header">
       <div class="header-content"> 
         <a class="icon-big" href="index.php">
@@ -101,14 +174,39 @@ $is_logged = isset($_SESSION['user']); //variabile booleana per verificare se l'
                         € <?php echo htmlspecialchars($row['prezzo']); ?>
                     </p>
                     
-                    <?php 
-                        $link_prenotazione = "salva_prenotazione.php?nome=" . urlencode($row['nome']) . "&prezzo=" . $row['prezzo'];
-                    ?>
-                    <a href="<?php echo $link_prenotazione; ?>" style="display:inline-block; background:#25D366; color:white; padding:10px 20px; text-decoration:none; border-radius:5px; margin-top:10px; font-weight:bold;">
-                        Prenota Ora
-                    </a>
+                    <?php if ($messaggio_stato == "no_camere"): ?>
+                        
+                        <p class="msg-warning">
+                             Devi prenotare una camera per una data futura prima di aggiungere un pacchetto.
+                        </p>
+                        <a href="camere.php" style="color: white; text-decoration: underline;">Vai alle Camere</a>
 
-                <?php else: ?>
+                    <?php elseif ($messaggio_stato == "tutto_pieno"): ?>
+                        
+                        <p class="msg-warning">
+                             Hai già associato un pacchetto a tutte le tue prenotazioni future.
+                        </p>
+
+                    <?php elseif ($messaggio_stato == "ok"): ?>
+                        
+                        <form action="salva_prenotazione.php" method="GET" class="booking-form">
+                            <input type="hidden" name="nome" value="<?php echo htmlspecialchars($row['nome']); ?>">
+                            <input type="hidden" name="prezzo" value="<?php echo $row['prezzo']; ?>">
+                            
+                            <label for="data_pack_<?php echo $row['id']; ?>" style="font-size: 0.9em;">Associa alla prenotazione del:</label>
+                            <select name="data" id="data_pack_<?php echo $row['id']; ?>" class="date-select" required>
+                                <?php foreach ($prenotazioni_disponibili as $data_disp => $nome_camera): ?>
+                                    <option value="<?php echo $data_disp; ?>">
+                                        <?php echo date("d/m/Y", strtotime($data_disp)); ?> - <?php echo $nome_camera; ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+
+                            <button type="submit" class="btn-prenota-pack">Prenota Ora</button>
+                        </form>
+
+                    <?php endif; ?>
+                    <?php else: ?>
                     <p style="font-style: italic; color: #f7f7f7;">
                         Registrati per visualizzare i dettagli completi e i prezzi riservati.
                     </p>
@@ -136,8 +234,7 @@ $is_logged = isset($_SESSION['user']); //variabile booleana per verificare se l'
    </div>
    </div>
 
-    <!-- FOOTER -->
-   <footer id="footer">
+    <footer id="footer">
           <div class="info">
             <h1>Salerno Mare e Luci</h1>
             <h2>Piazza Sedile di Portanova, 20<br> 
@@ -151,7 +248,7 @@ $is_logged = isset($_SESSION['user']); //variabile booleana per verificare se l'
                 Email: gruppo13@gmail.com
             </h2>
           </div>
-     
+       
           <div class="social">
             <h1>Social <br></h1>
 
@@ -173,7 +270,7 @@ $is_logged = isset($_SESSION['user']); //variabile booleana per verificare se l'
 
           <h2>
               <a class="tk" href="https://www.tiktok.com/@salernomareeluci?_r=1&_t=ZN-93hbMdaFklK">
-            
+             
             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"  viewBox="0 0 32 32" version="1.1">
             <path d="M16.656 1.029c1.637-0.025 3.262-0.012 4.886-0.025 0.054 2.031 0.878 3.859 2.189 5.213l-0.002-0.002c1.411 1.271 3.247 2.095 5.271 2.235l0.028 0.002v5.036c-1.912-0.048-3.71-0.489-5.331-1.247l0.082 0.034c-0.784-0.377-1.447-0.764-2.077-1.196l0.052 0.034c-0.012 3.649 0.012 7.298-0.025 10.934-0.103 1.853-0.719 3.543-1.707 4.954l0.020-0.031c-1.652 2.366-4.328 3.919-7.371 4.011l-0.014 0c-0.123 0.006-0.268 0.009-0.414 0.009-1.73 0-3.347-0.482-4.725-1.319l0.040 0.023c-2.508-1.509-4.238-4.091-4.558-7.094l-0.004-0.041c-0.025-0.625-0.037-1.25-0.012-1.862 0.49-4.779 4.494-8.476 9.361-8.476 0.547 0 1.083 0.047 1.604 0.136l-0.056-0.008c0.025 1.849-0.050 3.699-0.050 5.548-0.423-0.153-0.911-0.242-1.42-0.242-1.868 0-3.457 1.194-4.045 2.861l-0.009 0.030c-0.133 0.427-0.21 0.918-0.21 1.426 0 0.206 0.013 0.41 0.037 0.61l-0.002-0.024c0.332 2.046 2.086 3.59 4.201 3.59 0.061 0 0.121-0.001 0.181-0.004l-0.009 0c1.463-0.044 2.733-0.831 3.451-1.994l0.010-0.018c0.267-0.372 0.45-0.822 0.511-1.311l0.001-0.014c0.125-2.237 0.075-4.461 0.087-6.698 0.012-5.036-0.012-10.060 0.025-15.083z"/>
             </svg>
