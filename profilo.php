@@ -49,8 +49,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_profile'])) {
             $errori = "Email già utilizzata da un altro utente.";
         } else {
             // Aggiornamento credenziali 
+            $safe_hash=password_hash($new_pass, PASSWORD_DEFAULT);
             $update_sql = "UPDATE utenti SET username = $1, email = $2, password = $3 WHERE id = $4";
-            $res_up = pg_query_params($conn, $update_sql, array($new_user, $new_email, $new_pass, $user_id));
+            $res_up = pg_query_params($conn, $update_sql, array($new_user, $new_email, $safe_hash, $user_id));
 
             if ($res_up) {
                 $msg = "Dati aggiornati con successo!";
@@ -115,7 +116,7 @@ $res_pren = pg_query_params($conn, $query_pren, array($user_id));
 
                     <label>Password (Modifica)</label>
                     <div class="password-container">
-                        <input type="password" id="pass" name="pass" value="<?php echo htmlspecialchars($user_data['password']); ?>" required>
+                        <input type="password" id="pass" name="pass" placeholder="Inserisci la nuova password" required>
                         <span class="toggle-password" onclick="togglePassword()">
                              <img src="assets/eye-slash.png" id="icon-slash">
                               <img src="assets/eye.png" id="icon-eye" hidden>
