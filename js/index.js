@@ -1,88 +1,51 @@
-var elements = document.querySelectorAll('.watch');
+/* --- 1. GESTIONE MENU HAMBURGER (Rimasto invariato) --- */
+let hamburger = document.querySelector('.hamb-menu');
+let body = document.body;
 
-var callback = function(items) {
-    items.forEach((item) => {
-        if (item.isIntersecting) {
-            item.target.classList.add("in-page");
+hamburger.addEventListener("click", function() {
+    body.classList.toggle('menu-open');
+});
+
+
+/* --- 2. FUNZIONI DI UTILITÀ --- */
+
+// Funzione per controllare se un elemento è visibile nello schermo
+function isElementVisible(el) {
+    if (!el) return false;
+    var rect = el.getBoundingClientRect();
+    var windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    
+    // L'elemento è visibile se la sua parte superiore è entrata nella finestra
+    // (Aggiungiamo un piccolo offset di 100px per non farlo scattare proprio al bordo)
+    return (rect.top <= windowHeight - 100 && rect.bottom >= 0);
+}
+
+
+/* --- 3. GESTIONE ANIMAZIONI FADE-IN (.watch) --- */
+var watchElements = document.querySelectorAll('.watch');
+
+function checkWatchElements() {
+    watchElements.forEach(function(el) {
+        if (isElementVisible(el)) {
+            el.classList.add("in-page");
         } else {
-            item.target.classList.remove("in-page");
+            // Se vuoi che l'animazione si ripeta togliendo la classe quando esce:
+            el.classList.remove("in-page");
         }
     });
 }
 
-var observer = new IntersectionObserver(callback, { threshold: 0.5 });
-elements.forEach((element) => {
-    observer.observe(element);
+
+
+
+/* --- 5. EVENTO SCROLL PRINCIPALE --- */
+
+// Ascoltiamo l'evento scroll
+window.addEventListener('scroll', function() {
+    checkWatchElements();
 });
 
-
-let item = document.querySelector('.hamb-menu');
-item.addEventListener("click", function() {
-    document.body.classList.toggle('menu-open');
+// Eseguiamo le funzioni anche al caricamento della pagina (nel caso fossimo già a metà pagina)
+window.addEventListener('load', function() {
+    checkWatchElements();
 });
-
-
-
-class Cont {
-    constructor(options) {
-        this.el = options.el;
-        this.value = options.value;
-    }
-
-    update(targetValue) {
-        const startValue = this.value;
-        const duration = 5000;
-        const startTime = performance.now();
-
-        const animate = (currentTime) => {
-            const elapsedTime = currentTime - startTime;
-            const progress = Math.min(elapsedTime / duration, 1);
-
-
-            const currentVal = Math.floor(startValue + (targetValue - startValue) * progress);
-
-            this.el.textContent = currentVal;
-
-            if (progress < 1) {
-                requestAnimationFrame(animate);
-            } else {
-                this.value = targetValue;
-            }
-        };
-
-        requestAnimationFrame(animate);
-    }
-}
-
-const createContCl = (el, value) => {
-    if (!el) return;
-
-    const cont = new Cont({
-        el: el,
-        value: 0,
-    });
-
-    let hasRun = false;
-
-    const callback = function(items) {
-        items.forEach((item) => {
-            if (item.isIntersecting) {
-                if (!hasRun) {
-                    cont.update(value);
-                    hasRun = true;
-
-                    observer.unobserve(el);
-                }
-            }
-        });
-    };
-
-    var observer = new IntersectionObserver(callback, { threshold: 0.5 });
-    observer.observe(el);
-};
-
-const contClient = document.querySelector(".cont-client");
-createContCl(contClient, 6500);
-
-const contYear = document.querySelector(".cont-year");
-createContCl(contYear, 2008);

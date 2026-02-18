@@ -12,7 +12,7 @@ body {
 }
 
 
-/* --- INIZIO HEADER */
+/* --- HEADER --- */
 
 .header {
     position: fixed;
@@ -41,35 +41,12 @@ body {
     transition: transform 0.3s ease;
 }
 
-.header-menu li .name{
+.header-menu li .name {
     color: #FFD94A;
 }
 
-.header-menu li .name:hover{
+.header-menu li .name:hover {
     color: #ffffff;
-}
-
-.error{
-    background-color: #ff9e44; 
-    color: white; padding: 15px; 
-    text-align: center; 
-    margin: 20px auto; 
-    max-width: 800px; 
-    border-radius: 5px; 
-    font-family: sans-serif; 
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    margin-bottom: 40px;
-}
-
-@media (max-width: 1100px) {
-    .header-menu li {
-        display: inline-block;
-        margin-right: 50px;
-        transition: transform 0.3s ease;
-    }
-    .header-menu li:hover {
-        transform: scale(1.2);
-    }
 }
 
 .header-menu li a {
@@ -89,16 +66,6 @@ body {
     color: #FFD94A;
 }
 
-.user dotlottie-wc {
-    width: 3.2vw;
-    height: 2.5vh;
-    margin-bottom: -6vh;
-}
-
-.hamb-menu {
-    display: none;
-}
-
 .icon-big {
     display: flex;
     align-items: center;
@@ -114,6 +81,22 @@ body {
 
 .icon-big:hover {
     transform: scale(1.2);
+}
+
+.hamb-menu {
+    display: none;
+}
+
+/* Media Queries Header */
+@media (max-width: 1100px) {
+    .header-menu li {
+        display: inline-block;
+        margin-right: 50px;
+        transition: transform 0.3s ease;
+    }
+    .header-menu li:hover {
+        transform: scale(1.2);
+    }
 }
 
 @media (max-width: 768px) {
@@ -156,21 +139,29 @@ body {
     .hamb-menu:hover {
         transform: scale(1.2);
     }
-    .user dotlottie-wc {
-        width: 30px;
-        height: 30px;
-        margin: 0 auto;
-    }
 }
 
 
-/* --- FINE HEADER --- */
+/* --- MESSAGGI DI ERRORE --- */
+
+.error {
+    background-color: #ff9e44;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    margin: 20px auto;
+    max-width: 800px;
+    border-radius: 5px;
+    font-family: sans-serif;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    margin-bottom: 40px;
+}
 
 
 /* --- SEZIONE TITOLI CATEGORIE --- */
 
 .category-section {
-    scroll-margin-top: 140px;    /* aggiunge un margine sopra all'elemento raggiunto tramite link (ancora)*/
+    scroll-margin-top: 140px;
     padding: 0vh 1vw;
     margin-top: -30px;
     margin-bottom: 80px;
@@ -200,59 +191,48 @@ body {
     line-height: 1.6;
 }
 
+
+/* --- INPUT DATA --- */
+
 input[type="date"] {
-    background-color: #FFD94A; /* Sfondo scuro semi-trasparente */
-    color: #3a0707ff; /* Testo chiaro */
+    background-color: #FFD94A;
+    color: #3a0707ff;
     font-family: 'Helvetica Neue', sans-serif;
     font-size: 1rem;
-    font-weight:bold;
+    font-weight: bold;
     padding: 15px 20px;
-    border: 1px solid rgba(255, 255, 255, 0.2); /* Bordo sottile e discreto */
-    border-radius: 12px; /* Bordi arrotondati come i tuoi pannelli */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
     outline: none;
     width: 100%;
-    max-width: 300px; /* Larghezza massima per estetica */
+    max-width: 300px;
     cursor: pointer;
     transition: all 0.3s ease;
-    
-    /* Rimuove lo stile di default bruttino dei browser */
     -webkit-appearance: none;
     appearance: none;
     position: relative;
     margin-top: 1vh;
 }
 
-.btn-disabled {
-    pointer-events: none; /* Impedisce il click */
-    opacity: 0.5;         /* Lo rende semi-trasparente */
-    cursor: not-allowed;
-    background-color: #ccc !important; /* Grigio */
-    border-color: #999 !important;
-}
-
-/* Effetto Hover e Focus (quando ci clicchi) */
+/* Effetto Hover e Focus */
 input[type="date"]:hover,
 input[type="date"]:focus {
-    border-color: #ffffff; /* Diventa color ORO */
-    box-shadow: 0 0 15px rgba(255, 217, 74, 0.3); /* Alone luminoso dorato */
-    transform: translateY(-2px); /* Leggero sollevamento */
-}   
+    border-color: #ffffff;
+    box-shadow: 0 0 15px rgba(255, 217, 74, 0.3);
+    transform: translateY(-2px);
+}
 
 
-/* --- SLIDER FOTO FUNZIONANTE --- */
+/* --- SLIDER FOTO --- */
 
 .grid-container {
     display: flex !important;
     flex-wrap: nowrap !important;
     overflow-x: auto !important;
     overflow-y: visible !important;
-    /* Permette all'immagine di uscire dai bordi in alto/basso */
     gap: 40px;
-    /* MODIFICATO: Padding aumentato a 80px ai lati */
-    /* Questo crea spazio affinché la prima foto possa ingrandirsi senza essere tagliata a sinistra */
     padding: 60px 80px;
     scroll-snap-type: x mandatory;
-    /* Scrollbar personalizzata */
     scrollbar-width: thin;
     scrollbar-color: #FFD94A #1d1d1f;
 }
@@ -270,39 +250,28 @@ input[type="date"]:focus {
     border-radius: 10px;
 }
 
-
-/* CARD CONTENITORE */
-
+/* CARD CONTENITORE FOTO */
 .photo-card {
     flex: 0 0 auto !important;
-    /* DIMENSIONI GRANDI */
     min-width: 600px !important;
     width: 600px !important;
     height: 400px !important;
     border-radius: 20px;
     border: 2px solid rgba(255, 217, 74, 0.5);
     background: #000;
-    /* Overflow visible qui NON va bene se vogliamo mantenere i bordi arrotondati durante lo zoom 
-       MA se usiamo scale sul contenitore, dobbiamo assicurarci che il padding del grid-container sia sufficiente.
-       Con padding 80px laterale, possiamo usare overflow hidden per l'immagine interna */
     overflow: hidden;
     position: relative;
     scroll-snap-align: center;
     cursor: pointer;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    /* Transizione sul contenitore */
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, z-index 0s;
     z-index: 1;
 }
 
-
-/* EFFETTO ZOOM SU TUTTA LA CARD */
-
+/* Effetto zoom su hover */
 .photo-card:hover {
     transform: scale(1.2);
-    /* Ingrandisce tutto il blocco */
     z-index: 999;
-    /* Porta in primo piano */
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
     border-color: #FFD94A;
 }
@@ -315,7 +284,7 @@ input[type="date"]:focus {
 }
 
 
-/* BOTTONE PRENOTA */
+/* --- BOTTONE PRENOTA --- */
 
 .btn-whatsapp-big {
     display: inline-block;
@@ -334,6 +303,17 @@ input[type="date"]:focus {
     background-color: #e5d867;
     transform: scale(1.05);
 }
+
+.btn-disabled {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: #ccc !important;
+    border-color: #999 !important;
+}
+
+
+/* --- FOOTER --- */
 
 footer {
     position: relative;

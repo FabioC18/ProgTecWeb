@@ -1,6 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 html {
     overflow-x: hidden;
 }
+
+body {
+    background-color: #1d1d1f;
+    color: white;
+    font-family: 'Helvetica Neue', sans-serif;
+    padding-top: 40px;
+    margin: 0;
+}
+
+
+/* --- HEADER --- */
 
 header {
     position: fixed;
@@ -23,24 +40,12 @@ header {
     align-items: center;
     justify-content: space-between;
     padding-top: 13px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
-#map {
-    height: 400px;
-    width: 100%;
-    margin-top: 20px;
-    border-radius: 10px;
-    border: 1px solid #444;
-    display: none;
-}
 
-body {
-    background-color: #1d1d1f;
-    color: white;
-    font-family: sans-serif;
-    padding-top: 40px;
-    margin: 0;
-}
+/* --- LAYOUT PROFILO --- */
 
 .container {
     max-width: 900px;
@@ -60,7 +65,7 @@ body {
     }
 }
 
-.box1{
+.box1 {
     background: rgba(255, 255, 255, 0.05);
     padding: 25px 40px 25px 25px;
     border-radius: 10px;
@@ -82,6 +87,9 @@ h2 {
     margin-top: 0;
 }
 
+
+/* --- FORM ELEMENTI --- */
+
 label {
     display: block;
     margin-top: 15px;
@@ -98,6 +106,28 @@ input[type="password"] {
     color: white;
     border-radius: 5px;
 }
+
+.password-container {
+    position: relative;
+    justify-content: center;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 1vh;
+    cursor: pointer;
+    color: #ccc;
+    z-index: 10;
+}
+
+.toggle-password img {
+    width: 25px;
+    height: 29px;
+}
+
+
+/* --- TABELLA PRENOTAZIONI --- */
 
 table {
     width: 100%;
@@ -120,6 +150,9 @@ tr:hover {
     background: rgba(255, 255, 255, 0.05);
 }
 
+
+/* --- MESSAGGI FEEDBACK --- */
+
 .success {
     color: #4BB543;
     background: rgba(75, 181, 67, 0.2);
@@ -136,6 +169,9 @@ tr:hover {
     margin-bottom: 15px;
 }
 
+
+/* --- BOTTONI --- */
+
 .btn-save {
     background-color: #FFD94A;
     color: black;
@@ -148,6 +184,8 @@ tr:hover {
     border-radius: 5px;
     transition: opacity 0.3s;
     text-decoration: none;
+    display: inline-block;
+    text-align: center;
 }
 
 .btn-save:disabled {
@@ -156,34 +194,13 @@ tr:hover {
     cursor: not-allowed;
 }
 
-.password-container {
-    position: relative;
-    justify-content: center;
-}
 
-.toggle-password {
-    position: absolute;
-    right: 10px;
-    top: 1vh;
-    cursor: pointer;
-    color: #ccc;
-    z-index: 10;
-}
-
-.toggle-password img{
-    width: 25px;
-    height: 29px;
-}
-
-
-/* --- STILE TOOLTIP (SOTTO) --- */
+/* --- TOOLTIP REQUISITI PASSWORD --- */
 
 .tooltip-requirements {
     display: none;
-    /* Nascosto di default */
     position: absolute;
     top: 100%;
-    /* Posizionato SOTTO l'input */
     left: 0;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.95);
@@ -192,7 +209,6 @@ tr:hover {
     border-radius: 5px;
     font-size: 0.85em;
     margin-top: 5px;
-    /* Spazio tra input e tooltip */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     border: 1px solid #FFD94A;
     z-index: 100;
@@ -208,12 +224,26 @@ tr:hover {
     margin-bottom: 3px;
 }
 
+
+/* --- MAPPA LEAFLET --- */
+
+#map {
+    height: 400px;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 10px;
+    border: 1px solid #444;
+    display: none;
+}
+
+
+/* --- FOOTER --- */
+
 footer {
     position: relative;
     font-family: 'Helvetica Neue', sans-serif;
     z-index: 9999;
     background-color: #121212;
-    ;
     padding: 60px 20px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -223,6 +253,7 @@ footer {
     border-top: 4px solid #8B1E1E;
     color: #cccccc;
     width: 100%;
+    margin-top: 40px;
 }
 
 footer h1 {
