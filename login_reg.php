@@ -38,7 +38,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             else {
                 // Inserimento nuovo utente
                 $query = "INSERT INTO utenti (username, email, password) VALUES ($1, $2, $3)";
-                $res = pg_query_params($conn, $query, array($username, $email, $password));
+                $safe_password=password_hash($password, PASSWORD_DEFAULT);
+                $res = pg_query_params($conn, $query, array($username, $email, $safe_password));
                 if ($res) {
                     $_SESSION['user'] = $username; //permette il login automatico dopo la registrazione
                     header("Location: index.php");
@@ -48,19 +49,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
     // --- LOGICA LOGIN ---
-    elseif ($action === 'login' && isset($_POST['btn_submit'])) {
+   elseif ($action === 'login' && isset($_POST['btn_submit'])) {
         $password = $_POST['pass'];
         
-        //Verifica le credenziali cercando nel DataBase le coppie username e password
-        $query = "SELECT * FROM utenti WHERE username = $1 AND password = $2";
-        $result = pg_query_params($conn, $query, array($username, $password));
+        // 1. Cerchiamo l'utente nel DB usando SOLO l'username
+        $query = "SELECT * FROM utenti WHERE username = $1";
+        $result = pg_query_params($conn, $query, array($username));
 
-        if (pg_num_rows($result) == 1) {
+        // 2. Controlliamo se abbiamo trovato l'utente
+        if ($result && pg_num_rows($result) == 1) {
             $row = pg_fetch_assoc($result);
-            $_SESSION['user'] = $row['username'];  //Salva l'utente che sta navigando 
-            header("Location: index.php"); //dopo l'accesso, invia l'utente direttamente nella home
-            exit;
+            $saved_password = $row['password']; // Recuperiamo l'hash salvato
+            
+            // 3. Verifichiamo la password
+            if (password_verify($password, $saved_password)) {
+                // Password corretta!
+                $_SESSION['user'] = $row['username'];
+                header("Location: index.php");
+                exit;
+            } else {
+                // Password sbagliata
+                $errori = "Errore: Username o Password non corretti.";
+            }
         } else {
+            // Utente non trovato
             $errori = "Errore: Username o Password non corretti.";
         }
     }

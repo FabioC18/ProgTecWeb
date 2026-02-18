@@ -43,7 +43,7 @@ $result = pg_query($conn, $query);
                     <li><a class="name" href="profilo.php">Ciao, <?php echo htmlspecialchars($_SESSION['user']); ?></a></li>
                     <li class="menu-item-session"><a href="logout.php">Logout</a></li>
                 <?php else: ?>
-                    <li><a href="login_reg.php">Login / Registrati</a></li>
+                    <li><a href="login_reg.php"></a></li>
                 <?php endif; ?>
             </ul>
         </nav>
