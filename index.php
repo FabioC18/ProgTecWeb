@@ -105,9 +105,9 @@ require_once 'includes/db_config.php'; //Connessione al database PostgreSQL
       <div class="cont1">
         <h1>DOVE LA TRADIZIONE INCONTRA L'ELEGANZA</h1>
         <div class="client">Clienti soddisfatti</div>
-        <div class="cont-client cont">0</div>
+        <div class="cont-client cont">6500</div>
         <div class="client">dal</div>
-        <div class="cont-year cont">2023</div>
+        <div class="cont-year cont">2008</div>
       </div>
         </div>
 

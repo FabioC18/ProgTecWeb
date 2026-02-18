@@ -73,8 +73,6 @@ body {
     margin-bottom: 30vh;
     z-index: 2;
     color: #2e2e2e;
-    justify-content: center;
-    align-items: center;
     border-radius: 1%;
     box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.2);
 }
@@ -176,8 +174,6 @@ body {
     font-size: 3em;
     position: relative;
     text-align: center;
-    justify-content: center;
-    align-items: center;
     z-index: 4;
     font-family: 'Georgia', serif;
     font-style: italic;
@@ -187,8 +183,7 @@ body {
 .testo2 {
     font-size: 1.56vw;
     position: relative;
-    text-align: centre;
-    justify-content: center;
+    text-align: center;
     z-index: 4;
     font-weight: 500;
     line-height: 1.5;
@@ -308,9 +303,7 @@ body {
     color: #FFD94A;
 }
 
-.header-menu li .user-icon {
-    margin-right: 10px;
-}
+
 
 .hamb-menu {
     display: none;
@@ -373,20 +366,14 @@ body {
     .hamb-menu:hover {
         transform: scale(1.2);
     }
-    .user dotlottie-wc {
-        width: 30px;
-        height: 30px;
-        margin: 0 auto;
-    }
+    
 }
 
 .cont-container {
     position: relative;
     width: 100%;
     min-height: 60vh;
-    background: linear-gradient(135deg, #dd6b14 0%, #1E5F9C 50%, #46a9ec 100%);
-    background-size: 300% 300%;
-    animation: gradientMove 18s ease infinite;
+    background-color: #0d375d;
     color: #f7f7f7;
     z-index: 50;
     margin-top: -4.7vh;
@@ -397,17 +384,6 @@ body {
     box-shadow: 0px -10px 30px rgba(0, 0, 0, 10);
 }
 
-@keyframes gradientMove {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
 
 @media (max-width: 57.3vw) {
     .cont-container {

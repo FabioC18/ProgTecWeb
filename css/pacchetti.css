@@ -6,10 +6,8 @@
 
 body {
     min-height: 100vh;
-    /* Forza l'altezza schermo intero */
     width: 100vw;
     overflow-x: hidden;
-    /* Blocca scroll indesiderati */
     margin: 0;
     background-color: #3a0707ff;
     position: relative;
@@ -32,7 +30,7 @@ body {
 }
 
 
-/* POSIZIONAMENTO OGGETTI */
+/* POSIZIONAMENTO OGGETTI DI SFONDO */
 
 .top-right {
     top: 5%;
@@ -82,24 +80,6 @@ body {
     width: 8% !important;
     height: 8% !important;
     top: 500px;
-}
-
-.container h2 {
-    z-index: 1;
-    top: 40%;
-    position: fixed;
-    color: rgb(0, 0, 0);
-    font-size: 90px;
-    text-transform: uppercase;
-    font-weight: 900;
-    letter-spacing: 32px;
-    line-height: 60px;
-}
-
-.container h2 span {
-    font-size: 48px;
-    font-weight: 500;
-    letter-spacing: 10px;
 }
 
 
@@ -166,12 +146,6 @@ body {
 .header-menu li a:hover {
     transform: scale(1.2);
     color: #FFD94A;
-}
-
-.user dotlottie-wc {
-    width: 3.2vw;
-    height: 2.5vh;
-    margin-bottom: -6vh;
 }
 
 .hamb-menu {
@@ -244,33 +218,15 @@ body {
         padding: 20px;
         max-height: 80vh;
     }
-    .img-pack,
-    .img-lbase,
-    .img-lplus,
-    .img-lsushi {
+    .img-pack {
         margin-bottom: 15px;
         border-radius: 8px;
     }
-    .pack-base h3,
-    .love-base h3,
-    .love-plus h3,
-    .love-sushi h3 {
+    .pack-base h3 {
         font-size: 16px;
         margin-bottom: 5px;
     }
-    .pack-base ul,
-    .love-base ul,
-    .love-plus ul,
-    .love-sushi ul {
-        font-size: 14px;
-        padding-left: 0;
-        line-height: 1.4;
-    }
-    .container h2 {
-        font-size: 40px;
-        letter-spacing: 5px;
-        line-height: 45px;
-    }
+    /* Ho rimosso le classi .love-base, .img-lbase ecc. non presenti nel PHP */
 }
 
 @media (max-width: 1100px) {
@@ -287,9 +243,6 @@ body {
         padding: 25px;
     }
     .pack-base h3 {
-        font-size: 1.8vh;
-    }
-    .pack-base ul {
         font-size: 1.8vh;
     }
 }
@@ -312,7 +265,7 @@ body {
     flex-direction: row;
     align-items: center;
     position: absolute;
-    top:0;
+    top: 0;
     left: 0;
     z-index: 10;
     transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
@@ -363,12 +316,6 @@ body {
     font-size: 1.8vh;
 }
 
-.pack-base ul {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    list-style: none;
-    font-size: 1.8vh;
-}
-
 h4 {
     position: relative;
     margin-top: 20px;
@@ -384,7 +331,7 @@ h4 a {
     width: 90%;
     height: fit-content;
     border-radius: 12px;
-    margin:auto;
+    margin: auto;
     object-fit: contain;
     display: block;
 }
@@ -468,10 +415,7 @@ footer h2,
 }
 
 
-/* --- NUOVI STILI PER IL FORM DI PRENOTAZIONE --- */
-
-
-/* (Questi servono per il menu a tendina e il tasto prenota aggiunto in pacchetti.php) */
+/* --- STILI FORM PRENOTAZIONE E MESSAGGI --- */
 
 .booking-form {
     margin-top: 15px;
