@@ -303,8 +303,6 @@ body {
     color: #FFD94A;
 }
 
-
-
 .hamb-menu {
     display: none;
 }
@@ -366,7 +364,6 @@ body {
     .hamb-menu:hover {
         transform: scale(1.2);
     }
-    
 }
 
 .cont-container {
@@ -383,7 +380,6 @@ body {
     text-align: center;
     box-shadow: 0px -10px 30px rgba(0, 0, 0, 10);
 }
-
 
 @media (max-width: 57.3vw) {
     .cont-container {
