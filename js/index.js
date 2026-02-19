@@ -1,6 +1,6 @@
 /* --- 1. GESTIONE MENU HAMBURGER (Rimasto invariato) --- */
-let hamburger = document.querySelector('.hamb-menu');
-let body = document.body;
+const hamburger = document.querySelector('.hamb-menu');
+const body = document.body;
 
 hamburger.addEventListener("click", function() {
     body.classList.toggle('menu-open');
@@ -12,9 +12,9 @@ hamburger.addEventListener("click", function() {
 // Funzione per controllare se un elemento è visibile nello schermo
 function isElementVisible(el) {
     if (!el) return false;
-    var rect = el.getBoundingClientRect();
-    var windowHeight = window.innerHeight || document.documentElement.clientHeight;
-    
+    const rect = el.getBoundingClientRect();
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+
     // L'elemento è visibile se la sua parte superiore è entrata nella finestra
     // (Aggiungiamo un piccolo offset di 100px per non farlo scattare proprio al bordo)
     return (rect.top <= windowHeight - 100 && rect.bottom >= 0);
@@ -22,7 +22,7 @@ function isElementVisible(el) {
 
 
 /* --- 3. GESTIONE ANIMAZIONI FADE-IN (.watch) --- */
-var watchElements = document.querySelectorAll('.watch');
+const watchElements = document.querySelectorAll('.watch');
 
 function checkWatchElements() {
     watchElements.forEach(function(el) {

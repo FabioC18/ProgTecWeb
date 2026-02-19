@@ -1,4 +1,4 @@
-let item = document.querySelector('.hamb-menu');
+const item = document.querySelector('.hamb-menu');
 item.addEventListener("click", function() {
     document.body.classList.toggle('menu-open');
 });
@@ -40,16 +40,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function updateBookingLink(id) {
     // Recupera gli elementi
-    var dateInput = document.getElementById('date_' + id);
-    var btn = document.getElementById('btn_prenota_' + id);
+    const dateInput = document.getElementById('date_' + id);
+    const btn = document.getElementById('btn_prenota_' + id);
 
     // Errori: Sia quello client (js) che quello server (php)
-    var errorMsgClient = document.getElementById('error_msg_' + id);
-    var errorMsgServer = document.getElementById('server_error_' + id);
+    const errorMsgClient = document.getElementById('error_msg_' + id);
+    const errorMsgServer = document.getElementById('server_error_' + id);
 
     // Recupera il link base (senza data)
-    var baseUrl = btn.getAttribute('data-baseurl');
-    var selectedDate = dateInput.value;
+    const baseUrl = btn.getAttribute('data-baseurl');
+    const selectedDate = dateInput.value;
 
     if (selectedDate) {
         // Aggiunge la data selezionata alla fine del link
@@ -63,7 +63,7 @@ function updateBookingLink(id) {
 }
 
 function checkDateSelected(id) {
-    var dateInput = document.getElementById('date_' + id);
+    const dateInput = document.getElementById('date_' + id);
     // Se l'input data è vuoto, blocca il click e mostra errore
     if (!dateInput.value) {
         document.getElementById('error_msg_' + id).style.display = 'block';

@@ -63,19 +63,47 @@ passIn.addEventListener('input', checkInputs);
 
 checkInputs();
 
-
 let map = null;
 
 function getLocation() {
-
     const mapContainer = document.getElementById("map");
 
+    // Definiamo PRIMA la funzione di errore
+    function showError(error) {
+        const errorContainer = document.getElementById("geo-error");
+        errorContainer.style.display = 'block';
+
+        switch (error.code) {
+            case error.PERMISSION_DENIED:
+                errorContainer.innerText = "Hai negato il permesso per la geolocalizzazione.";
+                break;
+            case error.POSITION_UNAVAILABLE:
+                errorContainer.innerText = "Le informazioni sulla posizione non sono disponibili.";
+                break;
+            case error.TIMEOUT:
+                errorContainer.innerText = "La richiesta per ottenere la posizione è scaduta.";
+                break;
+            case error.UNKNOWN_ERROR:
+                errorContainer.innerText = "Si è verificato un errore sconosciuto.";
+                break;
+        }
+    }
+
+    // Ora lanciamo la geolocalizzazione passando ENTRAMBE le funzioni (successo e errore)
     navigator.geolocation.getCurrentPosition(
         (position) => {
             const lat = position.coords.latitude;
             const lon = position.coords.longitude;
 
             mapContainer.style.display = 'block';
+
+            // Nascondiamo eventuali errori precedenti
+            document.getElementById("geo-error").style.display = 'none';
+
+            // PREVENZIONE BUG LEAFLET: se la mappa esiste, rimuovila prima di ricaricarla
+            if (map !== null) {
+                map.remove();
+            }
 
             map = L.map('map').setView([lat, lon], 11);
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -85,6 +113,7 @@ function getLocation() {
             const suite = L.marker([40.6780, 14.7625]).addTo(map).bindPopup("<b>Suite!</b>").openPopup();
             const deluxe = L.marker([40.67891, 14.75808]).addTo(map).bindPopup("<b>Deluxe!</b>").openPopup();
             const marker = L.marker([lat, lon]).addTo(map).bindPopup("<b>Sei qui!</b>").openPopup();
-        }
+        },
+        showError // <--- ECCO IL COLLEGAMENTO MANCANTE!
     );
 }

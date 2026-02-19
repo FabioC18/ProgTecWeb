@@ -43,7 +43,7 @@ $result = pg_query($conn, $query);
                     <li><a class="name" href="profilo.php">Ciao, <?php echo htmlspecialchars($_SESSION['user']); ?></a></li>
                     <li class="menu-item-session"><a href="logout.php">Logout</a></li>
                 <?php else: ?>
-                    <li><a href="login_reg.php"></a></li>
+                    <li><a href="login_reg.php">Login / Registrati</a></li>
                 <?php endif; ?>
             </ul>
         </nav>
@@ -74,32 +74,60 @@ $result = pg_query($conn, $query);
         <div class="category-header">
             <h1 class="category-title"><?php echo htmlspecialchars($row['titolo']); ?></h1>
             <p class="category-desc"><?php echo htmlspecialchars($row['descrizione']); ?></p>
-            <p style="color:#FFD94A; font-weight:bold; font-size:1.5em; margin-top:10px;">
-                A partire da € <?php echo $row['prezzo']; ?> / notte per coppia
-            </p>
             
-            <div style="margin: 25px 0;">
-                <label for="date_<?php echo $row['id']; ?>" style="color:#ccc; display:block; margin-bottom:8px; font-size: 1.1em;">
-                    Seleziona la data del check-in:
-                </label>
-                <input type="date" 
-                       id="date_<?php echo $row['id']; ?>" 
-                       style="padding: 10px; border-radius: 5px; border: none; font-size: 1em;"
-                       min="<?php echo date('Y-m-d'); ?>" 
-                       onchange="updateBookingLink(<?php echo $row['id']; ?>)">
-            </div>
-            
-            <a href="#" 
-               id="btn_prenota_<?php echo $row['id']; ?>"
-               data-baseurl="<?php echo $link_base; ?>"
-               class="btn-whatsapp-big"
-               onclick="return checkDateSelected(<?php echo $row['id']; ?>)">
-                Prenota <?php echo htmlspecialchars($row['titolo']); ?>
-            </a>
-            
-            <p id="error_msg_<?php echo $row['id']; ?>" style="color: #ff4444; display: none; margin-top: 10px; font-weight: bold;">
-                Per favore, seleziona una data prima di prenotare.
-            </p>
+            <?php 
+            // ==========================================
+            // CONTROLLO LOGIN: SE L'UTENTE È LOGGATO
+            // ==========================================
+            if (isset($_SESSION['user'])): 
+            ?>
+                <p style="color:#FFD94A; font-weight:bold; font-size:1.5em; margin-top:10px;">
+                    A partire da € <?php echo $row['prezzo']; ?> / notte per coppia
+                </p>
+                
+                <div style="margin: 25px 0;">
+                    <label for="date_<?php echo $row['id']; ?>" style="color:#ccc; display:block; margin-bottom:8px; font-size: 1.1em;">
+                        Seleziona la data del check-in:
+                    </label>
+                    <input type="date" 
+                           id="date_<?php echo $row['id']; ?>" 
+                           style="padding: 10px; border-radius: 5px; border: none; font-size: 1em;"
+                           min="<?php echo date('Y-m-d'); ?>" 
+                           onchange="updateBookingLink(<?php echo $row['id']; ?>)">
+                </div>
+                
+                <a href="#" 
+                   id="btn_prenota_<?php echo $row['id']; ?>"
+                   data-baseurl="<?php echo $link_base; ?>"
+                   class="btn-whatsapp-big"
+                   onclick="return checkDateSelected(<?php echo $row['id']; ?>)">
+                    Prenota <?php echo htmlspecialchars($row['titolo']); ?>
+                </a>
+                
+                <p id="error_msg_<?php echo $row['id']; ?>" style="color: #ff4444; display: none; margin-top: 10px; font-weight: bold;">
+                    Per favore, seleziona una data prima di prenotare.
+                </p>
+
+            <?php 
+            // ==========================================
+            // SE L'UTENTE NON È LOGGATO (VISITATORE)
+            // ==========================================
+            else: 
+            ?>
+                <p style="color:#FFD94A; font-weight:bold; font-size:1.5em; margin-top:10px;">
+                    Prezzo riservato agli iscritti
+                </p>
+                
+                <div style="margin: 25px 0;">
+                    <p style="color:#ccc; font-size: 1.1em; font-style: italic;">
+                        Registrati o accedi per visualizzare i dettagli completi, i prezzi e procedere con la prenotazione.
+                    </p>
+                </div>
+                
+                <a href="login_reg.php" class="btn-whatsapp-big">
+                    Accedi per Prenotare
+                </a>
+            <?php endif; ?>
         </div>
 
         <div class="grid-container">
@@ -161,6 +189,5 @@ $result = pg_query($conn, $query);
 
     <script src="js/camere.js"></script>
     
-
 </body>
 </html>
