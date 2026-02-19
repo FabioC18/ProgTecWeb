@@ -87,7 +87,9 @@ body {
     display: none;
 }
 
+
 /* Media Queries Header */
+
 @media (max-width: 1100px) {
     .header-menu li {
         display: inline-block;
@@ -214,7 +216,9 @@ input[type="date"] {
     margin-top: 1vh;
 }
 
+
 /* Effetto Hover e Focus */
+
 input[type="date"]:hover,
 input[type="date"]:focus {
     border-color: #ffffff;
@@ -250,7 +254,9 @@ input[type="date"]:focus {
     border-radius: 10px;
 }
 
+
 /* CARD CONTENITORE FOTO */
+
 .photo-card {
     flex: 0 0 auto !important;
     min-width: 600px !important;
@@ -268,7 +274,9 @@ input[type="date"]:focus {
     z-index: 1;
 }
 
+
 /* Effetto zoom su hover */
+
 .photo-card:hover {
     transform: scale(1.2);
     z-index: 999;

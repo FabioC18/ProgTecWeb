@@ -1,51 +1,79 @@
-/* --- 1. GESTIONE MENU HAMBURGER (Rimasto invariato) --- */
+/* --- 1. GESTIONE MENU HAMBURGER --- */
 const hamburger = document.querySelector('.hamb-menu');
 const body = document.body;
 
-hamburger.addEventListener("click", function() {
-    body.classList.toggle('menu-open');
-});
-
+if (hamburger) {
+    hamburger.addEventListener("click", function() {
+        body.classList.toggle('menu-open');
+    });
+}
 
 /* --- 2. FUNZIONI DI UTILITÀ --- */
-
-// Funzione per controllare se un elemento è visibile nello schermo
 function isElementVisible(el) {
     if (!el) return false;
     const rect = el.getBoundingClientRect();
     const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-
-    // L'elemento è visibile se la sua parte superiore è entrata nella finestra
-    // (Aggiungiamo un piccolo offset di 100px per non farlo scattare proprio al bordo)
-    return (rect.top <= windowHeight - 100 && rect.bottom >= 0);
+    return (rect.top <= windowHeight - 50 && rect.bottom >= 0);
 }
 
-
-/* --- 3. GESTIONE ANIMAZIONI FADE-IN (.watch) --- */
+/* --- 3. ANIMAZIONI FADE-IN (.watch) --- */
 const watchElements = document.querySelectorAll('.watch');
 
 function checkWatchElements() {
     watchElements.forEach(function(el) {
         if (isElementVisible(el)) {
             el.classList.add("in-page");
-        } else {
-            // Se vuoi che l'animazione si ripeta togliendo la classe quando esce:
-            el.classList.remove("in-page");
         }
     });
 }
 
+/* --- 4. GESTIONE CONTATORI (VERSIONE FORZATA) --- */
+function animateValue(el, start, end, duration) {
+    let startTimestamp = null;
+    const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        el.innerHTML = Math.floor(progress * (end - start) + start);
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        } else {
+            el.innerHTML = end;
+        }
+    };
+    window.requestAnimationFrame(step);
+}
 
+function handleCounters() {
+    const counters = document.querySelectorAll('.cont-client, .cont-year');
 
+    counters.forEach(el => {
+        if (isElementVisible(el) && !el.classList.contains('animated')) {
+            const target = parseInt(el.getAttribute('data-target'));
+            if (!isNaN(target)) {
+                el.classList.add('animated');
+                animateValue(el, 0, target, 2000);
+            }
+        }
+    });
+}
 
-/* --- 5. EVENTO SCROLL PRINCIPALE --- */
+/* --- 5. INIZIALIZZAZIONE E EVENTI --- */
 
-// Ascoltiamo l'evento scroll
-window.addEventListener('scroll', function() {
+// Funzione unica di controllo
+function runAllChecks() {
     checkWatchElements();
+    handleCounters();
+}
+
+// Avvio al caricamento
+window.addEventListener('DOMContentLoaded', () => {
+    // Reset preventivo dei contatori a 0
+    document.querySelectorAll('.cont-client, .cont-year').forEach(el => el.innerHTML = "0");
+    runAllChecks();
 });
 
-// Eseguiamo le funzioni anche al caricamento della pagina (nel caso fossimo già a metà pagina)
-window.addEventListener('load', function() {
-    checkWatchElements();
-});
+// Avvio allo scroll
+window.addEventListener('scroll', runAllChecks);
+
+// Avvio al caricamento completo (immagini/video)
+window.addEventListener('load', runAllChecks);

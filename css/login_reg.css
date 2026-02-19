@@ -1,4 +1,5 @@
 /* --- VARIABILI E RESET --- */
+
 :root {
     --primary-yellow: #FFD94A;
     --hover-yellow: #e6c242;
@@ -19,7 +20,8 @@
 }
 
 body {
-    background-color: var(--bg-dark) !important; /* Sovrascrive lo stile inline del PHP */
+    background-color: var(--bg-dark) !important;
+    /* Sovrascrive lo stile inline del PHP */
     color: var(--text-main);
     display: flex;
     flex-direction: column;
@@ -62,7 +64,8 @@ body {
     backdrop-filter: blur(10px);
     border-radius: 12px;
     padding: 40px;
-    margin-top: 100px; /* Distanza dall'alto */
+    margin-top: 100px;
+    /* Distanza dall'alto */
     width: 90%;
     max-width: 420px;
     position: relative;
@@ -104,7 +107,9 @@ body {
     font-weight: bold !important;
 }
 
+
 /* Barra gialla animata sotto il tab */
+
 .tab-active::after {
     content: '';
     position: absolute;
@@ -118,8 +123,12 @@ body {
 }
 
 @keyframes slideIn {
-    from { transform: scaleX(0); }
-    to { transform: scaleX(1); }
+    from {
+        transform: scaleX(0);
+    }
+    to {
+        transform: scaleX(1);
+    }
 }
 
 
@@ -158,12 +167,14 @@ input:focus {
     position: relative;
     width: 100%;
     /* Importante per far vedere il tooltip fuori dal box se necessario */
-    overflow: visible; 
+    overflow: visible;
 }
 
+
 /* Forza l'input password a occupare tutto lo spazio */
+
 .password-container input {
-    width: 100% !important; 
+    width: 100% !important;
 }
 
 .toggle-password {
@@ -182,11 +193,15 @@ input:focus {
     color: var(--primary-yellow);
 }
 
+
 /* Tooltip Requisiti */
+
 .tooltip-requirements {
-    display: none; /* Gestito da JS */
+    display: none;
+    /* Gestito da JS */
     position: absolute;
-    bottom: 110%; /* Appare SOPRA l'input */
+    bottom: 110%;
+    /* Appare SOPRA l'input */
     left: 0;
     background: #2a2a2a;
     border: 1px solid var(--primary-yellow);
@@ -199,7 +214,9 @@ input:focus {
     z-index: 10;
 }
 
+
 /* Freccetta del tooltip */
+
 .tooltip-requirements::after {
     content: '';
     position: absolute;
@@ -251,7 +268,9 @@ input:focus {
 
 /* --- MESSAGGI DI ERRORE --- */
 
+
 /* Targettiamo il paragrafo che contiene l'errore PHP */
+
 p[style*="color: red"] {
     color: #ff5f5f !important;
     text-align: center;
