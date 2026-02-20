@@ -1,7 +1,11 @@
+/* =========================================
+   1. RESET E IMPOSTAZIONI GLOBALI
+========================================= */
+
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 html {
@@ -9,43 +13,47 @@ html {
 }
 
 body {
+    margin: 0;
+    padding-top: 40px;
     background-color: #1d1d1f;
     color: white;
     font-family: 'Helvetica Neue', sans-serif;
-    padding-top: 40px;
-    margin: 0;
 }
 
 
-/* --- HEADER --- */
+/* =========================================
+   2. HEADER
+========================================= */
 
 header {
     position: fixed;
-    height: 50px;
     top: 0;
     left: 0;
     z-index: 9999;
     width: 100%;
+    height: 50px;
     background-color: rgba(29, 29, 31, 0.95);
-    backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255, 217, 74, 0.2);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
 }
 
 .header-content {
-    max-width: 1200px;
-    width: 100%;
-    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
     padding-top: 13px;
-    padding-left: 20px;
     padding-right: 20px;
+    padding-left: 20px;
 }
 
 
-/* --- LAYOUT PROFILO --- */
+/* =========================================
+   3. LAYOUT PROFILO E BOX
+========================================= */
 
 .container {
     max-width: 900px;
@@ -59,36 +67,32 @@ header {
     gap: 40px;
 }
 
-@media (max-width: 768px) {
-    .profile-grid {
-        grid-template-columns: 1fr;
-    }
+
+/* Accorpamento classi box quasi identiche */
+
+.box,
+.box1 {
+    padding: 25px 40px 25px 25px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid #333;
+    border-radius: 10px;
 }
 
 .box1 {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 25px 40px 25px 25px;
-    border-radius: 10px;
-    border: 1px solid #333;
     height: fit-content;
 }
 
-.box {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 25px 40px 25px 25px;
-    border-radius: 10px;
-    border: 1px solid #333;
-}
-
 h2 {
+    margin-top: 0;
+    padding-bottom: 10px;
     color: #FFD94A;
     border-bottom: 1px solid #444;
-    padding-bottom: 10px;
-    margin-top: 0;
 }
 
 
-/* --- FORM ELEMENTI --- */
+/* =========================================
+   4. FORM, INPUT E TOOLTIP
+========================================= */
 
 label {
     display: block;
@@ -99,26 +103,28 @@ label {
 input[type="text"],
 input[type="password"] {
     width: 100%;
-    padding: 10px;
     margin-top: 5px;
+    padding: 10px;
     background: #222;
-    border: 1px solid #444;
     color: white;
+    border: 1px solid #444;
     border-radius: 5px;
 }
 
 .password-container {
-    position: relative;
+    display: flex;
+    /* aggiunto per il justify-content */
     justify-content: center;
+    position: relative;
 }
 
 .toggle-password {
     position: absolute;
-    right: 10px;
     top: 1vh;
-    cursor: pointer;
-    color: #ccc;
+    right: 10px;
     z-index: 10;
+    color: #ccc;
+    cursor: pointer;
 }
 
 .toggle-password img {
@@ -127,12 +133,44 @@ input[type="password"] {
 }
 
 
-/* --- TABELLA PRENOTAZIONI --- */
+/* Tooltip Requisiti Password */
+
+.tooltip-requirements {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+    margin-top: 5px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.95);
+    color: #fff;
+    font-size: 0.85em;
+    border: 1px solid #FFD94A;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.tooltip-requirements ul {
+    margin: 0;
+    padding-left: 20px;
+    list-style-type: circle;
+}
+
+.tooltip-requirements li {
+    margin-bottom: 3px;
+}
+
+
+/* =========================================
+   5. TABELLA PRENOTAZIONI
+========================================= */
 
 table {
     width: 100%;
-    border-collapse: collapse;
     margin-top: 20px;
+    border-collapse: collapse;
 }
 
 th,
@@ -151,41 +189,24 @@ tr:hover {
 }
 
 
-/* --- MESSAGGI FEEDBACK --- */
-
-.success {
-    color: #4BB543;
-    background: rgba(75, 181, 67, 0.2);
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 15px;
-}
-
-.error {
-    color: #ff4d4d;
-    background: rgba(255, 77, 77, 0.2);
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 15px;
-}
-
-
-/* --- BOTTONI --- */
+/* =========================================
+   6. BOTTONI E MESSAGGI FEEDBACK
+========================================= */
 
 .btn-save {
+    display: inline-block;
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px 20px;
     background-color: #FFD94A;
     color: black;
-    border: none;
-    padding: 12px 20px;
     font-weight: bold;
-    cursor: pointer;
-    margin-top: 20px;
-    width: 100%;
-    border-radius: 5px;
-    transition: opacity 0.3s;
-    text-decoration: none;
-    display: inline-block;
     text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: opacity 0.3s;
 }
 
 .btn-save:disabled {
@@ -195,87 +216,82 @@ tr:hover {
 }
 
 
-/* --- TOOLTIP REQUISITI PASSWORD --- */
+/* Accorpamento stili base messaggi */
 
-.tooltip-requirements {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.95);
-    color: #fff;
+.success,
+.error {
+    margin-bottom: 15px;
     padding: 10px;
     border-radius: 5px;
-    font-size: 0.85em;
-    margin-top: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    border: 1px solid #FFD94A;
-    z-index: 100;
 }
 
-.tooltip-requirements ul {
-    margin: 0;
-    padding-left: 20px;
-    list-style-type: circle;
+.success {
+    background: rgba(75, 181, 67, 0.2);
+    color: #4BB543;
 }
 
-.tooltip-requirements li {
-    margin-bottom: 3px;
+.error {
+    background: rgba(255, 77, 77, 0.2);
+    color: #ff4d4d;
 }
 
 
-/* --- MAPPA LEAFLET --- */
+/* =========================================
+   7. MAPPA LEAFLET
+========================================= */
 
 #map {
-    height: 400px;
-    width: 100%;
-    margin-top: 20px;
-    border-radius: 10px;
-    border: 1px solid #444;
     display: none;
+    width: 100%;
+    height: 400px;
+    margin-top: 20px;
+    border: 1px solid #444;
+    border-radius: 10px;
 }
 
 
-/* --- FOOTER --- */
+/* =========================================
+   8. FOOTER
+========================================= */
 
 footer {
-    position: relative;
-    font-family: 'Helvetica Neue', sans-serif;
-    z-index: 9999;
-    background-color: #121212;
-    padding: 3.1vh 1vw;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 15%;
-    justify-items: center;
     align-items: start;
-    border-top: 4px solid #8B1E1E;
-    color: #cccccc;
+    justify-items: center;
+    position: relative;
+    z-index: 9999;
     width: 100%;
     margin-top: 40px;
+    padding: 3.1vh 1vw;
+    background-color: #121212;
+    color: #cccccc;
+    font-family: 'Helvetica Neue', sans-serif;
+    border-top: 4px solid #8B1E1E;
 }
 
 footer h1 {
-    font-family: 'Georgia', serif;
-    color: #F5F5F5;
-    font-size: 1.5rem;
-    margin-bottom: 1vh;
-    border-bottom: 1px solid #2F86C1;
     display: inline-block;
+    margin-bottom: 1vh;
     padding-bottom: 0.52vh;
+    color: #F5F5F5;
+    font-family: 'Georgia', serif;
+    font-size: 1.5rem;
+    border-bottom: 1px solid #2F86C1;
 }
 
-footer h2,
-.info h2,
-.contatti h2 {
+
+/* Ottimizzazione selettore h2 */
+
+footer h2 {
+    padding-bottom: 0;
+    color: #aaaaaa;
     font-size: 0.9rem;
     font-weight: 400;
     line-height: 2;
-    color: #aaaaaa;
     border-bottom: none;
     /* FIX: Annulla la linea globale h2 */
-    padding-bottom: 0;
 }
 
 .social .ig,
@@ -285,37 +301,51 @@ footer h2,
     width: 2.1vw;
     /* Dimensione perfetta per la colonna */
     margin: 0 0.78vw;
+    color: #F5F5F5;
     cursor: pointer;
     transition: all 0.3s ease;
-    color: #F5F5F5;
-}
-
-@media (max-width: 768px) {
-    .social .ig,
-    .social .fb,
-    .social .tk {
-        width: 30px;
-        /* Misura di sicurezza per mobile */
-    }
 }
 
 .social .ig:hover,
 .social .fb:hover,
 .social .tk:hover {
-    transform: translateY(-5px);
     color: #FFD94A;
+    transform: translateY(-5px);
 }
+
+
+/* =========================================
+   9. MEDIA QUERIES (RESPONSIVE)
+========================================= */
+
+
+/* --- TABLET E SCHERMI MEDI --- */
 
 @media (max-width: 900px) {
     footer {
         grid-template-columns: 1fr;
         gap: 40px;
-        text-align: center;
         padding: 40px 20px;
+        text-align: center;
     }
     .info,
     .contatti,
     .social {
         text-align: center;
+    }
+}
+
+
+/* --- MOBILE E SMARTPHONE --- */
+
+@media (max-width: 768px) {
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
+    .social .ig,
+    .social .fb,
+    .social .tk {
+        width: 30px;
+        /* Misura di sicurezza per mobile */
     }
 }

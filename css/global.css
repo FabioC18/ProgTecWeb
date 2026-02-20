@@ -1,5 +1,5 @@
 /* =========================================
-   GLOBAL CSS: RESET, HEADER E FOOTER
+   1. GLOBAL CSS: RESET E BODY
 ========================================= */
 
 * {
@@ -9,14 +9,16 @@
 }
 
 body {
-    background-color: #3a0707ff;
-    margin: 0;
+    background-color: #3a0707;
+    /* Pulito l'esadecimale */
     font-family: 'Helvetica Neue', sans-serif;
     overflow-x: hidden;
 }
 
 
-/* --- HEADER --- */
+/* =========================================
+   2. HEADER
+========================================= */
 
 .header {
     position: fixed;
@@ -31,12 +33,12 @@ body {
 }
 
 .header-content {
-    max-width: 62.5vw;
-    width: 100%;
-    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    max-width: 62.5vw;
+    margin: 0 auto;
 }
 
 .header-menu {
@@ -58,20 +60,20 @@ body {
 }
 
 .header-menu li a {
-    color: #f7f7f7;
     display: inline;
-    text-decoration: none;
-    font-size: 0.73vw;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: 500;
+    color: #f7f7f7;
     font-family: 'Helvetica Neue', sans-serif;
+    font-size: 0.73vw;
+    font-weight: 500;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 2px;
     transition: transform 0.3s ease;
 }
 
 .header-menu li a:hover {
-    transform: scale(1.2);
     color: #FFD94A;
+    transform: scale(1.2);
 }
 
 .icon-big {
@@ -80,7 +82,7 @@ body {
     justify-content: center;
     min-width: 2.5vw;
     min-height: 2.5vh;
-    margin-left: 0px;
+    margin-left: 0;
     margin-right: 3.2vw;
     padding-top: 0.52vh;
     cursor: pointer;
@@ -96,167 +98,43 @@ body {
 }
 
 
-/* MEDIA QUERIES HEADER */
-
-@media (max-width: 1100px) {
-    /* Menu */
-    .header-menu li {
-        display: inline-block;
-        margin-right: 50px;
-        transition: transform 0.3s ease;
-    }
-    .header-menu li:hover {
-        transform: scale(1.2);
-    }
-    /* 1. Reset totale margini per eliminare il buco tra i pannelli */
-    .panel,
-    .panel2,
-    .panel3 {
-        min-height: 0 !important;
-        margin-bottom: 0 !important;
-        /* Rimuove lo spazio vuoto tra Panel 1 e Panel 2 */
-        padding-bottom: 0 !important;
-        top: 0 !important;
-        /* Li tiene allineati correttamente */
-    }
-    /* 2. Altezza precisa: 56.25vw corrisponde esattamente al rapporto 16:9 delle foto.
-          Così il pannello finisce esattamente dove finisce l'immagine. */
-    .panel {
-        height: 57vw !important;
-    }
-    .panel2 {
-        height: 57vw !important;
-    }
-    .panel3 {
-        height: 57vw !important;
-    }
-    /* 3. Centra i testi sopra le immagini */
-    .panel .testo1 {
-        color: #f5f5f5;
-        text-align: left;
-        max-width: 40%;
-        margin-left: 15%;
-    }
-    .panel .testo2 {
-        color: #f5f5f5;
-        text-align: left;
-        max-width: 40%;
-        margin-left: 15%;
-    }
-    .panel2 .testo1 {
-        color: #f5f5f5;
-        text-align: left;
-        max-width: 40%;
-        margin-left: 15%;
-    }
-    .panel2 .testo2 {
-        color: #f5f5f5;
-        text-align: left;
-        max-width: 40%;
-        margin-left: 15%;
-    }
-    .panel3 .testo1 {
-        color: #f5f5f5;
-        text-align: right;
-        max-width: 30%;
-        margin-left: 0%;
-    }
-    .panel3 .testo2 {
-        color: #f5f5f5;
-        text-align: right;
-        max-width: 30%;
-        margin-left: 0%;
-    }
-}
-
-@media (max-width: 768px) {
-    .header {
-        height: 60px;
-    }
-    /* Nasconde il menu desktop e mostra l'hamburger */
-    .header-menu {
-        position: fixed;
-        top: 60px;
-        left: 0;
-        background-color: #1d1d1f;
-        width: 100%;
-        flex-direction: column;
-        gap: 0;
-        padding: 0;
-        border-bottom: 2px solid #FFD94A;
-        /* La linea gialla che volevi mantenere */
-        /* FIX APPLICATO QUI: Usiamo -200% per farlo salire di più e lo rendiamo invisibile finché l'hamburger è chiuso */
-        transform: translateY(-200%);
-        opacity: 0;
-        visibility: hidden;
-        transition: transform 0.4s ease, opacity 0.4s ease, visibility 0.4s ease;
-        z-index: 9998;
-    }
-    /* Classe aggiunta con JS per mostrare il menu */
-    .menu-open .header-menu {
-        transform: translateY(0);
-        opacity: 1;
-        visibility: visible;
-    }
-    .header-menu li {
-        width: 100%;
-        text-align: center;
-    }
-    .header-menu li a {
-        display: block;
-        padding: 10px 5px;
-        font-size: 0.6rem;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    /* Rimuove la riga grigiastra sotto l'ultima voce per farla combaciare perfettamente con la linea gialla */
-    .header-menu li:last-child a {
-        border-bottom: none;
-    }
-    .hamb-menu {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        z-index: 9999;
-    }
-}
-
-
-/* --- FOOTER --- */
+/* =========================================
+   3. FOOTER
+========================================= */
 
 footer {
     position: relative;
-    font-family: 'Helvetica Neue', sans-serif;
     z-index: 10;
-    background-color: #121212;
-    padding: 3.1vh 1vw;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 15%;
-    justify-items: center;
     align-items: start;
+    justify-items: center;
+    width: 100%;
+    padding: 3.1vh 1vw;
+    background-color: #121212;
     border-top: 4px solid #8B1E1E;
     color: #cccccc;
-    width: 100%;
+    font-family: 'Helvetica Neue', sans-serif;
 }
 
 footer h1 {
-    font-family: 'Georgia', serif;
+    display: inline-block;
     color: #F5F5F5;
+    font-family: 'Georgia', serif;
     font-size: 1.5rem;
     margin-bottom: 1vh;
-    border-bottom: 1px solid #2F86C1;
-    display: inline-block;
     padding-bottom: 0.52vh;
+    border-bottom: 1px solid #2F86C1;
 }
 
 footer h2,
 .info h2,
 .contatti h2 {
+    color: #aaaaaa;
     font-size: 0.9rem;
     font-weight: 400;
     line-height: 2;
-    color: #aaaaaa;
 }
 
 .social .ig,
@@ -265,37 +143,134 @@ footer h2,
     display: inline-block;
     width: 2.1vw;
     margin: 0 0.78vw;
+    color: #F5F5F5;
     cursor: pointer;
     transition: all 0.3s ease;
-    color: #F5F5F5;
-}
-
-@media (max-width: 768px) {
-    .social .ig,
-    .social .fb,
-    .social .tk {
-        width: 30px;
-        /* Misura di sicurezza per mobile */
-    }
 }
 
 .social .ig:hover,
 .social .fb:hover,
 .social .tk:hover {
-    transform: translateY(-5px);
     color: #FFD94A;
+    transform: translateY(-5px);
 }
+
+
+/* =========================================
+   4. MEDIA QUERIES (RESPONSIVE)
+========================================= */
+
+
+/* --- SCHERMI MEDI (Tablet Orizzontale / Laptop) --- */
+
+@media (max-width: 1100px) {
+    .header-menu li {
+        margin-right: 50px;
+    }
+    /* Reset totale margini per eliminare il buco e altezza 16:9 precisa */
+    .panel,
+    .panel2,
+    .panel3 {
+        top: 0 !important;
+        min-height: 0 !important;
+        height: 57vw !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+    }
+    /* Accorpamento massivo: Centra i testi sopra le immagini per i pannelli 1 e 2 */
+    .panel .testo1,
+    .panel .testo2,
+    .panel2 .testo1,
+    .panel2 .testo2 {
+        max-width: 40%;
+        margin-left: 15%;
+        color: #f5f5f5;
+        text-align: left;
+    }
+    /* Accorpamento: Testi Pannello 3 */
+    .panel3 .testo1,
+    .panel3 .testo2 {
+        max-width: 30%;
+        margin-left: 0;
+        color: #f5f5f5;
+        text-align: right;
+    }
+}
+
+
+/* --- TABLET VERTICALE --- */
 
 @media (max-width: 900px) {
     footer {
         grid-template-columns: 1fr;
         gap: 40px;
-        text-align: center;
         padding: 40px 20px;
+        text-align: center;
     }
     .info,
     .contatti,
     .social {
         text-align: center;
+    }
+}
+
+
+/* --- MOBILE E SMARTPHONE --- */
+
+@media (max-width: 768px) {
+    /* Header Mobile */
+    .header {
+        height: 60px;
+    }
+    /* Menu Hamburger Desktop Hidden -> Mobile Visible */
+    .hamb-menu {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 9999;
+    }
+    /* Menu a tendina */
+    .header-menu {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        z-index: 9998;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: 0;
+        background-color: #1d1d1f;
+        border-bottom: 2px solid #FFD94A;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-200%);
+        transition: transform 0.4s ease, opacity 0.4s ease, visibility 0.4s ease;
+    }
+    .menu-open .header-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    .header-menu li {
+        width: 100%;
+        text-align: center;
+        margin-right: 0;
+        /* Annulla il margine destro del desktop */
+    }
+    .header-menu li a {
+        display: block;
+        padding: 10px 5px;
+        font-size: 0.6rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .header-menu li:last-child a {
+        border-bottom: none;
+    }
+    /* Footer Social Mobile (Unito al blocco 768px) */
+    .social .ig,
+    .social .fb,
+    .social .tk {
+        width: 30px;
     }
 }
