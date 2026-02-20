@@ -17,7 +17,7 @@ INSERT INTO camere (titolo, descrizione, prezzo, galleria) VALUES
 ),
 (
     'AREA DELUXE', 
-    'Vivi l'esperienza Deluxe con vasca privata in camera, zona living per cene romantiche e cromoterapia.', 
+    'Vivi la casa vacanza Deluxe con vasca privata in camera, zona living per cene romantiche e cromoterapia.', 
     100.00, 
     's5.jpeg,s6.jpeg,s7.jpeg,s8.jpeg'
 );
