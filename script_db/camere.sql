@@ -10,14 +10,14 @@ ALTER TABLE camere OWNER TO www;
 
 INSERT INTO camere (titolo, descrizione, prezzo, galleria) VALUES 
 (
-    'AREA SUITE', 
+    'SUITE', 
     'Scopri la nostra Suite esclusiva con vasca idromassaggio, sauna e cucina moderna. Il massimo del relax', 
     150.00, 
-    's1.jpeg,s2.jpeg,s3.jpeg,s4.jpeg'
+    's1.jpeg,s2.jpeg,s3.jpeg,s4.jpeg,s5.jpeg,s6.jpeg,s7.jpeg,s8.jpeg'
 ),
 (
-    'AREA DELUXE', 
-    'Vivi la casa vacanza Deluxe con vasca privata in camera, zona living per cene romantiche e cromoterapia.', 
+    'DELUXE', 
+    'Vivi la tua esperienza Deluxe con vasca privata in camera, zona living per cene romantiche e cromoterapia.', 
     100.00, 
-    's5.jpeg,s6.jpeg,s7.jpeg,s8.jpeg'
+    's9.jpeg,s10.jpeg,s11.jpeg,s12.jpeg,s13.jpeg,s14.jpeg,s15.jpeg,s16.jpeg'
 );
