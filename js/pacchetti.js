@@ -21,7 +21,12 @@ function scorriA(idElemento) {
             behavior: 'smooth',
             block: 'nearest',
             inline: 'center'
-
         });
     }
 }
+
+window.addEventListener('pageshow', function(event) {
+    if (event.persisted) {
+        window.location.reload();
+    }
+});
