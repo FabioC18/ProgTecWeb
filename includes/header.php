@@ -22,7 +22,7 @@
             <li><a href="pacchetti.php">Pacchetti</a></li>
             <?php if (isset($_SESSION['user'])): ?>
                 <li><a class="name" href="profilo.php">Ciao, <?php echo htmlspecialchars($_SESSION['user']); ?></a></li>
-                <li class="menu-item-session"><a href="logout.php">Logout</a></li>
+                <li class="menu-item-session"><a href="logout.php" onclick="return confirm('Sei sicuro di voler uscire?');">Logout</a></li>
             <?php else: ?>
                 <li><a href="login_reg.php">Login / Registrati</a></li>
             <?php endif; ?>

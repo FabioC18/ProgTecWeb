@@ -181,18 +181,22 @@ body {
         background-color: #1d1d1f;
         width: 100%;
         flex-direction: column;
-        /* Menu verticale */
         gap: 0;
         padding: 0;
-        /* <--- FIX: Rimosso lo spazio vuoto sopra e sotto il menu */
         border-bottom: 2px solid #FFD94A;
-        transform: translateY(-150%);
-        transition: transform 0.4s ease;
+        /* La linea gialla che volevi mantenere */
+        /* FIX APPLICATO QUI: Usiamo -200% per farlo salire di più e lo rendiamo invisibile finché l'hamburger è chiuso */
+        transform: translateY(-200%);
+        opacity: 0;
+        visibility: hidden;
+        transition: transform 0.4s ease, opacity 0.4s ease, visibility 0.4s ease;
         z-index: 9998;
     }
     /* Classe aggiunta con JS per mostrare il menu */
     .menu-open .header-menu {
         transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
     }
     .header-menu li {
         width: 100%;
@@ -201,11 +205,10 @@ body {
     .header-menu li a {
         display: block;
         padding: 10px 5px;
-        /* Aumentato il padding interno per mantenere un bel respiro tra le voci */
         font-size: 0.6rem;
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
-    /* FIX: Rimuove la riga grigiastra sotto l'ultima voce (Logout) per farla combaciare perfettamente con la linea gialla */
+    /* Rimuove la riga grigiastra sotto l'ultima voce per farla combaciare perfettamente con la linea gialla */
     .header-menu li:last-child a {
         border-bottom: none;
     }
