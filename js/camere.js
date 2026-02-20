@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
     dateInputs.forEach(input => {
         input.addEventListener('change', function() {
             // Trova il contenitore genitore (category-header)
-            const parentDiv = this.closest('.category-header');
+            const parentDiv = document.getElementById("category-header").parentNode;
 
             // Trova il bottone di prenotazione dentro questo contenitore
             const btn = parentDiv.querySelector('.link-prenotazione');

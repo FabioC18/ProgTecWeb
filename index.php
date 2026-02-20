@@ -84,9 +84,9 @@ $res = pg_query($conn, $sql);
         <div class="cont1">
             <h1>DOVE LA TRADIZIONE INCONTRA L'ELEGANZA</h1>
             <div class="client">Clienti soddisfatti</div>
-            <div class="cont-client watch" data-target="6500">0</div>
+            <div class="cont-client watch" >6500</div>
             <div class="client">dal</div>
-            <div class="cont-year watch" data-target="2008">0</div>
+            <div class="cont-year watch">2008</div>
         </div>
     </div>
 

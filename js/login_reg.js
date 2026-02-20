@@ -1,3 +1,7 @@
+/* ==========================================
+   1. VARIABILI E COSTANTI DOM
+   ========================================== */
+
 const userIn = document.getElementById('username');
 const emailIn = document.getElementById('email');
 const passIn = document.getElementById('pass');
@@ -13,11 +17,10 @@ const errorMsg = document.getElementById('error-msg');
 
 let currentMode = 'register';
 
-passIn.addEventListener('mouseover', showTooltip);
-passIn.addEventListener('mouseenter', showTooltip);
-passIn.addEventListener('mouseleave', hideTooltip);
-passIn.addEventListener('focus', showTooltip);
-passIn.addEventListener('blur', hideTooltip);
+
+/* ==========================================
+   2. FUNZIONI DI GESTIONE INTERFACCIA (UI)
+   ========================================== */
 
 function showTooltip() {
     if (currentMode === 'register') {
@@ -51,6 +54,8 @@ function switchMode(mode, isExplicitClick = false) {
         btn.value = 'Crea Account';
         passIn.placeholder = 'Password';
     }
+
+    // Ricontrolla gli input ogni volta che si cambia tab
     checkInputs();
 }
 
@@ -65,6 +70,11 @@ function togglePassword() {
         iconEye.hidden = true;
     }
 }
+
+
+/* ==========================================
+   3. FUNZIONI DI VALIDAZIONE
+   ========================================== */
 
 function checkInputs() {
     const passValue = passIn.value;
@@ -92,6 +102,24 @@ function checkInputs() {
     }
 }
 
+
+/* ==========================================
+   4. INIZIALIZZAZIONE E ASSEGNAZIONE EVENTI
+   ========================================== */
+
+// Eventi per il Tooltip della Password
+passIn.addEventListener('mouseover', showTooltip);
+passIn.addEventListener('mouseenter', showTooltip);
+passIn.addEventListener('mouseleave', hideTooltip);
+passIn.addEventListener('focus', showTooltip);
+passIn.addEventListener('blur', hideTooltip);
+
+// Eventi per la validazione in tempo reale degli Input
+userIn.addEventListener('input', checkInputs);
+emailIn.addEventListener('input', checkInputs);
+passIn.addEventListener('input', checkInputs);
+
+// Inizializzazione al caricamento della pagina
 window.addEventListener('load', () => {
     const savedAction = actionInput.value;
     if (savedAction === 'login') {
@@ -101,8 +129,5 @@ window.addEventListener('load', () => {
     }
 });
 
-userIn.addEventListener('input', checkInputs);
-emailIn.addEventListener('input', checkInputs);
-passIn.addEventListener('input', checkInputs);
-
+// Primo controllo di validazione all'avvio dello script
 checkInputs();

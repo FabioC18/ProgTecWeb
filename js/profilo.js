@@ -1,3 +1,7 @@
+/* ==========================================
+   1. VARIABILI E COSTANTI DOM
+   ========================================== */
+
 const userIn = document.getElementById('username');
 const emailIn = document.getElementById('email');
 const passIn = document.getElementById('pass');
@@ -5,6 +9,13 @@ const btn = document.getElementById('btn-submit');
 const tooltip = document.getElementById('password-tooltip');
 const iconSlash = document.getElementById('icon-slash');
 const iconEye = document.getElementById('icon-eye');
+
+let map = null;
+
+
+/* ==========================================
+   2. FUNZIONI DI GESTIONE INTERFACCIA (UI)
+   ========================================== */
 
 // GESTIONE TOOLTIP PASSWORD (SOTTO)
 function showTooltip() {
@@ -15,24 +26,22 @@ function hideTooltip() {
     tooltip.style.display = 'none';
 }
 
-passIn.addEventListener('mouseenter', showTooltip);
-passIn.addEventListener('mouseleave', hideTooltip);
-passIn.addEventListener('focus', showTooltip);
-passIn.addEventListener('blur', hideTooltip);
-
-
 function togglePassword() {
     if (passIn.type === "password") {
         passIn.type = "text";
         iconSlash.hidden = true;
         iconEye.hidden = false;
-
     } else {
         passIn.type = "password";
         iconSlash.hidden = false;
         iconEye.hidden = true;
     }
 }
+
+
+/* ==========================================
+   3. FUNZIONI DI VALIDAZIONE
+   ========================================== */
 
 function checkInputs() {
     const passValue = passIn.value;
@@ -57,13 +66,10 @@ function checkInputs() {
     }
 }
 
-userIn.addEventListener('input', checkInputs);
-emailIn.addEventListener('input', checkInputs);
-passIn.addEventListener('input', checkInputs);
 
-checkInputs();
-
-let map = null;
+/* ==========================================
+   4. MAPPA E GEOLOCALIZZAZIONE
+   ========================================== */
 
 function getLocation() {
     const mapContainer = document.getElementById("map");
@@ -114,6 +120,25 @@ function getLocation() {
             const deluxe = L.marker([40.67891, 14.75808]).addTo(map).bindPopup("<b>Deluxe!</b>").openPopup();
             const marker = L.marker([lat, lon]).addTo(map).bindPopup("<b>Sei qui!</b>").openPopup();
         },
-        showError // <--- ECCO IL COLLEGAMENTO MANCANTE!
+        showError 
     );
 }
+
+
+/* ==========================================
+   5. ASSEGNAZIONE EVENTI E INIZIALIZZAZIONE
+   ========================================== */
+
+// Eventi Tooltip Password
+passIn.addEventListener('mouseenter', showTooltip);
+passIn.addEventListener('mouseleave', hideTooltip);
+passIn.addEventListener('focus', showTooltip);
+passIn.addEventListener('blur', hideTooltip);
+
+// Eventi Validazione Input in tempo reale
+userIn.addEventListener('input', checkInputs);
+emailIn.addEventListener('input', checkInputs);
+passIn.addEventListener('input', checkInputs);
+
+// Avvio iniziale del controllo per impostare lo stato del bottone
+checkInputs();

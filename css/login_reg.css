@@ -1,4 +1,6 @@
-/* --- VARIABILI E RESET --- */
+/* =========================================
+   1. VARIABILI E RESET GLOBALI
+========================================= */
 
 :root {
     --primary-yellow: #FFD94A;
@@ -20,24 +22,26 @@
 }
 
 body {
-    background-color: var(--bg-dark) !important;
-    /* Sovrascrive lo stile inline del PHP */
-    color: var(--text-main);
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
+    background-color: var(--bg-dark) !important;
+    /* Sovrascrive lo stile inline del PHP */
+    color: var(--text-main);
 }
 
 
-/* --- HEADER --- */
+/* =========================================
+   2. HEADER
+========================================= */
 
 .header {
-    width: 100%;
-    padding: 20px;
     position: absolute;
     top: 0;
     left: 0;
+    width: 100%;
+    padding: 20px;
 }
 
 .header-content {
@@ -55,46 +59,50 @@ body {
 }
 
 
-/* --- PANNELLO PRINCIPALE (LOGIN/REG) --- */
+/* =========================================
+   3. PANNELLO PRINCIPALE (LOGIN/REG)
+========================================= */
 
 .panel {
-    background: var(--bg-card);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
-    border-radius: 12px;
-    padding: 30px;
-    margin-top: 100px;
-    /* Distanza dall'alto */
+    position: relative;
     width: 90%;
     max-width: 420px;
-    position: relative;
+    margin-top: 100px;
+    /* Distanza dall'alto */
+    padding: 30px;
+    background: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
 }
 
 
-/* --- TAB SWITCH (Google Style) --- */
+/* =========================================
+   4. TAB SWITCH (Google Style)
+========================================= */
 
 .tab-switch {
     display: flex;
-    width: 100%;
-    border-bottom: 2px solid #333;
-    margin-bottom: 30px;
     position: relative;
+    width: 100%;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #333;
 }
 
 .tab-switch span {
+    position: relative;
     flex: 1;
-    text-align: center;
     padding: 15px 0;
-    cursor: pointer;
+    background: transparent;
+    color: #888;
     font-size: 1rem;
     font-weight: 500;
-    color: #888;
-    position: relative;
-    transition: all 0.3s ease;
+    text-align: center;
     text-transform: uppercase;
     letter-spacing: 1px;
-    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .tab-switch span:hover {
@@ -132,61 +140,60 @@ body {
 }
 
 
-/* --- FORM ELEMENTI --- */
+/* =========================================
+   5. FORM E INPUT
+========================================= */
 
 form label {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    margin-bottom: 5px;
     display: block;
+    margin-bottom: 5px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
     font-weight: 500;
 }
 
-input {
-    background-color: var(--input-bg);
-    border: 1px solid transparent;
-    border-radius: var(--border-radius);
+input,
+.password-container input {
+    width: 100%;
     padding: 12px 15px;
+    background-color: var(--input-bg);
     color: white;
     font-size: 1rem;
+    border: 1px solid transparent;
+    border-radius: var(--border-radius);
     outline: none;
-    transition: all var(--transition-speed);
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all var(--transition-speed);
 }
 
 input:focus {
-    border-color: var(--primary-yellow);
     background-color: #333;
+    border-color: var(--primary-yellow);
     box-shadow: 0 0 8px rgba(255, 217, 74, 0.2);
 }
 
 
-/* --- PASSWORD CONTAINER & TOOLTIP --- */
+/* =========================================
+   6. PASSWORD E TOOLTIP REQUISITI
+========================================= */
 
 .password-container {
     position: relative;
     width: 100%;
-    /* Importante per far vedere il tooltip fuori dal box se necessario */
     overflow: visible;
-}
-
-
-/* Forza l'input password a occupare tutto lo spazio */
-
-.password-container input {
-    width: 100% !important;
+    /* Importante per far vedere il tooltip fuori dal box */
 }
 
 .toggle-password {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: var(--text-muted);
-    transition: color var(--transition-speed);
     display: flex;
     align-items: center;
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transform: translateY(-50%);
+    transition: color var(--transition-speed);
 }
 
 .toggle-password:hover {
@@ -203,15 +210,15 @@ input:focus {
     bottom: 110%;
     /* Appare SOPRA l'input */
     left: 0;
-    background: #2a2a2a;
-    border: 1px solid var(--primary-yellow);
-    padding: 15px;
-    border-radius: var(--border-radius);
-    width: 100%;
-    font-size: 0.85rem;
-    color: #ddd;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     z-index: 10;
+    width: 100%;
+    padding: 15px;
+    background: #2a2a2a;
+    color: #ddd;
+    font-size: 0.85rem;
+    border: 1px solid var(--primary-yellow);
+    border-radius: var(--border-radius);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
 }
 
 
@@ -222,14 +229,14 @@ input:focus {
     position: absolute;
     top: 100%;
     left: 20px;
-    border-width: 6px;
-    border-style: solid;
-    border-color: var(--primary-yellow) transparent transparent transparent;
+    border: solid transparent;
+    border-width: 6px 6px 0;
+    border-top-color: var(--primary-yellow);
 }
 
 .tooltip-requirements ul {
-    padding-left: 20px;
     margin-top: 5px;
+    padding-left: 20px;
 }
 
 .tooltip-requirements li {
@@ -237,44 +244,44 @@ input:focus {
 }
 
 
-/* --- BOTTONE SUBMIT --- */
+/* =========================================
+   7. BOTTONI E MESSAGGI DI ERRORE
+========================================= */
 
 #btn-submit {
+    width: 100%;
+    margin-top: 20px;
     background-color: var(--primary-yellow);
     color: #111;
+    font-size: 1rem;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 1px;
     border: none;
     border-radius: var(--border-radius);
-    width: 100%;
-    margin-top: 20px;
     transition: all var(--transition-speed);
 }
 
 #btn-submit:hover:not(:disabled) {
     background-color: var(--hover-yellow);
-    box-shadow: 0 0 15px rgba(255, 217, 74, 0.4);
     transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(255, 217, 74, 0.4);
 }
 
 #btn-submit:disabled {
     background-color: #444;
     color: #777;
-    cursor: not-allowed;
     opacity: 0.6;
+    cursor: not-allowed;
 }
-
-
-/* --- MESSAGGI DI ERRORE --- */
 
 
 /* Targettiamo il paragrafo che contiene l'errore PHP */
 
 p[style*="color: red"] {
-    color: #ff5f5f !important;
-    text-align: center;
     min-height: 20px;
-    font-size: 0.9rem;
     margin-bottom: 15px;
+    color: #ff5f5f !important;
+    font-size: 0.9rem;
+    text-align: center;
 }

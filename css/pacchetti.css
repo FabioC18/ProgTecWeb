@@ -1,10 +1,14 @@
+/* =========================================
+   1. CONTENITORE PRINCIPALE E SFONDO
+========================================= */
+
 .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .container img {
@@ -15,16 +19,16 @@
 }
 
 
-/* POSIZIONAMENTO OGGETTI DI SFONDO */
-
-.top-right {
-    top: 5%;
-    right: 5%;
-}
+/* --- Posizionamento Oggetti di Sfondo --- */
 
 .top-left {
     top: 5%;
     left: 5%;
+}
+
+.top-right {
+    top: 5%;
+    right: 5%;
 }
 
 .cent-top {
@@ -51,6 +55,9 @@
     right: 5%;
 }
 
+
+/* Dimensioni Oggetti */
+
 .pane {
     width: 40% !important;
     height: 40% !important;
@@ -62,25 +69,25 @@
 }
 
 .freccia {
+    top: 500px;
     width: 8% !important;
     height: 8% !important;
-    top: 500px;
 }
 
 
-/* WRAPPER E PANNELLI */
+/* =========================================
+   2. WRAPPER E STRUTTURA PANNELLI (SLIDER)
+========================================= */
 
 .wrapper {
+    position: relative;
+    z-index: 1;
     width: 100vw;
     height: 120vh;
-    position: relative;
     overflow: hidden;
-    z-index: 1;
 }
 
 .pannelli {
-    width: 400vw;
-    height: 120vh;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -88,6 +95,8 @@
     top: 0;
     left: 0;
     z-index: 10;
+    width: 400vw;
+    height: 120vh;
     transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
@@ -95,18 +104,21 @@
 .panel2,
 .panel3,
 .panel4 {
-    width: 80vw;
-    margin: 0 25vw;
-    margin-top: 2vh;
-    height: 95vh;
-    border-radius: 20px;
-    padding: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    width: 80vw;
+    height: 95vh;
+    margin: 2vh 25vw 0;
+    /* Accorpato margin e margin-top */
+    padding: 20px;
+    border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
+
+
+/* Colori specifici per i pannelli */
 
 .panel {
     background-color: #C08081;
@@ -124,11 +136,16 @@
     background-color: #fda3a3;
 }
 
+
+/* =========================================
+   3. CONTENUTI INTERNI DEI PANNELLI
+========================================= */
+
 .pack-base {
-    margin-bottom: 20px;
     width: 100%;
-    text-align: center;
     height: auto;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
 .pack-base h3 {
@@ -136,87 +153,122 @@
     font-size: 2.1vh;
 }
 
+.pack-base p {
+    position: relative;
+    top: 15px;
+    /* REGOLA QUESTO VALORE per scendere o salire (es. 60px, 70px...) */
+    margin: 0;
+    padding: 0 10px;
+}
+
 h4 {
     position: relative;
     margin-top: 20px;
-    text-align: center;
     font-size: 1.8vh;
+    text-align: center;
 }
 
 h4 a {
     text-decoration: none;
 }
 
-.pack-base p {
-    margin: 0;
-    position: relative;
-    top: 15px;
-    /* REGOLA QUESTO VALORE per scendere o salire (es. 60px, 70px...) */
-    padding: 0 10px;
-}
-
 .img-pack {
+    display: block;
     width: 90%;
     height: fit-content;
-    border-radius: 20px;
     margin: auto;
+    border-radius: 20px;
     object-fit: contain;
-    display: block;
 }
 
 .frslider {
     width: 10%;
-    transition: transform 0.3s ease;
     color: #1d1d1f;
+    transition: transform 0.3s ease;
 }
 
 .frslider:hover {
     transform: scale(1.2);
 }
 
-@media (max-width: 768px) {
-    .panel,
-    .panel2,
-    .panel3,
-    .panel4 {
-        width: 90vw;
-        margin: 0 5vw;
-        padding: 20px;
-        max-height: 80vh;
-    }
-    .img-pack {
-        margin-bottom: 15px;
-        border-radius: 8px;
-    }
-    .pack-base h3 {
-        font-size: 16px;
-        margin-bottom: 5px;
-    }
+
+/* =========================================
+   4. STILI FORM PRENOTAZIONE E MESSAGGI
+========================================= */
+
+.booking-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.date-select {
+    max-width: 90%;
+    padding: 8px;
+    background: #fff;
+    color: #333;
+    font-family: 'Helvetica Neue', sans-serif;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-prenota-pack {
+    padding: 10px 20px;
+    background: #25D366;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.btn-prenota-pack:hover {
+    background-color: #1ebe57;
+    transform: scale(1.05);
+}
+
+.msg-warning {
+    margin-top: 10px;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #FFD94A;
+    font-size: 0.9em;
+    font-style: italic;
+    border-radius: 5px;
 }
 
 
-/* --- ADATTAMENTO PER MEZZO SCHERMO --- */
+/* =========================================
+   5. MEDIA QUERIES (RESPONSIVE)
+========================================= */
+
+
+/* --- ADATTAMENTO PER MEZZO SCHERMO E TABLET --- */
 
 @media (max-width: 1100px) {
     .panel,
     .panel2,
     .panel3,
     .panel4 {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
         width: 85vw !important;
-        margin: 0 7.5vw !important;
-        padding: 20px !important;
-        padding-bottom: 40px !important;
-        /* Aggiunge spazio rosa extra sotto le frecce */
-        /* LA MAGIA AVVIENE QUI SOTTO */
         min-height: 60vh !important;
         /* Garantisce una lunghezza base */
         height: auto !important;
         /* FORZA il pannello ad allungarsi quanto serve, annullando vecchi blocchi */
         max-height: 90vw !important;
         /* Rimuove eventuali tetti massimi */
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: space-between !important;
+        margin: 0 7.5vw !important;
+        /* LA MAGIA AVVIENE QUI SOTTO: accorpato padding e padding-bottom. Aggiunge spazio rosa extra sotto le frecce */
+        padding: 20px 20px 40px !important;
     }
     .img-pack {
         width: 80% !important;
@@ -226,51 +278,24 @@ h4 a {
 }
 
 
-/* --- STILI FORM PRENOTAZIONE E MESSAGGI --- */
+/* --- ADATTAMENTO PER SMARTPHONE --- */
 
-.booking-form {
-    margin-top: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-.date-select {
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    background: #fff;
-    color: #333;
-    font-family: 'Helvetica Neue', sans-serif;
-    max-width: 90%;
-    cursor: pointer;
-}
-
-.btn-prenota-pack {
-    background: #25D366;
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: transform 0.2s;
-}
-
-.btn-prenota-pack:hover {
-    transform: scale(1.05);
-    background-color: #1ebe57;
-}
-
-.msg-warning {
-    color: #FFD94A;
-    font-style: italic;
-    font-size: 0.9em;
-    margin-top: 10px;
-    background-color: rgba(0, 0, 0, 0.2);
-    padding: 5px;
-    border-radius: 5px;
+@media (max-width: 768px) {
+    .panel,
+    .panel2,
+    .panel3,
+    .panel4 {
+        width: 90vw;
+        max-height: 80vh;
+        margin: 0 5vw;
+        padding: 20px;
+    }
+    .pack-base h3 {
+        margin-bottom: 5px;
+        font-size: 16px;
+    }
+    .img-pack {
+        margin-bottom: 15px;
+        border-radius: 8px;
+    }
 }

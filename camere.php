@@ -35,7 +35,7 @@ $result = pg_query($conn, $query);
             </div>
         <?php endif; ?>
 
-        <div class="category-header">
+        <div class="category-header" id="category-header">
             <h1 class="category-title"><?php echo htmlspecialchars($row['titolo']); ?></h1>
             <p class="category-desc"><?php echo htmlspecialchars($row['descrizione']); ?></p>
 
