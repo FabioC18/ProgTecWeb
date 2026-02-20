@@ -97,13 +97,13 @@ INSERT INTO camere (titolo, descrizione, prezzo, galleria) VALUES
     'AREA SUITE', 
     'Scopri la nostra Suite esclusiva con vasca idromassaggio, sauna e cucina moderna. Il massimo del relax', 
     150.00, 
-    's1.jpeg,s2.jpeg,s3.jpeg,s4.jpeg'
+    's1.jpeg,s2.jpeg,s3.jpeg,s4.jpeg,s5.jpeg,s6.jpeg,s7.jpeg,s8.jpeg'
 ),
 (
     'AREA DELUXE', 
     'Vivi la casa vacanza Deluxe con vasca privata in camera, zona living per cene romantiche e cromoterapia.', 
     100.00, 
-    's5.jpeg,s6.jpeg,s7.jpeg,s8.jpeg'
+    's9.jpeg,s10.jpeg,s11.jpeg,s12.jpeg,s13.jpeg,s14.jpeg,s15.jpeg,s16.jpeg'
 );
 
 
@@ -113,7 +113,7 @@ INSERT INTO contenuti (titolo, descrizione, immagine) VALUES
 ('Pacchetti', 'Pacchetti per aperitivi romantici', 'ape3.jpeg');
 
 INSERT INTO pacchetti (nome, descrizione, prezzo, immagine) VALUES 
-('Pacchetto Base', 'Allestimento love standard per una serata romantica.', 49.99, 'packbase.jpeg'),
-('Love Base', 'Allestimento + aperitivo con stuzzichini locali.', 79.99, 'love-base.jpeg'),
-('Love Plus', 'Allestimento + aperitivo large con bottiglia di spumante.', 119.99, 'ape3.jpeg'),
-('Love Sushi', 'Allestimento + box sushi speciale per due persone.', 149.99, 'imgsushi.jpeg');
+('Pacchetto Base', 'Allestimento love standard per una serata romantica.', 19, 'packbase.jpeg'),
+('Love Base', 'Allestimento + aperitivo con stuzzichini locali.', 29, 'love-base.jpeg'),
+('Love Plus', 'Allestimento + aperitivo large con bottiglia di spumante.', 39, 'ape3.jpeg'),
+('Love Sushi', 'Allestimento + box sushi speciale per due persone.', 49, 'imgsushi.jpeg');
