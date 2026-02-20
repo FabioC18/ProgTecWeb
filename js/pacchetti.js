@@ -49,14 +49,3 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-/* ==========================================
-   3. GESTIONE CACHE BROWSER (BFCache)
-   ========================================== */
-
-// Forza il ricaricamento della pagina se viene recuperata dalla cache 
-// (es. quando l'utente usa il tasto "Indietro" del browser)
-window.addEventListener('pageshow', function(event) {
-    if (event.persisted) {
-        window.location.reload();
-    }
-});

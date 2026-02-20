@@ -8,6 +8,10 @@ html {
     line-height: 1.6;
 }
 
+body{
+    background-color: transparent;
+}
+
 
 /* SFONDO VIDEO */
 
@@ -20,7 +24,7 @@ html {
     object-fit: cover;
     opacity: 0.4;
     z-index: 0;
-    filter: saturate(0.8) contrast(1.1);
+    
 }
 
 

@@ -120,7 +120,7 @@ function getLocation() {
             const deluxe = L.marker([40.67891, 14.75808]).addTo(map).bindPopup("<b>Deluxe!</b>").openPopup();
             const marker = L.marker([lat, lon]).addTo(map).bindPopup("<b>Sei qui!</b>").openPopup();
         },
-        showError // <--- ECCO IL COLLEGAMENTO MANCANTE!
+        showError 
     );
 }
 
