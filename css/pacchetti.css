@@ -207,7 +207,7 @@ h4 a {
 .date-select {
     max-width: 90%;
     padding: 8px;
-    background: #fff;
+    background: #ffffff;
     color: #333;
     font-family: 'Helvetica Neue', sans-serif;
     border: 1px solid #ccc;
@@ -217,7 +217,7 @@ h4 a {
 
 .btn-prenota-pack {
     padding: 10px 20px;
-    background: #25D366;
+    background: #FFD94A;
     color: white;
     font-size: 1rem;
     font-weight: bold;
