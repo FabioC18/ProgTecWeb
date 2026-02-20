@@ -73,6 +73,7 @@ if ($is_logged) {
     <meta charset='utf-8'>
     <title>Pacchetti - Salerno Mare e Luci</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/pacchetti.css">
     <link rel="icon" href="assets/favicon.ico">
 </head>
@@ -126,14 +127,18 @@ if ($is_logged) {
                     <?php if ($messaggio_stato == "no_camere"): ?>
                         
                         <p class="msg-warning">
-                             Devi prenotare una camera per una data futura prima di aggiungere un pacchetto.
+                            <a href="camere.php" style="color: white; text-decoration: none;">
+                                Devi prenotare una camera per una data futura prima di aggiungere un pacchetto.
+                            </a>
                         </p>
-                        <a href="camere.php" style="color: white; text-decoration: underline;">Vai alle Camere</a>
+                     
 
                     <?php elseif ($messaggio_stato == "tutto_pieno"): ?>
                         
                         <p class="msg-warning">
-                             Hai già associato un pacchetto a tutte le tue prenotazioni future.
+                            <a href="camere.php" style="color: inherit; text-decoration: none;">
+                                Hai già associato un pacchetto a tutte le tue prenotazioni future. Prenota una nuova camera per avere un nuovo pachetto.
+                            </a>
                         </p>
 
                     <?php elseif ($messaggio_stato == "ok"): ?>
@@ -156,10 +161,12 @@ if ($is_logged) {
 
                     <?php endif; ?>
                     <?php else: ?>
-                    <p style="font-style: italic; color: #f7f7f7;">
-                        Registrati per visualizzare i dettagli completi e i prezzi riservati.
-                    </p>
-                <?php endif; ?>
+                        <p style="font-style: italic; color: #f7f7f7;">
+                            <a href="login_reg.php" style="color: inherit; text-decoration: none;">
+                                Registrati per visualizzare i dettagli completi e i prezzi riservati.
+                            </a>
+                        </p>
+                    <?php endif; ?>
             </div>
 
             <figure>

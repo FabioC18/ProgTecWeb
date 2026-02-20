@@ -2,50 +2,49 @@ const userIn = document.getElementById('username');
 const emailIn = document.getElementById('email');
 const passIn = document.getElementById('pass');
 const btn = document.getElementById('btn-submit');
-const tooltip = document.getElementById('password-tooltip'); // Riferimento al tooltip
+const tooltip = document.getElementById('password-tooltip');
 const iconSlash = document.getElementById('icon-slash');
 const iconEye = document.getElementById('icon-eye');
 const tabReg = document.getElementById('tab-reg');
 const tabLog = document.getElementById('tab-log');
 const emailCont = document.getElementById('email-container');
 const actionInput = document.getElementById('action-input');
+const errorMsg = document.getElementById('error-msg');
 
 let currentMode = 'register';
 
 passIn.addEventListener('mouseover', showTooltip);
 passIn.addEventListener('mouseenter', showTooltip);
 passIn.addEventListener('mouseleave', hideTooltip);
-passIn.addEventListener('focus', showTooltip); // Utile per chi usa tab
+passIn.addEventListener('focus', showTooltip);
 passIn.addEventListener('blur', hideTooltip);
 
-// GESTIONE TOOLTIP PASSWORD
-// Mostra quando il mouse entra o il campo ha il focus
 function showTooltip() {
     if (currentMode === 'register') {
         tooltip.style.display = 'block';
     }
 }
-// Nascondi quando il mouse esce o perde focus
+
 function hideTooltip() {
     tooltip.style.display = 'none';
 }
 
-
-function switchMode(mode) {
+function switchMode(mode, isExplicitClick = false) {
     currentMode = mode;
     actionInput.value = mode;
 
+    if (isExplicitClick && errorMsg) {
+        errorMsg.textContent = "";
+    }
+
     if (mode === 'login') {
-        // UI Login
         tabLog.className = 'tab-active';
         tabReg.className = 'tab-inactive';
         emailCont.style.display = 'none';
         btn.value = 'Accedi';
         passIn.placeholder = 'Password';
-        // Nasconde tooltip se era aperto
         tooltip.style.display = 'none';
     } else {
-        // UI Registrazione
         tabReg.className = 'tab-active';
         tabLog.className = 'tab-inactive';
         emailCont.style.display = 'block';
@@ -81,20 +80,26 @@ function checkInputs() {
 
         if (userIn.value.trim() !== "" && isEmailValid && hasUpperCase && hasNumber && hasSpecial && hasLength) {
             btn.disabled = false;
-            btn.style.backgroundColor = "";
         } else {
             btn.disabled = true;
         }
-
     } else {
         if (userIn.value.trim() !== "" && passValue.trim() !== "") {
             btn.disabled = false;
-            btn.style.backgroundColor = "";
         } else {
             btn.disabled = true;
         }
     }
 }
+
+window.addEventListener('load', () => {
+    const savedAction = actionInput.value;
+    if (savedAction === 'login') {
+        switchMode('login', false);
+    } else {
+        switchMode('register', false);
+    }
+});
 
 userIn.addEventListener('input', checkInputs);
 emailIn.addEventListener('input', checkInputs);

@@ -1,0 +1,298 @@
+/* =========================================
+   GLOBAL CSS: RESET, HEADER E FOOTER
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #3a0707ff;
+    margin: 0;
+    font-family: 'Helvetica Neue', sans-serif;
+    overflow-x: hidden;
+}
+
+
+/* --- HEADER --- */
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    width: 100%;
+    background-color: rgba(29, 29, 31, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 217, 74, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.header-content {
+    max-width: 62.5vw;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-menu {
+    list-style: none;
+}
+
+.header-menu li {
+    display: inline-block;
+    margin-right: 3vw;
+    transition: transform 0.3s ease;
+}
+
+.header-menu li .name {
+    color: #FFD94A;
+}
+
+.header-menu li .name:hover {
+    color: #ffffff;
+}
+
+.header-menu li a {
+    color: #f7f7f7;
+    display: inline;
+    text-decoration: none;
+    font-size: 0.73vw;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 500;
+    font-family: 'Helvetica Neue', sans-serif;
+    transition: transform 0.3s ease;
+}
+
+.header-menu li a:hover {
+    transform: scale(1.2);
+    color: #FFD94A;
+}
+
+.icon-big {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.5vw;
+    min-height: 2.5vh;
+    margin-left: 0px;
+    margin-right: 3.2vw;
+    padding-top: 0.52vh;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.icon-big:hover {
+    transform: scale(1.2);
+}
+
+.hamb-menu {
+    display: none;
+}
+
+
+/* MEDIA QUERIES HEADER */
+
+@media (max-width: 1100px) {
+    /* Menu */
+    .header-menu li {
+        display: inline-block;
+        margin-right: 50px;
+        transition: transform 0.3s ease;
+    }
+    .header-menu li:hover {
+        transform: scale(1.2);
+    }
+    /* 1. Reset totale margini per eliminare il buco tra i pannelli */
+    .panel,
+    .panel2,
+    .panel3 {
+        min-height: 0 !important;
+        margin-bottom: 0 !important;
+        /* Rimuove lo spazio vuoto tra Panel 1 e Panel 2 */
+        padding-bottom: 0 !important;
+        top: 0 !important;
+        /* Li tiene allineati correttamente */
+    }
+    /* 2. Altezza precisa: 56.25vw corrisponde esattamente al rapporto 16:9 delle foto.
+          Così il pannello finisce esattamente dove finisce l'immagine. */
+    .panel {
+        height: 57vw !important;
+    }
+    .panel2 {
+        height: 57vw !important;
+    }
+    .panel3 {
+        height: 57vw !important;
+    }
+    /* 3. Centra i testi sopra le immagini */
+    .panel .testo1 {
+        color: #f5f5f5;
+        text-align: left;
+        max-width: 40%;
+        margin-left: 15%;
+    }
+    .panel .testo2 {
+        color: #f5f5f5;
+        text-align: left;
+        max-width: 40%;
+        margin-left: 15%;
+    }
+    .panel2 .testo1 {
+        color: #f5f5f5;
+        text-align: left;
+        max-width: 40%;
+        margin-left: 15%;
+    }
+    .panel2 .testo2 {
+        color: #f5f5f5;
+        text-align: left;
+        max-width: 40%;
+        margin-left: 15%;
+    }
+    .panel3 .testo1 {
+        color: #f5f5f5;
+        text-align: right;
+        max-width: 30%;
+        margin-left: 0%;
+    }
+    .panel3 .testo2 {
+        color: #f5f5f5;
+        text-align: right;
+        max-width: 30%;
+        margin-left: 0%;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        height: 60px;
+    }
+    /* Nasconde il menu desktop e mostra l'hamburger */
+    .header-menu {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        background-color: #1d1d1f;
+        width: 100%;
+        flex-direction: column;
+        /* Menu verticale */
+        gap: 0;
+        padding: 0;
+        /* <--- FIX: Rimosso lo spazio vuoto sopra e sotto il menu */
+        border-bottom: 2px solid #FFD94A;
+        transform: translateY(-150%);
+        transition: transform 0.4s ease;
+        z-index: 9998;
+    }
+    /* Classe aggiunta con JS per mostrare il menu */
+    .menu-open .header-menu {
+        transform: translateY(0);
+    }
+    .header-menu li {
+        width: 100%;
+        text-align: center;
+    }
+    .header-menu li a {
+        display: block;
+        padding: 10px 5px;
+        /* Aumentato il padding interno per mantenere un bel respiro tra le voci */
+        font-size: 0.6rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    /* FIX: Rimuove la riga grigiastra sotto l'ultima voce (Logout) per farla combaciare perfettamente con la linea gialla */
+    .header-menu li:last-child a {
+        border-bottom: none;
+    }
+    .hamb-menu {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 9999;
+    }
+}
+
+
+/* --- FOOTER --- */
+
+footer {
+    position: relative;
+    font-family: 'Helvetica Neue', sans-serif;
+    z-index: 10;
+    background-color: #121212;
+    padding: 3.1vh 1vw;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15%;
+    justify-items: center;
+    align-items: start;
+    border-top: 4px solid #8B1E1E;
+    color: #cccccc;
+    width: 100%;
+}
+
+footer h1 {
+    font-family: 'Georgia', serif;
+    color: #F5F5F5;
+    font-size: 1.5rem;
+    margin-bottom: 1vh;
+    border-bottom: 1px solid #2F86C1;
+    display: inline-block;
+    padding-bottom: 0.52vh;
+}
+
+footer h2,
+.info h2,
+.contatti h2 {
+    font-size: 0.9rem;
+    font-weight: 400;
+    line-height: 2;
+    color: #aaaaaa;
+}
+
+.social .ig,
+.social .fb,
+.social .tk {
+    display: inline-block;
+    width: 2.1vw;
+    margin: 0 0.78vw;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #F5F5F5;
+}
+
+@media (max-width: 768px) {
+    .social .ig,
+    .social .fb,
+    .social .tk {
+        width: 30px;
+        /* Misura di sicurezza per mobile */
+    }
+}
+
+.social .ig:hover,
+.social .fb:hover,
+.social .tk:hover {
+    transform: translateY(-5px);
+    color: #FFD94A;
+}
+
+@media (max-width: 900px) {
+    footer {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+        padding: 40px 20px;
+    }
+    .info,
+    .contatti,
+    .social {
+        text-align: center;
+    }
+}

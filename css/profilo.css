@@ -244,7 +244,7 @@ footer {
     font-family: 'Helvetica Neue', sans-serif;
     z-index: 9999;
     background-color: #121212;
-    padding: 60px 20px;
+    padding: 3.1vh 1vw;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 15%;
@@ -260,10 +260,10 @@ footer h1 {
     font-family: 'Georgia', serif;
     color: #F5F5F5;
     font-size: 1.5rem;
-    margin-bottom: 20px;
+    margin-bottom: 1vh;
     border-bottom: 1px solid #2F86C1;
     display: inline-block;
-    padding-bottom: 10px;
+    padding-bottom: 0.52vh;
 }
 
 footer h2,
@@ -273,17 +273,30 @@ footer h2,
     font-weight: 400;
     line-height: 2;
     color: #aaaaaa;
+    border-bottom: none;
+    /* FIX: Annulla la linea globale h2 */
+    padding-bottom: 0;
 }
 
 .social .ig,
 .social .fb,
 .social .tk {
     display: inline-block;
-    width: 40px;
-    margin: 0 15px;
+    width: 2.1vw;
+    /* Dimensione perfetta per la colonna */
+    margin: 0 0.78vw;
     cursor: pointer;
     transition: all 0.3s ease;
     color: #F5F5F5;
+}
+
+@media (max-width: 768px) {
+    .social .ig,
+    .social .fb,
+    .social .tk {
+        width: 30px;
+        /* Misura di sicurezza per mobile */
+    }
 }
 
 .social .ig:hover,
@@ -298,6 +311,7 @@ footer h2,
         grid-template-columns: 1fr;
         gap: 40px;
         text-align: center;
+        padding: 40px 20px;
     }
     .info,
     .contatti,

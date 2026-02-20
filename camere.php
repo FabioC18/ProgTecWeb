@@ -10,6 +10,7 @@ $result = pg_query($conn, $query);
 <head>
     <meta charset="UTF-8">
     <title>Le Nostre Camere - Salerno Mare e Luci</title>
+    <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/camere.css">
     <link rel="icon" href="assets/favicon.ico"> 
 </head>
