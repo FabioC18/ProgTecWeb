@@ -81,7 +81,7 @@ $res_pren = pg_query_params($conn, $query_pren, array($user_id));
         </a>
         <div style="display:flex; gap:20px; align-items:center;">
              <span>Ciao, <strong><?php echo htmlspecialchars($currentUser); ?></strong></span>
-             <a href="logout.php" style="color:white; text-decoration:underline;">Logout</a>
+             <li class="menu-item-session"><a href="logout.php" onclick="return confirm('Sei sicuro di voler uscire?');">Logout</a></li>
         </div>
       </div>
     </header>

@@ -1,20 +1,21 @@
 <?php
-session_start(); 
+session_start();
 header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
 header('Pragma: no-cache');
 
-require_once 'includes/db_config.php'; 
+require_once 'includes/db_config.php';
 
 $is_logged = isset($_SESSION['user']);
 $prenotazioni_disponibili = [];
-$messaggio_stato = ""; 
+$messaggio_stato = "";
 
+// 1. GESTIONE DELLA LOGICA UTENTE E PRENOTAZIONI
 if ($is_logged) {
     $username = $_SESSION['user'];
-    
+
     $query_user = "SELECT id FROM utenti WHERE username = $1";
     $res_user = pg_query_params($conn, $query_user, array($username));
-    
+
     if ($res_user && pg_num_rows($res_user) > 0) {
         $user_row = pg_fetch_assoc($res_user);
         $user_id = $user_row['id'];
@@ -29,8 +30,8 @@ if ($is_logged) {
         $q_pren = "SELECT * FROM prenotazioni WHERE id_utente = $1";
         $r_pren = pg_query_params($conn, $q_pren, array($user_id));
 
-        $mie_camere_per_data = []; 
-        $miei_pacchetti_per_data = []; 
+        $mie_camere_per_data = [];
+        $miei_pacchetti_per_data = [];
 
         while ($row_pr = pg_fetch_assoc($r_pren)) {
             $data = $row_pr['data_prenotazione'];
@@ -58,17 +59,21 @@ if ($is_logged) {
                     $num_pacchetti = isset($miei_pacchetti_per_data[$data]) ? $miei_pacchetti_per_data[$data] : 0;
 
                     if ($num_pacchetti < $num_camere) {
-                        $prenotazioni_disponibili[$data] = $camere[0]; 
+                        $prenotazioni_disponibili[$data] = $camere[0];
                         $messaggio_stato = "ok";
                     }
                 }
             }
             if ($messaggio_stato == "" && !empty($mie_camere_per_data)) {
-                $messaggio_stato = "tutto_pieno"; 
+                $messaggio_stato = "tutto_pieno";
             }
         }
     }
 }
+
+// 2. RECUPERO DEI PACCHETTI DAL DATABASE (Spostato qui dall'HTML)
+$query_pacchetti = "SELECT * FROM pacchetti ORDER BY id ASC";
+$result_pacchetti = pg_query($conn, $query_pacchetti);
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -83,7 +88,7 @@ if ($is_logged) {
 <body>
 
     <?php include 'includes/header.php'; ?>
-    
+
     <div class="container">
         <img src="assets/unnamed-no-bg.png" class="object freccia" data-value="3">
         <img src="assets/bacchette-no-bg.png" class="object top-right" data-value="12 ">
@@ -104,65 +109,60 @@ if ($is_logged) {
     </div>
 
     <div class="wrapper">
-   <div class="pannelli">
-     <?php
-     $query = "SELECT * FROM pacchetti ORDER BY id ASC";
-     $result = pg_query($conn, $query);
+        <div class="pannelli">
+            <?php
+            if ($result_pacchetti):
+                $count = 1;
+                $total_rows = pg_num_rows($result_pacchetti);
 
-     if ($result):
-         $count = 1;
-         $total_rows = pg_num_rows($result);
-         
-         while ($row = pg_fetch_assoc($result)):
-             $id_panel =  "panel" . $count;
-             $class_panel = ($count == 1) ? "panel" : "panel" . $count;
-     ?>
-        <article id="<?php echo $id_panel; ?>" class="<?php echo $class_panel; ?>">        
-            <div class="pack-base">
-                <h3><?php echo htmlspecialchars($row['nome']); ?> <br> <span>include:</span></h3>
+                while ($row = pg_fetch_assoc($result_pacchetti)):
+                    $id_panel = "panel" . $count;
+                    $class_panel = ($count == 1) ? "panel" : "panel" . $count;
+            ?>
+            
+            <article id="<?php echo $id_panel; ?>" class="<?php echo $class_panel; ?>">
                 
-                <?php if ($is_logged): ?>
-                    <p><?php echo htmlspecialchars($row['descrizione']); ?></p>
-                    <p style="font-weight: bold; font-size: 1.5em; color: #FFD94A;">
-                        € <?php echo htmlspecialchars($row['prezzo']); ?>
-                    </p>
-                    
-                    <?php if ($messaggio_stato == "no_camere"): ?>
-                        
-                        <p class="msg-warning">
-                            <a href="camere.php" style="color: white; text-decoration: none;">
-                                Devi prenotare una camera per una data futura prima di aggiungere un pacchetto.
-                            </a>
-                        </p>
-                     
+                <div class="pack-base">
+                    <h3><?php echo htmlspecialchars($row['nome']); ?> <br> <span>include:</span></h3>
 
-                    <?php elseif ($messaggio_stato == "tutto_pieno"): ?>
-                        
-                        <p class="msg-warning">
-                            <a href="camere.php" style="color: inherit; text-decoration: none;">
-                                Hai già associato un pacchetto a tutte le tue prenotazioni future. Prenota una nuova camera per avere un nuovo pachetto.
-                            </a>
+                    <?php if ($is_logged): ?>
+                        <p><?php echo htmlspecialchars($row['descrizione']); ?></p>
+                        <p style="font-weight: bold; font-size: 1.5em; color: #FFD94A;">
+                            € <?php echo htmlspecialchars($row['prezzo']); ?>
                         </p>
 
-                    <?php elseif ($messaggio_stato == "ok"): ?>
-                        
-                        <form action="salva_prenotazione.php" method="GET" class="booking-form">
-                            <input type="hidden" name="nome" value="<?php echo htmlspecialchars($row['nome']); ?>">
-                            <input type="hidden" name="prezzo" value="<?php echo $row['prezzo']; ?>">
-                            
-                            <label for="data_pack_<?php echo $row['id']; ?>" style="font-size: 0.9em;">Associa alla prenotazione del:</label>
-                            <select name="data" id="data_pack_<?php echo $row['id']; ?>" class="date-select" required>
-                                <?php foreach ($prenotazioni_disponibili as $data_disp => $nome_camera): ?>
-                                    <option value="<?php echo $data_disp; ?>">
-                                        <?php echo date("d/m/Y", strtotime($data_disp)); ?> - <?php echo $nome_camera; ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
+                        <?php if ($messaggio_stato == "no_camere"): ?>
+                            <p class="msg-warning">
+                                <a href="camere.php" style="color: white; text-decoration: none;">
+                                    Devi prenotare una camera per una data futura prima di aggiungere un pacchetto.
+                                </a>
+                            </p>
 
-                            <button type="submit" class="btn-prenota-pack">Prenota Ora</button>
-                        </form>
+                        <?php elseif ($messaggio_stato == "tutto_pieno"): ?>
+                            <p class="msg-warning">
+                                <a href="camere.php" style="color: inherit; text-decoration: none;">
+                                    Hai già associato un pacchetto a tutte le tue prenotazioni future. Prenota una nuova camera per avere un nuovo pacchetto.
+                                </a>
+                            </p>
 
-                    <?php endif; ?>
+                        <?php elseif ($messaggio_stato == "ok"): ?>
+                            <form action="salva_prenotazione.php" method="GET" class="booking-form">
+                                <input type="hidden" name="nome" value="<?php echo htmlspecialchars($row['nome']); ?>">
+                                <input type="hidden" name="prezzo" value="<?php echo $row['prezzo']; ?>">
+
+                                <label for="data_pack_<?php echo $row['id']; ?>" style="font-size: 0.9em;">Associa alla prenotazione del:</label>
+                                <select name="data" id="data_pack_<?php echo $row['id']; ?>" class="date-select" required>
+                                    <?php foreach ($prenotazioni_disponibili as $data_disp => $nome_camera): ?>
+                                        <option value="<?php echo $data_disp; ?>">
+                                            <?php echo date("d/m/Y", strtotime($data_disp)); ?> - <?php echo $nome_camera; ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+
+                                <button type="submit" class="btn-prenota-pack">Prenota Ora</button>
+                            </form>
+                        <?php endif; ?>
+
                     <?php else: ?>
                         <p style="font-style: italic; color: #f7f7f7;">
                             <a href="login_reg.php" style="color: inherit; text-decoration: none;">
@@ -170,31 +170,34 @@ if ($is_logged) {
                             </a>
                         </p>
                     <?php endif; ?>
-            </div>
+                </div>
 
-            <figure>
-                <img src="assets/<?php echo htmlspecialchars($row['immagine']); ?>" class="img-pack" alt="Pacchetto">
-            </figure>
+                <figure>
+                    <img src="assets/<?php echo htmlspecialchars($row['immagine']); ?>" class="img-pack" alt="Pacchetto">
+                </figure>
 
-            <h4>*I PACCHETTI POSSONO ESSERE PERSONALIZZATI SU RICHIESTA <br>
-                <a href="#" onclick="scorriA('<?php echo ($count > 1) ? "panel".($count-1) : "panel".$total_rows; ?>'); return false;">
-                    <img class="frslider" src="assets/arrow-circle-left.png" alt="Precedente">
-                </a> 
-                <a href="#" onclick="scorriA('<?php echo ($count < $total_rows) ? "panel".($count+1) : "panel1"; ?>'); return false;">
-                    <img class="frslider" src="assets/arrow-circle-right.png" alt="Successivo">
-                </a>
-            </h4>
-        </article>
-     <?php 
-         $count++;
-         endwhile;
-     endif; 
-     ?>
-   </div>
-   </div>
+                <h4>*I PACCHETTI POSSONO ESSERE PERSONALIZZATI SU RICHIESTA <br>
+                    <a href="#" onclick="scorriA('<?php echo ($count > 1) ? "panel".($count-1) : "panel".$total_rows; ?>'); return false;">
+                        <img class="frslider" src="assets/arrow-circle-left.png" alt="Precedente">
+                    </a>
+                    <a href="#" onclick="scorriA('<?php echo ($count < $total_rows) ? "panel".($count+1) : "panel1"; ?>'); return false;">
+                        <img class="frslider" src="assets/arrow-circle-right.png" alt="Successivo">
+                    </a>
+                </h4>
+                
+            </article>
+            
+            <?php
+                    $count++;
+                endwhile;
+            endif;
+            ?>
+        </div>
+    </div>
 
-   <?php include 'includes/footer.php'; ?>
+    <?php include 'includes/footer.php'; ?>
 
-   <script src="js/pacchetti.js"></script>
+    <script src="js/pacchetti.js"></script>
+    
 </body>
 </html>

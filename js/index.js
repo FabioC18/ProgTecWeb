@@ -1,33 +1,16 @@
-/* --- 1. GESTIONE MENU HAMBURGER --- */
-const hamburger = document.querySelector('.hamb-menu');
-const body = document.body;
+/* ==========================================
+   1. FUNZIONI DI UTILITÀ GLOBALI
+   ========================================== */
 
-if (hamburger) {
-    hamburger.addEventListener("click", function() {
-        body.classList.toggle('menu-open');
-    });
-}
-
-/* --- 2. FUNZIONI DI UTILITÀ --- */
 function isElementVisible(el) {
     if (!el) return false;
     const rect = el.getBoundingClientRect();
     const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    // Ritorna true se l'elemento è visibile nella viewport (con 50px di tolleranza)
     return (rect.top <= windowHeight - 50 && rect.bottom >= 0);
 }
 
-/* --- 3. ANIMAZIONI FADE-IN (.watch) --- */
-const watchElements = document.querySelectorAll('.watch');
-
-function checkWatchElements() {
-    watchElements.forEach(function(el) {
-        if (isElementVisible(el)) {
-            el.classList.add("in-page");
-        }
-    });
-}
-
-/* --- 4. GESTIONE CONTATORI (VERSIONE FORZATA) --- */
+/* GESTIONE CONTATORI (VERSIONE FORZATA) */
 function animateValue(el, start, end, duration) {
     let startTimestamp = null;
     const step = (timestamp) => {
@@ -43,37 +26,59 @@ function animateValue(el, start, end, duration) {
     window.requestAnimationFrame(step);
 }
 
-function handleCounters() {
+/* ==========================================
+   2. INIZIALIZZAZIONE ED EVENTI DOM
+   ========================================== */
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    /* --- 2.1 GESTIONE MENU HAMBURGER --- */
+    const hamburger = document.querySelector('.hamb-menu');
+    if (hamburger) {
+        hamburger.addEventListener("click", function() {
+            document.body.classList.toggle('menu-open');
+        });
+    }
+
+    /* --- 2.2 CACHE DEGLI ELEMENTI DOM --- */
+    // Salviamo gli elementi una sola volta per migliorare le prestazioni allo scroll
+    const watchElements = document.querySelectorAll('.watch');
     const counters = document.querySelectorAll('.cont-client, .cont-year');
 
-    counters.forEach(el => {
-        if (isElementVisible(el) && !el.classList.contains('animated')) {
-            const target = parseInt(el.getAttribute('data-target'));
-            if (!isNaN(target)) {
-                el.classList.add('animated');
-                animateValue(el, 0, target, 2000);
-            }
-        }
-    });
-}
-
-/* --- 5. INIZIALIZZAZIONE E EVENTI --- */
-
-// Funzione unica di controllo
-function runAllChecks() {
-    checkWatchElements();
-    handleCounters();
-}
-
-// Avvio al caricamento
-window.addEventListener('DOMContentLoaded', () => {
     // Reset preventivo dei contatori a 0
-    document.querySelectorAll('.cont-client, .cont-year').forEach(el => el.innerHTML = "0");
+    counters.forEach(el => el.innerHTML = "0");
+
+    /* --- 2.3 FUNZIONE UNICA DI CONTROLLO SCROLL --- */
+    function runAllChecks() {
+
+        // A. Animazioni fade-in (.watch)
+        watchElements.forEach(function(el) {
+            if (isElementVisible(el)) {
+                el.classList.add("in-page");
+            }
+        });
+
+        // B. Animazioni Contatori
+        counters.forEach(el => {
+            if (isElementVisible(el) && !el.classList.contains('animated')) {
+                const target = parseInt(el.getAttribute('data-target'));
+                if (!isNaN(target)) {
+                    el.classList.add('animated');
+                    animateValue(el, 0, target, 2000);
+                }
+            }
+        });
+    }
+
+    /* --- 2.4 ASSEGNAZIONE EVENT LISTENERS --- */
+
+    // Esecuzione immediata al caricamento
     runAllChecks();
+
+    // Avvio allo scroll
+    window.addEventListener('scroll', runAllChecks);
+
+    // Avvio al caricamento completo (es. quando terminano di caricare immagini/video)
+    window.addEventListener('load', runAllChecks);
+
 });
-
-// Avvio allo scroll
-window.addEventListener('scroll', runAllChecks);
-
-// Avvio al caricamento completo (immagini/video)
-window.addEventListener('load', runAllChecks);
