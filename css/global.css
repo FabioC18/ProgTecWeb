@@ -1,40 +1,44 @@
-/* =========================================
-   1. GLOBAL CSS: RESET E BODY
-========================================= */
+/* GLOBAL CSS: RESET E BODY */
 
 * {
+    /*Rimuove tutti i margini esterni  e le spaziature interne che i browser applicano di default*/
     margin: 0;
     padding: 0;
+    /* fsa si che padding e bordi non ingrandiscano la largezza degli elementi*/
     box-sizing: border-box;
 }
 
 body {
     background-color: #3a0707;
-    /* Pulito l'esadecimale */
     font-family: 'Helvetica Neue', sans-serif;
+    /*taglia tutto ciò che esce fuori dai bordi evitando lo scorrimento*/
     overflow-x: hidden;
 }
 
 
-/* =========================================
-   2. HEADER
-========================================= */
+/*HEADER*/
 
 .header {
+    /*blocca l'header in cima allo schermo anche quando si scorre giù*/
     position: fixed;
     top: 0;
     left: 0;
+    /*numero alto che permette di lasciare l'header sempre sopra qualsiasi altro elemento */
     z-index: 9999;
     width: 100%;
     background-color: rgba(29, 29, 31, 0.95);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 217, 74, 0.2);
+    /*riga sottile sotto l'header che permette di visualizzarlo meglio rispetto allo sfondo della pagina*/
+    border-bottom: 2px solid #FFD94A;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
 .header-content {
+    /*layout flessibile per posizionare logo e link sulla stessa riga*/
     display: flex;
+    /*allinea verticalmente tutti gli elementi dell'header al centro  */
     align-items: center;
+    /*centra orizzontalmente tutto il contenuto dell'header */
     justify-content: center;
     width: 100%;
     max-width: 62.5vw;
@@ -42,12 +46,16 @@ body {
 }
 
 .header-menu {
+    /*rimuove i numeri di base delle liste html*/
     list-style: none;
 }
 
 .header-menu li {
+    /*voci di menù poszionate una di fianco all'altra*/
     display: inline-block;
+    /*DistanzIa ogni voce dalla successiva del 3% della larghezza dello schermo*/
     margin-right: 3vw;
+    /*Animazione fluida di ogni voce*/
     transition: transform 0.3s ease;
 }
 
@@ -66,65 +74,85 @@ body {
     font-size: 0.73vw;
     font-weight: 500;
     text-transform: uppercase;
+    /* Rimuove la sottolineatura che i browser mettono di default ai link */
     text-decoration: none;
+    /*spazio di 2pixel tra le lettere di ogni voce*/
     letter-spacing: 2px;
+    /*Animazione fluida di ogni voce*/
     transition: transform 0.3s ease;
 }
 
 .header-menu li a:hover {
     color: #FFD94A;
+    /*Al passaggio del mouse la voce si ingradisce*/
     transform: scale(1.2);
 }
 
 .icon-big {
     display: flex;
+    /*allinea verticalmente tutti gli elementi del logo al centro  */
     align-items: center;
+    /*centra orizzontalmente tutti gli elementi del logo */
     justify-content: center;
     min-width: 2.5vw;
     min-height: 2.5vh;
     margin-left: 0;
     margin-right: 3.2vw;
     padding-top: 0.52vh;
+    /*cambia il mouse in una mano per far capire l'utente che e possibile interagire*/
     cursor: pointer;
+    /*Animazione fluida di ogni voce*/
     transition: transform 0.3s ease;
 }
 
 .icon-big:hover {
+    /*Al passaggio del mouse il logo si ingrandisce*/
     transform: scale(1.2);
 }
 
 .hamb-menu {
+    /*Quando lo schermo è grande, l'hamburger viene nascosto perchè tutte le informazioni presenti nell'header sono gia visibili*/
     display: none;
 }
 
 
-/* =========================================
-   3. FOOTER
-========================================= */
+/* FOOTER */
 
 footer {
     position: relative;
+    /*livello di profondità che gli permette di trovarsi sopra lo sfondo */
     z-index: 10;
+    /*display a griglia*/
     display: grid;
+    /*Divide il footer in 3 colonne uguali */
     grid-template-columns: repeat(3, 1fr);
+    /*spaziatura tra una colonna e l'altra*/
     gap: 15%;
+    /*Allinea le colonne in alto */
     align-items: start;
+    /*Centra ogni colonna utilizzando tutto lo spazio*/
     justify-items: center;
     width: 100%;
     padding: 3.1vh 1vw;
     background-color: #121212;
+    /*spessa riga rossa lungo il bordo superiore*/
     border-top: 4px solid #8B1E1E;
     color: #cccccc;
     font-family: 'Helvetica Neue', sans-serif;
 }
 
 footer h1 {
+    /* Permette al titolo di avere una larghezza basata sul suo testo*/
     display: inline-block;
     color: #F5F5F5;
     font-family: 'Georgia', serif;
-    font-size: 1.5rem;
+    /*dimensione del titolo 1.5 volte la grandezza di base */
+    font-size: 24px;
+    /*distanzia il titolo dal desto sottostante */
     margin-bottom: 1vh;
+    /*aggiunge spazio tra le letter del titolo e la linea sottostante */
     padding-bottom: 0.52vh;
+    /*linea sottostante che sottolinea appunto il titolo*/
     border-bottom: 1px solid #2F86C1;
 }
 
@@ -132,7 +160,8 @@ footer h2,
 .info h2,
 .contatti h2 {
     color: #aaaaaa;
-    font-size: 0.9rem;
+    /*grandezze seconda scritta*/
+    font-size: 14.5px;
     font-weight: 400;
     line-height: 2;
 }
@@ -140,11 +169,14 @@ footer h2,
 .social .ig,
 .social .fb,
 .social .tk {
+    /*Permette di affiancare le icone*/
     display: inline-block;
     width: 2.1vw;
     margin: 0 0.78vw;
     color: #F5F5F5;
+    /*cambiare il cursore in una mano per far capire l'utente che puù cliccarci su */
     cursor: pointer;
+    /*Animazione fluida di ogni voce*/
     transition: all 0.3s ease;
 }
 
@@ -152,32 +184,31 @@ footer h2,
 .social .fb:hover,
 .social .tk:hover {
     color: #FFD94A;
+    /*solleva l'icona di 5px verso l'alto */
     transform: translateY(-5px);
 }
 
 
-/* =========================================
-   4. MEDIA QUERIES (RESPONSIVE)
-========================================= */
+/* MEDIA QUERIES */
 
 
-/* --- SCHERMI MEDI (Tablet Orizzontale / Laptop) --- */
+/* --- SCHERMI MEDI (Tablet / portatile metà schermo --- */
 
 @media (max-width: 1100px) {
     .header-menu li {
         margin-right: 50px;
     }
-    /* Reset totale margini per eliminare il buco e altezza 16:9 precisa */
     .panel,
     .panel2,
     .panel3 {
+        /*forma i pannelli ad attaccarsi in cima allo schermo */
         top: 0 !important;
         min-height: 0 !important;
         height: 57vw !important;
         margin-bottom: 0 !important;
         padding-bottom: 0 !important;
     }
-    /* Accorpamento massivo: Centra i testi sopra le immagini per i pannelli 1 e 2 */
+    /*Centra i testi sopra le immagini per i pannelli 1 e 2 */
     .panel .testo1,
     .panel .testo2,
     .panel2 .testo1,
@@ -197,14 +228,14 @@ footer h2,
     }
 }
 
-
-/* --- TABLET VERTICALE --- */
-
 @media (max-width: 900px) {
     footer {
-        grid-template-columns: 1fr;
+        /*Divide il footer in 3 colonne uguali */
+        grid-template-columns: repeat(3, 1fr);
+        /*spazio tra un colonna e l'altra*/
         gap: 40px;
-        padding: 40px 20px;
+        padding: 30px 20px;
+        /*forza tutti i test ad allinearsi al centro */
         text-align: center;
     }
     .info,
@@ -215,17 +246,20 @@ footer h2,
 }
 
 
-/* --- MOBILE E SMARTPHONE --- */
+/* MOBILE E SMARTPHONE */
 
 @media (max-width: 768px) {
     /* Header Mobile */
     .header {
         height: 60px;
+        border-bottom: none;
     }
-    /* Menu Hamburger Desktop Hidden -> Mobile Visible */
+    /* IL Menu Hamburger viene reso visibile*/
     .hamb-menu {
         display: flex;
+        /*allinea le righe nell'header*/
         align-items: center;
+        /*centra le righe orizzontalmente all'header*/
         justify-content: center;
         cursor: pointer;
         z-index: 9999;
@@ -244,33 +278,37 @@ footer h2,
         border-bottom: 2px solid #FFD94A;
         opacity: 0;
         visibility: hidden;
-        transform: translateY(-200%);
+        /*gestisce l'animazione a tendina che scende quando viene aperto*/
         transition: transform 0.4s ease, opacity 0.4s ease, visibility 0.4s ease;
     }
     .menu-open .header-menu {
         opacity: 1;
         visibility: visible;
-        transform: translateY(0);
     }
     .header-menu li {
         width: 100%;
         text-align: center;
         margin-right: 0;
-        /* Annulla il margine destro del desktop */
     }
     .header-menu li a {
         display: block;
         padding: 10px 5px;
         font-size: 0.6rem;
+        /*crea una sottile riga grigia tra una voce e l'altra dell'header*/
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
     .header-menu li:last-child a {
+        /*toglie la riga grigia all'ultima voce del menù perchè già da quella gialla*/
         border-bottom: none;
     }
-    /* Footer Social Mobile (Unito al blocco 768px) */
+    /*Footer mobile */
     .social .ig,
     .social .fb,
     .social .tk {
         width: 30px;
+    }
+    .icon-big {
+        margin-left: 10vw;
+        margin-right: 3.2vw;
     }
 }

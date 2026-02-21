@@ -1,16 +1,15 @@
-/* =========================================
-   1. IMPOSTAZIONI BASE E SFONDO
-========================================= */
+/* IMPOSTAZIONI BASE E SFONDO VIDEO*/
 
 html {
     margin: 0;
     background-color: #1a1a1a;
     color: #f5f5f5;
     font-family: 'Intro', sans-serif;
+    /*aumenta lo spazio tra le righe di testo */
     line-height: 1.6;
 }
 
-body{
+body {
     background-color: transparent;
 }
 
@@ -18,18 +17,17 @@ body{
     position: fixed;
     top: 0;
     left: 0;
+    /*livello di profondità basso, tutto il resto del sito si troverà sopra il video */
     z-index: 0;
     width: 100%;
     height: 100vh;
+    /*adatta il video alla grandezza della pagina*/
     object-fit: cover;
     opacity: 0.4;
-    
 }
 
 
-/* =========================================
-   2. SEZIONI E TITOLI INIZIALI
-========================================= */
+/* SEZIONI E TITOLI INIZIALI */
 
 .section {
     position: relative;
@@ -40,9 +38,11 @@ body{
 
 .title {
     display: flex;
+    /*allinea verticalmente il titolo rispetto al centro  */
     align-items: center;
-    justify-content: center;
+    /*centra orizzontalmente il titolo */
     position: relative;
+    /*limita la grandezza del titolo a metà scherma, poi continua a capo */
     max-width: 50%;
     height: 100vh;
     margin-left: 25%;
@@ -51,10 +51,12 @@ body{
     font-size: 3.5rem;
     font-style: italic;
     letter-spacing: 0.1vw;
+    /*assicura che se il testo va a capo sia centraro riga per riga*/
     text-align: center;
     text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     opacity: 0;
-    transform: scale(1);
+    /*animazione creata quando vengono inviate le parole sullo schermo */
+    transform: scale(2);
     transition: all 1s cubic-bezier(.215, .61, .355, 1);
 }
 
@@ -64,30 +66,33 @@ body{
 }
 
 
-/* =========================================
-   3. PANNELLI
-========================================= */
+/* PANNELLI */
 
 .panel {
+    /*Fa in modo che il pannello si incolli temporaneamente allo schermo anzichè scorrere subito*/
     position: sticky;
-    top: -7vh;
+    /*specifica che il pannello si fermerà quando il suo bordo superiore sarà al 1.5% dello schermo oltre il margine */
+    top: -1.5vh;
     z-index: 2;
     width: 100%;
     height: 130vh;
     margin-bottom: 30vh;
     background: #f7f7f7;
     color: #2e2e2e;
+    /*arrotonda gli angoli del pannello*/
     border-radius: 1%;
     box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.2);
+    padding-top: 1.3vh;
 }
 
 .panel2 {
-    top: -7vh;
+    top: -1.5vh;
     z-index: 10;
     height: 75vh;
     margin-bottom: 40vh;
     background-color: #1e5f9c;
     color: #f7f7f7;
+    padding-top: 1.3vh;
 }
 
 .panel3 {
@@ -96,12 +101,11 @@ body{
     margin-bottom: 0;
     background-color: #2f86c1;
     color: #f5f5f5;
+    padding-top: 1.3vh;
 }
 
 
-/* =========================================
-   4. TIPOGRAFIA E TESTI PANNELLI
-========================================= */
+/* TESTI PANNELLI */
 
 .intro {
     padding-top: 2%;
@@ -174,23 +178,26 @@ body{
 }
 
 
-/* =========================================
-   5. ANIMAZIONI E IMMAGINI
-========================================= */
+/* ANIMAZIONI E IMMAGINI */
 
 .fade-in,
 .tit {
+    /*invisibili di partenza*/
     opacity: 0;
+    /*vengono spsotati di 20px verso il basso rispetto alla loro posizione di partenza*/
     transform: translateY(20px);
+    /*Animazione di 1,5s per quando dovranno apparire*/
     transition: all 1.5s cubic-bezier(.215, .61, .355, 1);
 }
 
 .tit {
+    /*valore che ci permette di avere il testo sopra le immagini */
     z-index: 4;
 }
 
 .fade-in.in-page,
 .tit.in-page {
+    /*Il testo diventa visibile*/
     opacity: 1;
     transform: translateY(0);
 }
@@ -204,24 +211,24 @@ body{
 }
 
 
-/* =========================================
-   6. SEZIONE CONTATORI
-========================================= */
+/* CONTATORE */
 
 .cont-container {
     display: flex;
+    /*allinea i contatori verticalemente a centro schermo */
     align-items: center;
+    /*centra i contatori orizzontalemente */
     justify-content: center;
     position: relative;
     z-index: 50;
     width: 100%;
-    min-height: 60vh;
+    min-height: 63vh;
     margin-top: -4.7vh;
     background-color: #0d375d;
     color: #f7f7f7;
+    /*centra i testi che vanno a capo */
     text-align: center;
     box-shadow: 0 -10px 30px rgba(0, 0, 0, 1);
-    /* Bug rgba risolto */
 }
 
 .cont-container h1 {
@@ -245,11 +252,14 @@ body{
 .cont-client,
 .cont-year {
     display: flex;
+    /*allinea vericalmente i numeri rispetto allo schermo*/
     align-items: center;
+    /*centra orizzontalmente i numeri*/
     justify-content: center;
-    width: 8.8vw;
+    /*dimensioni cerchio*/
+    width: 9.5vw;
     height: 8.8vh;
-    margin: 1.56vh auto;
+    margin: 1.9vh auto;
     background: transparent;
     color: #FFD94A;
     border: 2px solid #FFD94A;
@@ -264,15 +274,15 @@ body{
 
 .cont-client:hover,
 .cont-year:hover {
+    /*Il cerchio si riempie diventando tutto giallo*/
     background: #FFD94A;
     color: #1a1a1a;
+    /*Il cerchio si ingrandisce del 5%*/
     transform: scale(1.05);
 }
 
 
-/* =========================================
-   7. MEDIA QUERIES
-========================================= */
+/* MEDIA QUERIES */
 
 @media (max-width: 57.3vw) {
     .cont-container {
@@ -283,12 +293,21 @@ body{
 }
 
 @media (max-width: 53.3vw) {
+    /* FIX SCRITTA TAGLIATA: Aggiungiamo spazio interno in alto a tutti i pannelli 
+       per spingere i titoli in basso e salvarli dall'header nero fisso */
+    .panel,
+    .panel2,
+    .panel3 {
+        padding-top: 100px !important;
+    }
     .panel {
         position: sticky;
         top: 4.16vh;
         z-index: 2;
         display: flex;
+        /*allinea verticalmente i contenuti a centro schermo */
         align-items: center;
+        /*centra orizzontalemente i contenuti*/
         justify-content: center;
         width: 100%;
         height: 57vh;

@@ -1,12 +1,13 @@
-/* --- MESSAGGI DI ERRORE --- */
+/* MESSAGGI DI ERRORE */
 
 .error {
     background-color: #ff9e44;
     color: white;
     text-align: center;
     font-family: sans-serif;
+    /* Spazio interno in un unica regola*/
     padding: 15px;
-    /* Accorpato margin e margin-bottom in un'unica regola */
+    /* Spazio interno in un'unica regola */
     margin: 20px auto 40px;
     max-width: 800px;
     border-radius: 5px;
@@ -14,14 +15,14 @@
 }
 
 
-/* --- SEZIONE TITOLI CATEGORIE --- */
+/* SEZIONE TITOLI CATEGORIE */
 
 .category-section {
+    /*Quando la pagina scorre si ferma 140px prima per non finere sotto l'header*/
     scroll-margin-top: 140px;
-    /* Accorpato padding e padding-bottom. Lo zero non ha bisogno di unità di misura */
     padding: 0 1vw 60px;
-    /* Accorpato margin-top e margin-bottom in un'unica regola */
     margin: -30px 0 80px;
+    /* Linea sottile (1px) in basso per separare le sezioni */
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -35,6 +36,7 @@
     font-family: 'Intro', sans-serif;
     font-size: 3.5rem;
     color: #FFD94A;
+    /*Lettere del titolo scritte tutte in maiuscolo*/
     text-transform: uppercase;
     margin-bottom: 0.52vh;
 }
@@ -42,13 +44,14 @@
 .category-desc {
     font-size: 1.2rem;
     color: #ccc;
+    /* Aumenta l'altezza delle righe per migliorare la leggibilità dei testi lunghi */
     line-height: 1.6;
     max-width: 41.7vw;
     margin: 0 auto;
 }
 
 
-/* --- INPUT DATA --- */
+/* INPUT DATA */
 
 input[type="date"] {
     background-color: #FFD94A;
@@ -61,34 +64,49 @@ input[type="date"] {
     margin-top: 1vh;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 12px;
-    outline: none;
     width: 100%;
+    /*cambia il mouse in una mano per far capire l'utente che e possibile interagire*/
     max-width: 300px;
     cursor: pointer;
+    /*Il cambiamento avviene in modo graduale (0.3s) */
     transition: all 0.3s ease;
+    /* Rimuove lo stile predefinito del sistema operativo per l'input data su Safari/Chrome */
     -webkit-appearance: none;
+    /* Rimuove lo stile predefinito del sistema operativo per l'input data sugli altri browser */
     appearance: none;
     position: relative;
 }
+
+
+/*Regola che si attiva al passaggio del puntatore sul mouse 
+  e quando si scrive\selezionando dentro l'input data*/
 
 input[type="date"]:hover,
 input[type="date"]:focus {
     border-color: #ffffff;
     box-shadow: 0 0 15px rgba(255, 217, 74, 0.3);
+    /*Sposta l'input verso l'alto creando un effetto sollevamento*/
     transform: translateY(-2px);
 }
 
 
-/* --- SLIDER FOTO --- */
+/* SLIDER FOTO */
 
 .grid-container {
+    /* Dispone le foto una di fianco all'altra */
     display: flex !important;
+    /* Impedisce alle foto di andare a capo riga, costringendole a stare in orizzontale */
     flex-wrap: nowrap !important;
+    /*spazio tra una foto e l'altra*/
     gap: 40px;
     padding: 60px 80px;
+    /* Abilita la barra di scorrimento orizzontale se le foto superano la larghezza dello schermo */
     overflow-x: auto !important;
+    /* Permette all'ombra e agli effetti zoom delle foto di uscire verticalmente senza essere tagliati */
     overflow-y: visible !important;
+    /* Slider "magnetico" sull'asse X. Permette alla barra di fermarsi nei punti di snap (scroll-snap-align)*/
     scroll-snap-type: x mandatory;
+    /*Sbarra di scorrimento sottile*/
     scrollbar-width: thin;
     scrollbar-color: #FFD94A #1d1d1f;
 }
@@ -98,10 +116,12 @@ input[type="date"]:focus {
 }
 
 .grid-container::-webkit-scrollbar-track {
+    /*colore binario in cui scorre la barra*/
     background: #1d1d1f;
 }
 
 .grid-container::-webkit-scrollbar-thumb {
+    /*colore barra*/
     background-color: #FFD94A;
     border-radius: 10px;
 }
@@ -110,6 +130,7 @@ input[type="date"]:focus {
 /* CARD CONTENITORE FOTO */
 
 .photo-card {
+    /*La card non puo ingrandirsi o rimpiccilirsi automaticamente. Usa le misure fisse*/
     flex: 0 0 auto !important;
     width: 600px !important;
     /* Rimossa la ridondanza di min-width */
@@ -117,13 +138,16 @@ input[type="date"]:focus {
     background: #000;
     border: 2px solid rgba(255, 217, 74, 0.5);
     border-radius: 20px;
+    /*Nasconde i pezzi di immagine fuori dai bordi arrotondati*/
     overflow: hidden;
     position: relative;
+    /*Permette di fermare lo slider facendo si che la foto selezionata sia perfettamente al centro*/
     scroll-snap-align: center;
+    /*cambia il mouse in una mano per far capire l'utente che e possibile interagire*/
     cursor: pointer;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    /*migliora il ridimensionamento dell'immagine quando si passa su con il mouse */
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, z-index 0s;
-    z-index: 1;
 }
 
 
@@ -133,30 +157,34 @@ input[type="date"]:focus {
     border-color: #FFD94A;
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
     transform: scale(1.2);
+    /**fa si che la foto selezionata non venga nascosta dalle altre vicino */
     z-index: 999;
 }
 
 .images {
-    display: block;
     width: 100% !important;
     height: 100% !important;
+    /* Impone all'immagine di riempire il contenitore senza deformarsi o schiacciarsi */
     object-fit: cover !important;
 }
 
 
-/* --- BOTTONE PRENOTA --- */
+/* BOTTONE PRENOTA */
 
 .btn-whatsapp-big {
+    /* definisce padding e margin del bottone */
     display: inline-block;
     background-color: #FFD94A;
     color: #3a0707;
-    /* Pulito l'esadecimale */
+    /* testo del bottone in grasseto*/
     font-weight: bold;
     font-size: 1.2rem;
+    /*Rimuove la sottolineatura del link cliccabili*/
     text-decoration: none;
     padding: 0.78vh 1.56vw;
     margin-top: 1.56vh;
     border-radius: 50px;
+    /*migliora il ridimensionamento del bottone quando si passa su con il mouse */
     transition: background 0.3s ease, transform 0.3s ease;
 }
 
@@ -170,5 +198,6 @@ input[type="date"]:focus {
     border-color: #999 !important;
     pointer-events: none;
     opacity: 0.5;
+    /*cambia il cursore in un simbolo vietato per far capire all'utente che quell'elemento non è cliccabile */
     cursor: not-allowed;
 }
