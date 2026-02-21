@@ -1,50 +1,40 @@
-// ==========================================
-// 1. GESTIONE EVENTI DOM (Caricamento pagina)
-// ==========================================
+/* GESTIONE EVENTI DOM (Caricamento pagina) */
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() { // Mette in "pausa" il JavaScript finché l'intero scheletro HTML della pagina non è stato caricato. 
 
-    // --- Menu Hamburger ---
-    const hambMenu = document.querySelector('.hamb-menu');
+    //  Menu Hamburger 
+    const hambMenu = document.querySelector('.hamb-menu'); // Cerca nel documento l'icona del menu a panino (.hamb-menu) e la salva nella variabile 'hambMenu'
     if (hambMenu) {
-        hambMenu.addEventListener("click", function() {
+        hambMenu.addEventListener("click", function() { //Se qualcuno clicca sull'icona esegue l'azione "menu open"
             document.body.classList.toggle('menu-open');
         });
     }
 
-    // --- Aggiornamento Link Prenotazione tramite Classi ---
-    // Seleziona tutti gli input di tipo date con la nostra classe
-    const dateInputs = document.querySelectorAll('.date_picker_input');
+    // Aggiornamento Link Prenotazione tramite Classi 
+    const dateInputs = document.querySelectorAll('.date_picker_input'); // Seleziona tutti gli input di tipo date con la classe
 
-    dateInputs.forEach(input => {
+    dateInputs.forEach(input => { //per ogni input trovato:
         input.addEventListener('change', function() {
-            // Trova il contenitore genitore (category-header)
-            const parentDiv = document.getElementById("category-header").parentNode;
 
-            // Trova il bottone di prenotazione dentro questo contenitore
-            const btn = parentDiv.querySelector('.link-prenotazione');
+            const parentDiv = document.getElementById("category-header").parentNode; // Trova il contenitore genitore (category-header) per lavoroare nella stessa sezione
 
-            // Ottieni la data selezionata
-            const selectedDate = this.value;
+            const btn = parentDiv.querySelector('.link-prenotazione'); // Trova il bottone di prenotazione dentro il contenitore
 
-            // Esegue solo se il bottone esiste
-            if (btn) {
+            const selectedDate = this.value; // Ottieni la data selezionata
+
+            if (btn) { //Se il bottone esiste
                 if (selectedDate) {
-                    // Recupera il link base (es: salva_prenotazione.php?nome=...&prezzo=...)
-                    const baseUrl = btn.getAttribute('data-baseurl');
 
-                    // Crea il nuovo link aggiungendo la data
-                    const newUrl = baseUrl + '&data=' + encodeURIComponent(selectedDate);
+                    const baseUrl = btn.getAttribute('data-baseurl'); // Prende il link base salvato nel file html( salva_prenotazione.php?nome=...&prezzo=...)
 
-                    // Aggiorna l'href del bottone
-                    btn.setAttribute('href', newUrl);
+                    const newUrl = baseUrl + '&data=' + encodeURIComponent(selectedDate); // Modifica il link base aggiungendo la data selezionata
 
-                    // Rimuovi la classe che lo disabilita
-                    btn.classList.remove('btn-disabled');
+                    btn.setAttribute('href', newUrl); // Aggiorna l'href del bottone
+
+                    btn.classList.remove('btn-disabled'); // Rimuovi la classe che lo disabilita
                 } else {
-                    // Se l'utente cancella la data, disabilita di nuovo
-                    btn.classList.add('btn-disabled');
-                    btn.setAttribute('href', '#');
+                    btn.classList.add('btn-disabled'); // Se l'utente cancella la data, disabilita di nuovo il bottone
+                    btn.setAttribute('href', '#'); //azzerA il liink del bottone
                 }
             }
         });
@@ -52,50 +42,43 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
+/* FUNZIONI GLOBALI (Richiamate dall'HTML) */
 
-// ==========================================
-// 2. FUNZIONI GLOBALI (Richiamate dall'HTML)
-// ==========================================
-
-function updateBookingLink(id) {
-    // Recupera gli elementi
-    const dateInput = document.getElementById('date_' + id);
-    const btn = document.getElementById('btn_prenota_' + id);
+function updateBookingLink(id) { //Funzione che aggiorna il link di prenotazione. id è il numeero specificato dalla camera
+    const dateInput = document.getElementById('date_' + id); // Recupera la data specifica
+    const btn = document.getElementById('btn_prenota_' + id); //Recupera il bottone prenota della casa scelta
 
     // Errori: Sia quello client (js) che quello server (php)
     const errorMsgClient = document.getElementById('error_msg_' + id);
     const errorMsgServer = document.getElementById('server_error_' + id);
 
-    // Blocco di sicurezza se mancano gli elementi
-    if (!dateInput || !btn) return;
+    if (!dateInput || !btn) return; // Blocco di sicurezza: se mancano gli elementi esce fuori
 
-    // Recupera il link base (senza data)
+    // Recupera il link base (senza data): legge poi bottone e data salvata nel link base
     const baseUrl = btn.getAttribute('data-baseurl');
     const selectedDate = dateInput.value;
 
-    if (selectedDate) {
-        // Aggiunge la data selezionata alla fine del link
-        btn.href = baseUrl + "&data=" + encodeURIComponent(selectedDate);
+    if (selectedDate) { //Se è stata selezionata una data
+        btn.href = baseUrl + "&data=" + encodeURIComponent(selectedDate); // Aggiunge la data selezionata alla fine del link
 
-        // NASCONDE TUTTI GLI ERRORI (Client e Server)
-        // Così se l'utente cambia data, il box rosso sparisce
+        // Nasconde gli errori, così se l'utente cambia data, il box sparisce
         if (errorMsgClient) errorMsgClient.style.display = 'none';
         if (errorMsgServer) errorMsgServer.style.display = 'none';
     }
 }
 
+//Funzione di controllo che scatta quando l'utente clicca sul link prenota senza aver inserito una data
 function checkDateSelected(id) {
-    const dateInput = document.getElementById('date_' + id);
-    const errorMsgClient = document.getElementById('error_msg_' + id);
+    const dateInput = document.getElementById('date_' + id); //Prende il bottone per la scelta della data della prenotazione
+    const errorMsgClient = document.getElementById('error_msg_' + id); //Prende il messaggio di errore nascosto per quella casa
 
-    // Blocco di sicurezza
-    if (!dateInput) return false;
+    if (!dateInput) return false; // Se non trova una data , blocca l'azione (restituisce 'falso', il click si annulla)
 
     // Se l'input data è vuoto, blocca il click e mostra errore
     if (!dateInput.value) {
-        if (errorMsgClient) errorMsgClient.style.display = 'block';
+        if (errorMsgClient) errorMsgClient.style.display = 'block'; //Messaggio di errore
         return false;
     }
 
-    return true;
+    return true; //Se la data c'è, viene effettuata la prenotazione
 }
