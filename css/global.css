@@ -34,6 +34,7 @@ body {
 }
 
 .header-content {
+    /* Seleziona il contenitore invisibile che tiene centrato il menu dentro l'header */
     /*layout flessibile per posizionare logo e link sulla stessa riga*/
     display: flex;
     /*allinea verticalmente tutti gli elementi dell'header al centro  */
@@ -246,7 +247,7 @@ footer h2,
 }
 
 
-/* MOBILE E SMARTPHONE */
+/*ADATTAMENTO PER MEZZO SCHERMO E TABLET*/
 
 @media (max-width: 768px) {
     /* Header Mobile */

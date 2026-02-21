@@ -1,10 +1,10 @@
-/* =========================================
-   1. CONTENITORE PRINCIPALE E SFONDO
-========================================= */
+/* CONTENITORE PRINCIPALE E SFONDO */
 
 .container {
     display: flex;
+    /*Allinea tutto il contenuto verticalmente*/
     align-items: center;
+    /*Centra tutto il contenuto orizzontalmente*/
     justify-content: center;
     position: relative;
     width: 100%;
@@ -75,9 +75,7 @@
 }
 
 
-/* =========================================
-   2. WRAPPER E STRUTTURA PANNELLI (SLIDER)
-========================================= */
+/* WRAPPER E STRUTTURA PANNELLI (SLIDER) */
 
 .wrapper {
     position: relative;
@@ -97,6 +95,7 @@
     z-index: 10;
     width: 400vw;
     height: 120vh;
+    /* Anima lo spostamento dei pannelli (quando premi le frecce) con una transizione di mezzo secondo */
     transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
@@ -111,7 +110,6 @@
     width: 80vw;
     height: 95vh;
     margin: 2vh 25vw 0;
-    /* Accorpato margin e margin-top */
     padding: 20px;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -137,9 +135,7 @@
 }
 
 
-/* =========================================
-   3. CONTENUTI INTERNI DEI PANNELLI
-========================================= */
+/* CONTENUTI INTERNI DEI PANNELLI */
 
 .pack-base {
     width: 100%;
@@ -156,7 +152,6 @@
 .pack-base p {
     position: relative;
     top: 15px;
-    /* REGOLA QUESTO VALORE per scendere o salire (es. 60px, 70px...) */
     margin: 0;
     padding: 0 10px;
 }
@@ -169,6 +164,7 @@ h4 {
 }
 
 h4 a {
+    /*Per il titolo cliccabile toglie la classica  riga sottolineata di default dei browser */
     text-decoration: none;
 }
 
@@ -182,23 +178,26 @@ h4 a {
 }
 
 .frslider {
+    /* Seleziona le frecce cliccabili per scorrere avanti o indietro i pannelli */
     width: 10%;
     color: #1d1d1f;
     transition: transform 0.3s ease;
 }
 
 .frslider:hover {
+    /*Animazione fluida (0.3 secondi) per quando si passa alle frecci e con il mouse */
     transform: scale(1.2);
 }
 
 
-/* =========================================
-   4. STILI FORM PRENOTAZIONE E MESSAGGI
-========================================= */
+/* STILI FORM PRENOTAZIONE E MESSAGGI */
 
 .booking-form {
+    /*Seleziona la data per prenotare il pacchetto */
     display: flex;
+    /*Inserisce campo di prenotazione e tasto uno sopra l'altro*/
     flex-direction: column;
+    /*Li allinea cnetrali uno rispetto all'altro */
     align-items: center;
     gap: 10px;
     margin-top: 15px;
@@ -210,12 +209,15 @@ h4 a {
     background: #ffffff;
     color: #333;
     font-family: 'Helvetica Neue', sans-serif;
+    /* Disegna un bordino grigio molto sottile e tenue */
     border: 1px solid #ccc;
     border-radius: 5px;
+    /*Quando si passa con il muose sopra gli elementi, il cursore diventa una mano1*/
     cursor: pointer;
 }
 
 .btn-prenota-pack {
+    /*bottone prenota*/
     padding: 10px 20px;
     background: #FFD94A;
     color: white;
@@ -225,6 +227,7 @@ h4 a {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    /*Anima la grandezza e il cambio di colore*/
     transition: transform 0.2s, background-color 0.2s;
 }
 
@@ -244,12 +247,10 @@ h4 a {
 }
 
 
-/* =========================================
-   5. MEDIA QUERIES (RESPONSIVE)
-========================================= */
+/* MEDIA QUERIES (RESPONSIVE) */
 
 
-/* --- ADATTAMENTO PER MEZZO SCHERMO E TABLET --- */
+/*ADATTAMENTO PER MEZZO SCHERMO E TABLET  */
 
 @media (max-width: 1100px) {
     .panel,
@@ -261,13 +262,9 @@ h4 a {
         justify-content: space-between !important;
         width: 85vw !important;
         min-height: 60vh !important;
-        /* Garantisce una lunghezza base */
         height: auto !important;
-        /* FORZA il pannello ad allungarsi quanto serve, annullando vecchi blocchi */
         max-height: 90vw !important;
-        /* Rimuove eventuali tetti massimi */
         margin: 0 7.5vw !important;
-        /* LA MAGIA AVVIENE QUI SOTTO: accorpato padding e padding-bottom. Aggiunge spazio rosa extra sotto le frecce */
         padding: 20px 20px 40px !important;
     }
     .img-pack {

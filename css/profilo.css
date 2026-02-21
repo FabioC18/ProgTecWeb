@@ -1,6 +1,4 @@
-/* =========================================
-   1. RESET E IMPOSTAZIONI GLOBALI
-========================================= */
+/*RESET E IMPOSTAZIONI GLOBALE */
 
 * {
     box-sizing: border-box;
@@ -9,6 +7,8 @@
 }
 
 html {
+    /* Impostazioni per il tag radice dell'intero documento */
+    /* Nasconde tutto ciò che esce fuori a destra o sinistra, prevenendo lo scroll orizzontale */
     overflow-x: hidden;
 }
 
@@ -21,9 +21,7 @@ body {
 }
 
 
-/* =========================================
-   2. HEADER
-========================================= */
+/* HEADER */
 
 header {
     position: fixed;
@@ -35,12 +33,15 @@ header {
     background-color: rgba(29, 29, 31, 0.95);
     border-bottom: 1px solid rgba(255, 217, 74, 0.2);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    /* Sfoca ciò che passa dietro all'header trasparente  */
     backdrop-filter: blur(10px);
 }
 
 .header-content {
+    /* Contenitore interno dell'header che allinea il menu */
     display: flex;
     align-items: center;
+    /* Spinge il link "Torna alla home" a sinistra e il menu a destra, creando spazio al centro */
     justify-content: space-between;
     width: 100%;
     max-width: 1200px;
@@ -51,9 +52,7 @@ header {
 }
 
 
-/* =========================================
-   3. LAYOUT PROFILO E BOX
-========================================= */
+/* LAYOUT PROFILO E BOX */
 
 .container {
     max-width: 900px;
@@ -62,9 +61,10 @@ header {
 }
 
 .profile-grid {
+    /*contenitore per disporre gli elementi a griglia */
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 40px;
+    gap: 60px;
 }
 
 
@@ -90,11 +90,10 @@ h2 {
 }
 
 
-/* =========================================
-   4. FORM, INPUT E TOOLTIP
-========================================= */
+/* FORM, INPUT E TOOLTIP */
 
 label {
+    /* Seleziona le etichette di testo sopra i campi di input */
     display: block;
     margin-top: 15px;
     color: #ccc;
@@ -102,6 +101,7 @@ label {
 
 input[type="text"],
 input[type="password"] {
+    /* Seleziona i campi di testo normale e i campi per le password*/
     width: 100%;
     margin-top: 5px;
     padding: 10px;
@@ -113,12 +113,12 @@ input[type="password"] {
 
 .password-container {
     display: flex;
-    /* aggiunto per il justify-content */
     justify-content: center;
     position: relative;
 }
 
 .toggle-password {
+    /*bottone per rivelare la password nascosta*/
     position: absolute;
     top: 1vh;
     right: 10px;
@@ -128,6 +128,7 @@ input[type="password"] {
 }
 
 .toggle-password img {
+    /*occhio nascosto dentro al bottone*/
     width: 25px;
     height: 29px;
 }
@@ -136,6 +137,7 @@ input[type="password"] {
 /* Tooltip Requisiti Password */
 
 .tooltip-requirements {
+    /*popup che mostra le regole per creare una nuova password*/
     display: none;
     position: absolute;
     top: 100%;
@@ -163,9 +165,7 @@ input[type="password"] {
 }
 
 
-/* =========================================
-   5. TABELLA PRENOTAZIONI
-========================================= */
+/* TABELLA PRENOTAZIONI */
 
 table {
     width: 100%;
@@ -175,6 +175,7 @@ table {
 
 th,
 td {
+    /*Celle di intestazione e celle per i dati della tabella*/
     padding: 12px 3px 12px 12px;
     text-align: left;
     border-bottom: 1px solid #444;
@@ -185,13 +186,13 @@ th {
 }
 
 tr:hover {
+    /* Regola attiva quando il mouse passa sopra un'intera riga della tabella */
+    /*Evidenzia la riga schierandola con un bianco trasparente*/
     background: rgba(255, 255, 255, 0.05);
 }
 
 
-/* =========================================
-   6. BOTTONI E MESSAGGI FEEDBACK
-========================================= */
+/* BOTTONI E MESSAGGI DI FEEDBACK*/
 
 .btn-save {
     display: inline-block;
@@ -206,10 +207,12 @@ tr:hover {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    /*Animazione sulla trasparenza per quando si disabilita*/
     transition: opacity 0.3s;
 }
 
 .btn-save:disabled {
+    /* Stato del bottone quando è bloccato e non cliccabile */
     background-color: #555;
     color: #888;
     cursor: not-allowed;
@@ -236,11 +239,11 @@ tr:hover {
 }
 
 
-/* =========================================
-   7. MAPPA LEAFLET
-========================================= */
+/* MAPPA LEAFLET */
 
 #map {
+    /*Il contenitore (div) destinato a caricare la mappa interattiva Leaflet/Google Maps */
+    /*inzialmente la mappa non è visibile se non si clicca sul pulsante */
     display: none;
     width: 100%;
     height: 400px;
@@ -250,15 +253,16 @@ tr:hover {
 }
 
 
-/* =========================================
-   8. FOOTER
-========================================= */
+/* FOOTER */
 
 footer {
     display: grid;
+    /* 3 colonne di larghezza uguale (1 frazione di spazio ciascuna) */
     grid-template-columns: repeat(3, 1fr);
     gap: 15%;
+    /*Allinea i contenuti di ogni colonna in alto */
     align-items: start;
+    /*Centra orizzontalmente il contenuto della colonna*/
     justify-items: center;
     position: relative;
     z-index: 9999;
@@ -272,6 +276,7 @@ footer {
 }
 
 footer h1 {
+    /*Titolo principale footer*/
     display: inline-block;
     margin-bottom: 1vh;
     padding-bottom: 0.52vh;
@@ -281,17 +286,14 @@ footer h1 {
     border-bottom: 1px solid #2F86C1;
 }
 
-
-/* Ottimizzazione selettore h2 */
-
 footer h2 {
+    /*Titolo secondario footer*/
     padding-bottom: 0;
     color: #aaaaaa;
     font-size: 0.9rem;
     font-weight: 400;
     line-height: 2;
     border-bottom: none;
-    /* FIX: Annulla la linea globale h2 */
 }
 
 .social .ig,
@@ -314,18 +316,16 @@ footer h2 {
 }
 
 
-/* =========================================
-   9. MEDIA QUERIES (RESPONSIVE)
-========================================= */
-
-
-/* --- TABLET E SCHERMI MEDI --- */
+/*MEDIA QUERIES (RESPONSIVE) */
 
 @media (max-width: 900px) {
     footer {
-        grid-template-columns: 1fr;
+        /*Divide il footer in 3 colonne uguali */
+        grid-template-columns: repeat(3, 1fr);
+        /*spazio tra un colonna e l'altra*/
         gap: 40px;
-        padding: 40px 20px;
+        padding: 30px 20px;
+        /*forza tutti i test ad allinearsi al centro */
         text-align: center;
     }
     .info,
@@ -336,16 +336,69 @@ footer h2 {
 }
 
 
-/* --- MOBILE E SMARTPHONE --- */
+/*ADATTAMENTO PER MEZZO SCHERMO E TABLET*/
 
 @media (max-width: 768px) {
-    .profile-grid {
-        grid-template-columns: 1fr;
+    /* Header Mobile */
+    .header {
+        height: 60px;
+        border-bottom: none;
     }
+    /* IL Menu Hamburger viene reso visibile*/
+    .hamb-menu {
+        display: flex;
+        /*allinea le righe nell'header*/
+        align-items: center;
+        /*centra le righe orizzontalmente all'header*/
+        justify-content: center;
+        cursor: pointer;
+        z-index: 9999;
+    }
+    /* Menu a tendina */
+    .header-menu {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        z-index: 9998;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: 0;
+        background-color: #1d1d1f;
+        border-bottom: 2px solid #FFD94A;
+        opacity: 0;
+        visibility: hidden;
+        /*gestisce l'animazione a tendina che scende quando viene aperto*/
+        transition: transform 0.4s ease, opacity 0.4s ease, visibility 0.4s ease;
+    }
+    .menu-open .header-menu {
+        opacity: 1;
+        visibility: visible;
+    }
+    .header-menu li {
+        width: 100%;
+        text-align: center;
+        margin-right: 0;
+    }
+    .header-menu li a {
+        display: block;
+        padding: 10px 5px;
+        font-size: 0.6rem;
+        /*crea una sottile riga grigia tra una voce e l'altra dell'header*/
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .header-menu li:last-child a {
+        /*toglie la riga grigia all'ultima voce del menù perchè già da quella gialla*/
+        border-bottom: none;
+    }
+    /*Footer mobile */
     .social .ig,
     .social .fb,
     .social .tk {
         width: 30px;
-        /* Misura di sicurezza per mobile */
+    }
+    .icon-big {
+        margin-left: 10vw;
+        margin-right: 3.2vw;
     }
 }

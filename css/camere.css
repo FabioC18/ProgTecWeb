@@ -54,6 +54,7 @@
 /* INPUT DATA */
 
 input[type="date"] {
+    /*Seleziona i campi input html per scegliere le date*/
     background-color: #FFD94A;
     color: #3a0707;
     /* Pulito l'esadecimale */
@@ -79,7 +80,7 @@ input[type="date"] {
 
 
 /*Regola che si attiva al passaggio del puntatore sul mouse 
-  e quando si scrive\selezionando dentro l'input data*/
+  e quando si scriveo si sta selezionando dentro l'input data*/
 
 input[type="date"]:hover,
 input[type="date"]:focus {
@@ -110,6 +111,9 @@ input[type="date"]:focus {
     scrollbar-width: thin;
     scrollbar-color: #FFD94A #1d1d1f;
 }
+
+
+/*Regole per personalizzare la barra di scorrimento su browser webkit*/
 
 .grid-container::-webkit-scrollbar {
     height: 12px;
