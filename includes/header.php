@@ -1,7 +1,9 @@
-<header class="header">
-  <div class="header-content"> 
-    <a class="icon-big" href="index.php">
-      <svg viewBox="0 0 900 260" width="155" height="40" role="img" aria-label="Salerno Mare & Luci">
+<header class="header"> <!-- intestazione della pagina stilizzata tramite CSS (class)-->
+  <div class="header-content"> <!-- contenitore generico (div): identifica un gruppo di elelementi. Viene usato in css-->
+   
+    <a class="icon-big" href="index.php"> 
+
+      <svg viewBox="0 0 900 260" width="155" height="40" role="img" aria-label="Salerno Mare & Luci"> <!-- grafica per la creazione del logo-->
         <g fill="none" fill-rule="evenodd">
           <rect x="30" y="40" width="170" height="170" stroke="#2E2E2E" stroke-width="4"/>
           <path d="M30 175 C70 155,110 195,150 175 C170 165,190 185,200 175 L200 210 L30 210 Z" fill="#2F86C1"/>
@@ -14,23 +16,24 @@
           <text x="250" y="200" fill="#1E5F9C" font-size="52" font-family="Arial, sans-serif" letter-spacing="6">MARE &amp; LUCI</text>
         </g>
       </svg>
+
     </a>
 
-    <nav>
+    <nav> <!-- sezione della pagina dedicate alla navigazione-->
         <ul class="header-menu">
             <li><a href="camere.php">Case vacanza</a></li>
             <li><a href="pacchetti.php">Pacchetti</a></li>
-            <?php if (isset($_SESSION['user'])): ?>
-                <li><a class="name" href="profilo.php">Ciao, <?php echo htmlspecialchars($_SESSION['user']); ?></a></li>
-                <li class="menu-item-session"><a href="logout.php" onclick="return confirm('Sei sicuro di voler uscire?');">Logout</a></li>
-            <?php else: ?>
+            <?php if (isset($_SESSION['user'])): ?> <!-- controllo se l'utente e loggato -->
+                <li><a class="name" href="profilo.php">Ciao, <?php echo htmlspecialchars($_SESSION['user']); ?></a></li> <!-- se l'utente e loggato mostra il suo nome e il link al suo profilo personale-->
+                <li class="menu-item-session"><a href="logout.php" onclick="return confirm('Sei sicuro di voler uscire?');">Logout</a></li> <!-- popup per confermare di voler uscire da sito  -->
+            <?php else: ?> <!-- se l'utente non è loggato viene mostrato il link per effettuare il login o la registrazione -->
                 <li><a href="login_reg.php">Login / Registrati</a></li>
             <?php endif; ?>
         </ul>
     </nav>
 
-    <div class="hamb-menu">
-       <svg width="25" height="25" viewBox="0 0 24 24">
+    <div class="hamb-menu"> <!-- icona menu per smarthphone , tablet e mezzi schermi -->
+       <svg width="25" height="25" viewBox="0 0 24 24"> <!-- creazione icona-->
          <line x1="3" y1="6" x2="21" y2="6" stroke="red" stroke-width="2"/>
          <line x1="3" y1="12" x2="21" y2="12" stroke="white" stroke-width="2"/>
          <line x1="3" y1="18" x2="21" y2="18" stroke="blue" stroke-width="2"/>
