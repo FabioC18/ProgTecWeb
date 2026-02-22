@@ -12,6 +12,32 @@ function scorriA(idElemento) {
     }
 }
 
+
+//Funzione che permette di nascondere la data quando ad essa viene associato un pacchetto
+function nascondiData(bottone) {
+    const form = bottone.closest('form'); //trova il form più vicino al bottone
+    const select = form.querySelector('.date-select'); //risale al menu a tendina all'interno del form
+    const valoreData = select.value; //recupera la data selezionata dall'utente 
+
+
+    const opzioniDaRimuovere = document.querySelectorAll('.data-' + valoreData); // Seleziona tutti gli elementi nel documento che hanno la classe corrispondente alla data scelta
+    opzioniDaRimuovere.forEach(opt => { // Rimuove fisicamente l'elemento dal DOM
+        opt.remove();
+    });
+
+
+    if (select.options.length === 0) { // Verifica se, dopo la rimozione, il menu a tendina non ha più opzioni disponibili
+        const container = form.parentElement //Seleziona il contenitore del form
+        container.innerHTML = "<h3>Prenotazione in corso...</h3><p class='msg-warning'>Hai già associato un pacchetto a tutte le tue prenotazioni.</p>"; // Se il menu diventa vuoto, viene mostrato il messaggio senza ricaricare
+    }
+}
+
+window.addEventListener("pageshow", (event) => { //Aggiunge un event listener che si attiva ogni volta che la pagina viene ricaricata
+    if (event.persisted) { //// Controlla se la pagina è stata caricata dalla cache
+        window.location.reload(); // Forza il ricaricamento completo della pagina dal server per eliminare la data
+    }
+});
+
 /* GESTIONE EVENTI DOM E INTERFACCIA*/
 
 document.addEventListener('DOMContentLoaded', () => { // Cerca nel documento l'icona del menu a panino (.hamb-menu) e la salva nella variabile 'hambMenu'

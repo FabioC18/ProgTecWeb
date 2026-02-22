@@ -170,7 +170,7 @@ $result_pacchetti = pg_query($conn, $query_pacchetti);
                                 <label for="data_pack_<?php echo $row['id']; ?>" style="font-size: 0.9em;">Associa alla prenotazione del:</label>
                                 <select name="data" id="data_pack_<?php echo $row['id']; ?>" class="date-select" required>
                                     <?php foreach ($prenotazioni_disponibili as $data_disp => $nome_camera): ?>
-                                        <option value="<?php echo $data_disp; ?>"> <!-- il valore che attende il server è la data -->
+                                        <option value="<?php echo $data_disp; ?>" class="data-<?php echo $data_disp; ?>"> <!-- il valore che attende il server è la data -->
                                             <?php echo date("d/m/Y", strtotime($data_disp)); ?> - <?php echo $nome_camera; ?> <!-- il essaggio mostrato all'utnete e la data scelta con il nome della casa-->
                                         </option>
                                     <?php endforeach; ?>
