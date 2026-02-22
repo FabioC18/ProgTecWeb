@@ -242,6 +242,21 @@ input:focus {
 }
 
 
+/* =========================================
+   FIX AUTOCOMPLETAMENTO BROWSER (Sfondo Bianco)
+========================================= */
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+    /*  crea un'ombra interna enorme del colore dell'input (#2b2b2b) per coprire il bianco forzato dal browser */
+    /*Questo vale quando: la pagina si ricarica, con si passa sopra il campo con il mouse, quando si clicca dentro il campo, quando si preme il tasto del mouse un email in precedenza */
+    -webkit-box-shadow: 0 0 0 30px #2b2b2b inset !important;
+    /* Il testo viene forzato a rimanere bianco */
+    -webkit-text-fill-color: white !important;
+}
+
+
 /*  BOTTONI E MESSAGGI DI ERRORE*/
 
 #btn-submit {

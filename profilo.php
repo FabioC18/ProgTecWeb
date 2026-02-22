@@ -17,8 +17,8 @@ $user_data = pg_fetch_assoc($res_info);
 $user_id = $user_data['id']; 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_profile'])) {
-    $new_user = $_POST['username'];
-    $new_email = $_POST['email'];
+    $new_user  = str_replace(' ', '', $_POST['username']);
+    $new_email = str_replace(' ', '', $_POST['email']);
     $new_pass = $_POST['pass'];
 
     if (!preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|it)$/", $new_email)) {
@@ -97,14 +97,14 @@ $res_pren = pg_query_params($conn, $query_pren, array($user_id));
                 <h2>I Miei Dati</h2>
                 <form method="POST" action="">
                     <label>Username</label>
-                    <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($user_data['username']); ?>" required>
+                    <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($user_data['username']); ?>" required pattern= "[^\s]+">
 
                     <label>Email</label>
-                    <input type="text" id="email" name="email" value="<?php echo htmlspecialchars($user_data['email']); ?>" required placeholder="nome@dominio.it">
+                    <input type="text" id="email" name="email" value="<?php echo htmlspecialchars($user_data['email']); ?>" required placeholder="nome@dominio.it" pattern= "[^\s]+">
 
                     <label>Password (Modifica)</label>
                     <div class="password-container">
-                        <input type="password" id="pass" name="pass" placeholder="Inserisci la nuova password" required>
+                        <input type="password" id="pass" name="pass" placeholder="Inserisci la nuova password" required pattern="[^\s]+">
                         <span class="toggle-password" onclick="togglePassword()">
                              <img src="assets/eye-slash.png" id="icon-slash">
                               <img src="assets/eye.png" id="icon-eye" hidden>

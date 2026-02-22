@@ -3,8 +3,9 @@ session_start();
 require_once 'includes/db_config.php';
 
 $errori = "";
-$username = $_POST['username'] ?? "";
-$email = $_POST['email'] ?? "";
+/* --- MODIFICA: Pulizia spazi in entrata --- */
+$username = isset($_POST['username']) ? str_replace(' ', '', $_POST['username']) : "";
+$email = isset($_POST['email']) ? str_replace(' ', '', $_POST['email']) : "";
 $action = $_POST['action'] ?? "register";
 
 // Accorpamento: Entrambe le logiche (login e register) richiedono che il metodo sia POST e che il bottone sia stato premuto.
@@ -92,7 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['btn_submit'])) {
             <span id="tab-log" class="tab-inactive" onclick="switchMode('login', true)">Login</span>
         </div>
 
-        <p id="error-msg" style="color: red; text-align: center; min-height: 20px; font-weight: bold;">
+        <p id="error-msg" class="error" style="color: red; text-align: center; min-height: 20px; font-weight: bold;">
             <?php echo $errori; ?>
         </p>
 
@@ -100,11 +101,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['btn_submit'])) {
             <input type="hidden" id="action-input" name="action" value="<?php echo htmlspecialchars($action); ?>">
 
             <label>Username:</label><br>
-            <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($username); ?>" style="width:100%" required><br><br>
+            <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($username); ?>" style="width:100%" required pattern="[^\s]+"><br><br>
 
             <div id="email-container">
                 <label>E-mail:</label><br>
-                <input type="text" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>" style="width:100%" placeholder="esempio@dominio.it"><br><br>
+                <input type="text" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>" style="width:100%" placeholder="esempio@dominio.it" pattern="[^\s]+"><br><br>
             </div>
 
             <label>Password:</label><br>
@@ -120,7 +121,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['btn_submit'])) {
                     </ul>
                 </div>
 
-                <input type="password" id="pass" name="pass" style="width:100%; padding-right: 40px;" required placeholder="Password">
+                <input type="password" id="pass" name="pass" style="width:100%; padding-right: 40px;" required placeholder="Password" pattern="[^\s]+">
                 <span class="toggle-password" onclick="togglePassword()">
                     <img src="assets/eye-slash.png" id="icon-slash">
                     <img src="assets/eye.png" id="icon-eye" hidden>
