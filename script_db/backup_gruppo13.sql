@@ -2,12 +2,12 @@
 -- PostgreSQL database dump
 --
 
-\restrict pnQANTEHMdIEEFV0YDCu8kjH6s6vy17PFZkaC5tLzeGEkLg942BNAkiuJecdGVv
+\restrict 4yeTEe2ent0qX7M6mzQBOeTdeN50ZBrQ2QPDyvijpY1pYU8LMwbJegNBTolQiy0
 
 -- Dumped from database version 18.1
 -- Dumped by pg_dump version 18.1
 
--- Started on 2026-02-20 19:44:35
+-- Started on 2026-02-22 13:00:38
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -296,7 +296,11 @@ COPY public.pacchetti (id, nome, descrizione, prezzo, immagine) FROM stdin;
 --
 
 COPY public.prenotazioni (id, id_utente, nome_pacchetto, data_prenotazione, prezzo) FROM stdin;
-38	19	SUITE	2026-02-20	150.00
+39	20	SUITE	2026-02-27	150.00
+40	20	Pacchetto Base	2026-02-27	19.00
+41	21	SUITE	2026-03-04	150.00
+42	22	DELUXE	2026-02-28	100.00
+43	22	Love Plus	2026-02-28	39.00
 \.
 
 
@@ -307,7 +311,9 @@ COPY public.prenotazioni (id, id_utente, nome_pacchetto, data_prenotazione, prez
 --
 
 COPY public.utenti (id, username, email, password) FROM stdin;
-19	giulia	giu@gmail.com	$2y$10$2VhQkatH.WC/WvNwFQ0m5.lhqw2XT7zD2XHEYXYpS.B4vPiEsBaJC
+20	fabio	f.concilio11@studenti.unisa.it	$2y$10$GZyaeJ0mGSBnn..1Cqunee4LeFqY3vmm8ekz1IW1izbs5EWb9Vzi2
+21	francesco	francesco@gmail.com	$2y$10$bxuFVbAiiku4aUYurE6YZO/XsNw8wuFXgFjxw.HuZ7Ed8QzIw7tcG
+22	carmine	carmine10@gmail.com	$2y$10$dbJ4H6XKIzsphiMpllmhOO0OHOh.n6JDm6T.Aqj.Rv.65BMjcJ3WO
 \.
 
 
@@ -344,7 +350,7 @@ SELECT pg_catalog.setval('public.pacchetti_id_seq', 4, true);
 -- Name: prenotazioni_id_seq; Type: SEQUENCE SET; Schema: public; Owner: www
 --
 
-SELECT pg_catalog.setval('public.prenotazioni_id_seq', 38, true);
+SELECT pg_catalog.setval('public.prenotazioni_id_seq', 43, true);
 
 
 --
@@ -353,7 +359,7 @@ SELECT pg_catalog.setval('public.prenotazioni_id_seq', 38, true);
 -- Name: utenti_id_seq; Type: SEQUENCE SET; Schema: public; Owner: www
 --
 
-SELECT pg_catalog.setval('public.utenti_id_seq', 19, true);
+SELECT pg_catalog.setval('public.utenti_id_seq', 22, true);
 
 
 --
@@ -419,11 +425,11 @@ ALTER TABLE ONLY public.prenotazioni
     ADD CONSTRAINT prenotazioni_id_utente_fkey FOREIGN KEY (id_utente) REFERENCES public.utenti(id) ON DELETE CASCADE;
 
 
--- Completed on 2026-02-20 19:44:35
+-- Completed on 2026-02-22 13:00:39
 
 --
 -- PostgreSQL database dump complete
 --
 
-\unrestrict pnQANTEHMdIEEFV0YDCu8kjH6s6vy17PFZkaC5tLzeGEkLg942BNAkiuJecdGVv
+\unrestrict 4yeTEe2ent0qX7M6mzQBOeTdeN50ZBrQ2QPDyvijpY1pYU8LMwbJegNBTolQiy0
 
