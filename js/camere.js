@@ -9,38 +9,8 @@ document.addEventListener('DOMContentLoaded', function() { // Mette in "pausa" i
             document.body.classList.toggle('menu-open');
         });
     }
+})
 
-    // Aggiornamento Link Prenotazione tramite Classi 
-    const dateInputs = document.querySelectorAll('.date_picker_input'); // Seleziona tutti gli input di tipo date con la classe
-
-    dateInputs.forEach(input => { //per ogni input trovato:
-        input.addEventListener('change', function() {
-
-            const parentDiv = document.getElementById("category-header").parentNode; // Trova il contenitore genitore (category-header) per lavoroare nella stessa sezione
-
-            const btn = parentDiv.querySelector('.link-prenotazione'); // Trova il bottone di prenotazione dentro il contenitore
-
-            const selectedDate = this.value; // Ottieni la data selezionata
-
-            if (btn) { //Se il bottone esiste
-                if (selectedDate) {
-
-                    const baseUrl = btn.getAttribute('data-baseurl'); // Prende il link base salvato nel file html( salva_prenotazione.php?nome=...&prezzo=...)
-
-                    const newUrl = baseUrl + '&data=' + encodeURIComponent(selectedDate); // Modifica il link base aggiungendo la data selezionata
-
-                    btn.setAttribute('href', newUrl); // Aggiorna l'href del bottone
-
-                    btn.classList.remove('btn-disabled'); // Rimuovi la classe che lo disabilita
-                } else {
-                    btn.classList.add('btn-disabled'); // Se l'utente cancella la data, disabilita di nuovo il bottone
-                    btn.setAttribute('href', '#'); //azzerA il liink del bottone
-                }
-            }
-        });
-    });
-
-});
 
 /* FUNZIONI GLOBALI (Richiamate dall'HTML) */
 

@@ -41,6 +41,7 @@ body {
     /*allinea verticalmente il titolo rispetto al centro  */
     align-items: center;
     /*centra orizzontalmente il titolo */
+    justify-content: center;
     position: relative;
     /*limita la grandezza del titolo a metà scherma, poi continua a capo */
     max-width: 50%;
