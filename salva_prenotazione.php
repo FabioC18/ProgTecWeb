@@ -15,7 +15,7 @@ $prezzo = $_GET['prezzo'] ?? 0;
 $data_prenotazione = $_GET['data'] ?? ''; 
 $room_id = $_GET['id'] ?? ''; 
 $username = $_SESSION['user'];
-$telefono_proprietario = "393497534392"; 
+$telefono_proprietario = "333333333333"; 
 
 if ($nome_oggetto && $data_prenotazione) {//Verifiica che i dati nome e data siano presenti
 
